@@ -1,0 +1,169 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 04-Aug-2020, 22:29:38
+    Author     : adilirshad
+*/
+
+
+
+.days-card > div {
+    background: #fff4df;
+    border-radius: 5px;
+    color: #fda729;
+    text-align: center;
+    padding: 25px 5px;
+    font-size: 17px;
+    font-weight: bold;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.subject-card, .add-card, .card-table {
+    padding: 0px;
+    position: relative;
+    border: 7px solid #fff;
+    cursor: pointer;
+}
+.subject-card > div {
+    background: #3d9cfc;
+    padding: 7px 10px;
+    height: 100%;
+    border-radius: 5px;
+    width: 100%;
+    color: #fff;
+    display: table;
+}
+.add-card > div {
+    background: #e1f0fe;
+    padding: 7px 10px;
+    height: 100%;
+    border-radius: 5px;
+    width: 100%;
+    color: #3d9cfc;
+    display: table;
+}
+.add-card .sub {
+    text-align: center;
+}
+.card-table > div {
+    background: #cbf7f5;
+    padding: 20px 27px;
+    height: 100%;
+    top: 0;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2cc4bd;
+}
+.subject-card .sub label {
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+}
+.subject-card .sub span {
+    display: inline-block;
+}
+.time-table {
+    width: 100%;
+    height: 1px;
+}
+.subject-card .sub, .add-card .sub, .days-card .sub {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 7px 10px;
+}
+.subject-card .checkbox, .add-card .checkbox,  .card-table .checkbox{
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    display: none;
+}
+.time-table .days-card {
+    border: 7px solid #fff;
+}
+.break-card {
+    border: 5px solid #fff;
+    position: relative;
+}
+.break-card label {
+    position: relative;
+    font-size: 37px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.break-card > div {
+    background: #fee2e5;
+    text-align: center;
+    color: #f45063;
+    letter-spacing: 13px;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    border-radius: 5px;
+}
+.subject-card i, .card-table i {
+    position: absolute;
+    right: 7px;
+    cursor: pointer;
+    color: #313131;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.select-grade {
+    background-color: #e65686 !important;
+    color: #fff !important;
+    font-size: 15px !important;
+}
+.add-card.active > div {
+    background: #ff8e9e;
+    color: #fff;
+}
+#assignSubjectModel .modal-content {
+    padding: 20px;
+}
+#select-subject + .select2-container {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100% !important;
+}
+#select-teacher + .select2-container {
+    margin-bottom: 20px;
+    width: 100% !important;
+}
+.summary {
+    border: 1px solid #979797;
+    width: 100%;
+}
+.summary th {
+    background: #ececec;
+    padding: 8px 35px;
+    border: 1px solid #979797;
+}
+.summary td {
+    padding: 10px 30px;
+    font-size: 16px;
+    border: 1px solid #979797;
+}
+.required span, .allocated-total span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.required, .allocated-total {
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+.time-table.second .card-table.main > div {
+    background: #fff4df;
+    padding: 25px 30px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fda729;
+}
