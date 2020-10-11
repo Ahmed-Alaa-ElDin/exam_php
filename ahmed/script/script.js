@@ -86,14 +86,16 @@ $(function(){
 
       $("#previewButton").on("click",function () {
 
+        $(".preview_body").children().remove()
         // pop up preview box
-        $(".preview").fadeIn();
+        // $(".preview").fadeIn();
 
         // set question images
         var questionImage = "<div class='question_images'></div>"
         $(".preview_body").append(questionImage)
         $("#essayAttachFilesWithQuestion").find(".dz-preview").each(function(){
           if ($(this).find(".dz-error-message").text() == "") {
+            console.log("Ahmed");
             let image = "<img src=" + allImages[$(this).find("img").attr("alt")] + " alt=" + $(this).find("img").attr("alt") + ">"
             $(".preview .question_images").append(image)
           }
@@ -108,7 +110,7 @@ $(function(){
         if ($("#essayAllowRichText").prop("checked")) {
           var studentAnswer = "<div class='summernote' style='max-width:90%; margin:10px auto;'><div id='StudentAnswer'></div></div>"
           $(".preview_body").append(studentAnswer)
-          $('#StudentAnswer').summernote();
+            $('#StudentAnswer').summernote();
         } else {
           var studentAnswer = "<textarea class='student_answer'></textarea>"
           $(".preview_body").append(studentAnswer)
@@ -118,15 +120,15 @@ $(function(){
         if ($("#essayAllowAttach").prop("checked")) {
           var studentAttachment = "<div class='dropzone dropzone-default dropzone-success' id='StudentAttachment'><div class='dropzone-msg dz-message needsclick'><h3 class='dropzone-msg-title'>Drop files here or click to upload.</h3><span class='dropzone-msg-desc'>Only image files are allowed for upload</span></div></div>"
           $(".preview_body").append(studentAttachment)
-          $("#StudentAttachment").dropzone({
-            url: "/",
-            acceptedFiles: "image/*",
-            addRemoveLinks: true,
-          });
+            $(".preview_body .dropzone").last().dropzone({
+              url: "/",
+              acceptedFiles: "image/*",
+              addRemoveLinks: true,
+            });
         }
 
         // add submit button
-        $(".preview_body").append("<div style='text-align:center'><button class='studentSubmit btn btn-success font-weight-bold'>Submit Answer</button></div>")
+        // $(".preview_body").append("<div style='text-align:center'><button class='studentSubmit btn btn-success font-weight-bold'>Submit Answer</button></div>")
       })
     }
     // end:: check if the question is Short Answer/Essay
@@ -137,6 +139,8 @@ $(function(){
       $("#MultiChoice").fadeIn()
 
       $("#MultiChoice").find("button[data-repeater-create]").on("click",function () {
+
+        // Enable Attachment box
         $("tr[data-repeater-item]").last().find(".MSQAttachments").dropzone({
           url: "/",
           acceptedFiles: "image/*",
@@ -157,7 +161,6 @@ $(function(){
           }
         });
 
-        // Enable Attachment box
 
 
       })

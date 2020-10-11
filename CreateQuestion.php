@@ -92,7 +92,7 @@
                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                   <ul class="nav nav-hover flex-column">
                                     <li class="nav-item">
-                                      <a href="#" id="previewButton" class="nav-link">
+                                      <a href="#" id="previewButton" class="nav-link" data-toggle="modal" data-target="#previewBox">
                                         <i class="nav-icon flaticon-eye"></i>
                                         <span class="nav-text">Preview</span>
                                       </a>
@@ -352,7 +352,7 @@
               <!--end::Main-->
 
               <!-- begin::Preview -->
-              <div class="preview" >
+              <!-- <div class="preview" >
                 <div class="preview_head">
                   <p class="preview_box">Preview Box</p>
                   <button type="button" name="button" class="btn btn-danger preview_close">X</button>
@@ -360,30 +360,52 @@
                 <div class="preview_body">
 
                 </div>
-              </div>
+              </div> -->
               <!-- end::Preview -->
 
+              <!-- Modal-->
+              <div class="modal fade" id="previewBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl " data-scroll="true" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="previewModalLabel">Preview Box</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="preview_body">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary font-weight-bold">Save Answer</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
 
 
-              <?php require_once './HeaderRightTopPanel.php'; ?>
+                <?php require_once './HeaderRightTopPanel.php'; ?>
 
 
 
-              <!--end::Global Config-->
+                <!--end::Global Config-->
 
-              <?php require_once './scripts.php'; ?>
+                <?php require_once './scripts.php'; ?>
 
-              <!-- begin:: dropzone -->
-              <!-- <script src="ahmed/script/html2canvas.min.js" type="text/javascript"></script> -->
-              <!-- end:: dropzone -->
+                <!-- begin:: dropzone -->
+                <!-- <script src="ahmed/script/html2canvas.min.js" type="text/javascript"></script> -->
+                <!-- end:: dropzone -->
 
-              <!-- begin:: Ahmed's Script -->
-              <script src="ahmed/script/script.js" type="text/javascript"></script>
-              <!-- end:: Ahmed's Script -->
+                <!-- begin:: Ahmed's Script -->
+                <script src="ahmed/script/script.js" type="text/javascript"></script>
+                <!-- end:: Ahmed's Script -->
 
 
-              <script src="assets/custom/js/CreateQuestion.js" type="text/javascript"></script>
-              <!--end::Page Scripts-->
-            </body>
-            <!--end::Body-->
-            </html>
+                <script src="assets/custom/js/CreateQuestion.js" type="text/javascript"></script>
+                <!--end::Page Scripts-->
+              </body>
+              <!--end::Body-->
+              </html>
