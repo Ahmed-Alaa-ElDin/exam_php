@@ -4,10 +4,10 @@ $(function(){
 
   // Set the Dropzones
   Dropzone.autoDiscover = false;
-  // Activate Dropzone
 
+  // Activate Dropzone
   // for Question Attachment
-  $("#essayAttachFilesWithQuestion").dropzone({
+  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion").dropzone({
     url: "/",
     acceptedFiles: "image/*",
     addRemoveLinks: true,
@@ -95,7 +95,6 @@ $(function(){
         $(".preview_body").append(questionImage)
         $("#essayAttachFilesWithQuestion").find(".dz-preview").each(function(){
           if ($(this).find(".dz-error-message").text() == "") {
-            console.log("Ahmed");
             let image = "<img src=" + allImages[$(this).find("img").attr("alt")] + " alt=" + $(this).find("img").attr("alt") + ">"
             $(".preview_body .question_images").append(image)
           }
@@ -126,22 +125,23 @@ $(function(){
               addRemoveLinks: true,
             });
         }
-
-        // add submit button
-        // $(".preview_body").append("<div style='text-align:center'><button class='studentSubmit btn btn-success font-weight-bold'>Submit Answer</button></div>")
       })
     }
     // end:: check if the question is Short Answer/Essay
 
     // begin:: check if the question is Short Answer/Essay
     else if ($(this).val() == 2) {
-      // config Question Types Fade in & out
+
       $("#MultiChoice").fadeIn()
+
+      var mcqAllImages = []
+
+      // config Question Types Fade in & out
 
       $("#MultiChoice").find("button[data-repeater-create]").on("click",function () {
 
         // Enable Attachment box
-        $("tr[data-repeater-item]").last().find(".MSQAttachments").dropzone({
+        $("tr[data-repeater-item]").last().find(".MCQAttachments").dropzone({
           url: "/",
           acceptedFiles: "image/*",
           addRemoveLinks: true,
@@ -154,15 +154,76 @@ $(function(){
               reader.onload = function(event) {
                 var base64String = event.target.result;
                 var fileName = file.name
-                // allImages[fileName] = base64String
+                mcqAllImages[fileName] = base64String
               };
               reader.readAsDataURL(file);
             });
           }
         });
+      })
 
+      $("#saveForm").on("click",function () {
+        var academicYearID = $("#AcademicYear").val();
+        var academicYear = $("#AcademicYear").find("option:selected").text();
+        var gradeID = $("#StudentClass").val();
+        var gradeName = $("#StudentClass").find("option:selected").text();
+        var subjectID = $("#StudentSection").val();
+        var subjectName = $("#StudentSection").find("option:selected").text();
+        var topicName = $("#topicName").text();
+        var filterTags = [];
+        $("#FilterTags option").each(function () {
+          filterTags.push($(this).val())
+        })
+        var questionHTML = $('#QuestionEditor').summernote('code')
 
+        var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
+        var allowAttachment = $("#mcqAllowAttach").prop("checked")
+        var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
+        var maximumMarks = $("#mcqMaximumMarks").val();
+        var maximumTime = $("#mcqMaximumTime").val();
 
+        var questionImages = {}
+        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function(){
+          if ($(this).find(".dz-error-message").text() == "") {
+            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+          }
+        })
+
+        var choices = []
+
+        $("#MultiChoice table .choice").each(function () {
+
+          let choice = {}
+
+          choice["image_name"] = $(this).find(".dz-success").find("img").attr("alt")
+          choice["image"] = mcqAllImages[$(this).find(".dz-success").find("img").attr("alt")]
+          choice["text"] = $(this).find(".choice-text").val()
+          choice["true-false"] = $(this).find(".choice-right-false").prop("checked")
+
+          choices.push(choice)
+        })
+
+        // console.log(mcqAllImages);
+        console.log(choices);
+
+        var data = {
+          "grade_id" : gradeID,
+          "grade_name" : gradeName,
+          "subject_id" : subjectID,
+          "subject_name" : gradeName,
+          "topic_name" : subjectName,
+          "filter_tags" : filterTags,
+          "question_html" : questionHTML,
+          "rondomize_options" : randomizeOptions,
+          "allow_attachment" : allowAttachment,
+          "allow_partial_credit" : allowPartialCredit,
+          "maximum_marks" : maximumMarks,
+          "maximum_time" : maximumTime,
+          "question_images" : questionImages,
+          "choices" : choices
+        }
+        var dataJSON = JSON.stringify(data)
+        console.log(data);
       })
 
     }

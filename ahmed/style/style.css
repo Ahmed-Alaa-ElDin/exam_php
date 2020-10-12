@@ -9,10 +9,13 @@
 .dropzone.dropzone-default .dz-remove:hover {
   color: #c0392b;
 }
+.dropzone .dz-preview .dz-error-message {
+  top: 160px!important;
+}
 
 /* end general styling */
 
-/* Preview the image  */
+/* begin:: Preview styling */
 
 #previewBox .preview_body .question_images {
   max-width: 90%;
@@ -50,4 +53,21 @@ margin: auto 10px;
 #previewBox .preview_body #StudentAttachment {
   margin: 10px auto;
   width: 90%;
+}
+
+/* end:: Preview styling */
+
+
+#MultiChoice .choice .multi-choice-td:first-of-type {
+  width: 100px;
+  height: 100px;
+}
+
+#MultiChoice .choice .multi-choice-td .dz-image {
+  height: auto;
+}
+
+#MultiChoice .choice .multi-choice-td .dz-image img {
+  width: 75px;
+  margin: auto;
 }
