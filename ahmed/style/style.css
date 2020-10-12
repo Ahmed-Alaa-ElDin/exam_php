@@ -3,7 +3,7 @@
 .dropzone.dropzone-default .dz-remove {
   font-size: 14px;
   color: #e74c3c;
-  margin-top: 10px;
+  margin-top: 15px;
   font-weight: bold;
 }
 .dropzone.dropzone-default .dz-remove:hover {
@@ -59,8 +59,7 @@ margin: auto 10px;
 
 
 #MultiChoice .choice .multi-choice-td:first-of-type {
-  width: 100px;
-  height: 100px;
+    width: 230px;
 }
 
 #MultiChoice .choice .multi-choice-td .dz-image {
@@ -70,4 +69,15 @@ margin: auto 10px;
 #MultiChoice .choice .multi-choice-td .dz-image img {
   width: 75px;
   margin: auto;
+}
+
+#MultiChoice .choice .dz-preview.dz-error {
+  display: none;
+}
+#MultiChoice .choice .dz-preview.dz-success {
+  margin: auto;
+}
+
+#MultiChoice .choice .dz-details {
+  padding: 0
 }

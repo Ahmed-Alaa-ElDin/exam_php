@@ -87,8 +87,6 @@ $(function(){
       $("#previewButton").on("click",function () {
 
         $(".preview_body").children().remove()
-        // pop up preview box
-        // $(".preview").fadeIn();
 
         // set question images
         var questionImage = "<div class='question_images'></div>"
@@ -174,8 +172,8 @@ $(function(){
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
-        var questionHTML = $('#QuestionEditor').summernote('code')
 
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
         var allowAttachment = $("#mcqAllowAttach").prop("checked")
         var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
@@ -224,6 +222,75 @@ $(function(){
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
+      })
+
+      $("#previewButton").on("click",function () {
+
+        $(".preview_body").children().remove()
+
+        var questionHTML = $('#QuestionEditor').summernote('code')
+        var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
+        var allowAttachment = $("#mcqAllowAttach").prop("checked")
+        var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
+        var maximumMarks = $("#mcqMaximumMarks").val();
+        var maximumTime = $("#mcqMaximumTime").val();
+
+        var questionImages = {}
+        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function(){
+          if ($(this).find(".dz-error-message").text() == "") {
+            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+          }
+        })
+
+        var choices = []
+
+        $("#MultiChoice table .choice").each(function () {
+
+          let choice = {}
+
+          choice["image_name"] = $(this).find(".dz-success").find("img").attr("alt")
+          choice["image"] = mcqAllImages[$(this).find(".dz-success").find("img").attr("alt")]
+          choice["text"] = $(this).find(".choice-text").val()
+          choice["true-false"] = $(this).find(".choice-right-false").prop("checked")
+
+          choices.push(choice)
+        })
+
+        // set question images
+        var questionImage = "<div class='question_images'></div>"
+        $(".preview_body").append(questionImage)
+        $("#essayAttachFilesWithQuestion").find(".dz-preview").each(function(){
+          if ($(this).find(".dz-error-message").text() == "") {
+            let image = "<img src=" + allImages[$(this).find("img").attr("alt")] + " alt=" + $(this).find("img").attr("alt") + ">"
+            $(".preview_body .question_images").append(image)
+          }
+        })
+
+        // set question text
+        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionParagraph = "<div class='question_text'>" + $('#QuestionEditor').summernote('code') + "</div>"
+        $(".preview_body").append(questionParagraph)
+
+        // set student textbox
+        if ($("#essayAllowRichText").prop("checked")) {
+          var studentAnswer = "<div class='summernote' style='max-width:90%; margin:10px auto;'><div id='StudentAnswer'></div></div>"
+          $(".preview_body").append(studentAnswer)
+            $('#StudentAnswer').summernote();
+        } else {
+          var studentAnswer = "<textarea class='student_answer'></textarea>"
+          $(".preview_body").append(studentAnswer)
+        }
+
+        // set attachment
+        if ($("#essayAllowAttach").prop("checked")) {
+          var studentAttachment = "<div class='dropzone dropzone-default dropzone-success' id='StudentAttachment'><div class='dropzone-msg dz-message needsclick'><h3 class='dropzone-msg-title'>Drop files here or click to upload.</h3><span class='dropzone-msg-desc'>Only image files are allowed for upload</span></div></div>"
+          $(".preview_body").append(studentAttachment)
+            $(".preview_body .dropzone").last().dropzone({
+              url: "/",
+              acceptedFiles: "image/*",
+              addRemoveLinks: true,
+            });
+        }
       })
 
     }
