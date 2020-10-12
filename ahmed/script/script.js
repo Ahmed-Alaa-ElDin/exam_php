@@ -97,7 +97,7 @@ $(function(){
           if ($(this).find(".dz-error-message").text() == "") {
             console.log("Ahmed");
             let image = "<img src=" + allImages[$(this).find("img").attr("alt")] + " alt=" + $(this).find("img").attr("alt") + ">"
-            $(".preview .question_images").append(image)
+            $(".preview_body .question_images").append(image)
           }
         })
 

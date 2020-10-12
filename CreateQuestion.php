@@ -365,7 +365,7 @@
 
               <!-- Modal-->
               <div class="modal fade" id="previewBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-xl " data-scroll="true" role="document">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="previewModalLabel">Preview Box</h5>
@@ -373,7 +373,7 @@
                         <i aria-hidden="true" class="ki ki-close"></i>
                       </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" data-scroll="true">
                       <div class="preview_body">
                       </div>
                     </div>
