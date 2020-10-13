@@ -277,11 +277,10 @@ $(function(){
         $(".preview_body").append(totalChoices)
 
         if ($("#mcqRandomizeOptions").prop("checked")){
-          const length = choices.length
 
-          for (var i = 0; i < length; i++) {
+          for (var i = 0; i < choices.length; i++) {
 
-            let x = Math.floor (Math.random() * length);
+            let x = Math.floor (Math.random() * choices.length);
             console.log('X :'+  x);
 
             choices.splice(x,1);
