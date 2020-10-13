@@ -7,9 +7,9 @@ $(function(){
 
   // Activate Dropzone
   // for Question Attachment
-  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion").dropzone({
+  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion").dropzone({
     url: window.location.href,
-    acceptedFiles: "image/*",
+    acceptedFiles: "image/*,application/pdf,.doc,.docx",
     addRemoveLinks: true,
 
     // create base64 image link
@@ -103,27 +103,8 @@ $(function(){
         var questionParagraph = "<div class='question_text'>" + $('#QuestionEditor').summernote('code') + "</div>"
         $(".preview_body").append(questionParagraph)
 
-        // set student textbox
-        if ($("#essayAllowRichText").prop("checked")) {
-          var studentAnswer = "<div class='summernote' style='max-width:90%; margin:10px auto;'><div id='StudentAnswer'></div></div>"
-          $(".preview_body").append(studentAnswer)
-            $('#StudentAnswer').summernote();
-        } else {
-          var studentAnswer = "<textarea class='student_answer'></textarea>"
-          $(".preview_body").append(studentAnswer)
-        }
-
-        // set attachment
-        if ($("#essayAllowAttach").prop("checked")) {
-          var studentAttachment = "<div class='dropzone dropzone-default dropzone-success' id='StudentAttachment'><div class='dropzone-msg dz-message needsclick'><h3 class='dropzone-msg-title'>Drop files here or click to upload.</h3><span class='dropzone-msg-desc'>Only image files are allowed for upload</span></div></div>"
-          $(".preview_body").append(studentAttachment)
-            $(".preview_body .dropzone").last().dropzone({
-              url: window.location.href,
-              acceptedFiles: "image/*",
-              addRemoveLinks: true,
-            });
-        }
       })
+
     }
     // end:: check if the question is Short Answer/Essay
 
@@ -276,59 +257,168 @@ $(function(){
         var totalChoices = "<div class='totalChoices'></div>"
         $(".preview_body").append(totalChoices)
 
-        if ($("#mcqRandomizeOptions").prop("checked")){
 
-          for (var i = 0; i < choices.length; i++) {
-
-            let x = Math.floor (Math.random() * choices.length);
-            console.log('X :'+  x);
-
-            choices.splice(x,1);
-
-            // range = jQuery.grep(range, function(value) {return value != x});
-            // console.log('range2 :' + range);
-
-            let choiceBox = "<div class='choiceBox row' data-val='" + choices[x]["text"] + "'></div>"
-
-            // Image & Text
-            if (choices[x]["image"] != undefined && choices[x]["text"] != "") {
-              $(".preview_body .totalChoices").append(choiceBox)
-              let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[x]["image"] + "' alt='" + choices[x]["image_name"] + "'></div>"
-              let choiceText = "<div class='col-8 choiceText'><span>" + choices[x]["text"] + "</span></div>"
-              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
-            } else if (choices[x]["image"] != undefined) {
-              $(".preview_body .totalChoices").append(choiceBox)
-              let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[x]["image"] + "' alt='" + choices[x]["image_name"] + "'></div>"
-              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
-            } else if (choices[x]["text"] != "") {
-              $(".preview_body .totalChoices").append(choiceBox)
-              let choiceText = "<div class='col-12 choiceText'><span>" + choices[x]["text"] + "</span></div>"
-              $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
-            }
+        for (var i = 0; i < choices.length; i++) {
+          let choiceBox = "<div class='choiceBox row' data-val='" + choices[i]["text"] + "'></div>"
+          // Image & Text
+          if (choices[i]["image"] != undefined && choices[i]["text"] != "") {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            let choiceText = "<div class='col-8 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
+          } else if (choices[i]["image"] != undefined) {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
+          } else if (choices[i]["text"] != "") {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceText = "<div class='col-12 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
           }
-
-        } else {
-
-          for (var i = 0; i < choices.length; i++) {
-            let choiceBox = "<div class='choiceBox row' data-val='" + choices[i]["text"] + "'></div>"
-            // Image & Text
-            if (choices[i]["image"] != undefined && choices[i]["text"] != "") {
-              $(".preview_body .totalChoices").append(choiceBox)
-              let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
-              let choiceText = "<div class='col-8 choiceText'><span>" + choices[i]["text"] + "</span></div>"
-              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
-            } else if (choices[i]["image"] != undefined) {
-              $(".preview_body .totalChoices").append(choiceBox)
-              let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
-              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
-            } else if (choices[i]["text"] != "") {
-              $(".preview_body .totalChoices").append(choiceBox)
-              let choiceText = "<div class='col-12 choiceText'><span>" + choices[i]["text"] + "</span></div>"
-              $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
-            }
-          }
-
         }
+
+
+
+        $(".preview_body .totalChoices .choiceBox").on("click", function () {
+          $(this).toggleClass("selected")
+        })
+
+        // ----------------------------------------------------------
+
+
+      })
+    }
+    // end:: check if the question is MultiChoice
+
+    // begin:: check if the question is MultiChoice
+    else if ($(this).val() == 3) {
+
+      // config Question Types Fade in & out
+      $("#TrueFalse").fadeIn()
+
+      // handle save form clicking
+      $("#saveForm").on("click",function () {
+        var academicYearID = $("#AcademicYear").val();
+        var academicYear = $("#AcademicYear").find("option:selected").text();
+        var gradeID = $("#StudentClass").val();
+        var gradeName = $("#StudentClass").find("option:selected").text();
+        var subjectID = $("#StudentSection").val();
+        var subjectName = $("#StudentSection").find("option:selected").text();
+        var topicName = $("#topicName").text();
+        var filterTags = [];
+        $("#FilterTags option").each(function () {
+          filterTags.push($(this).val())
+        })
+
+        var questionHTML = $('#QuestionEditor').summernote('code')
+
+        var randomizeOptions = $("#trueFalseRandomizeOptions").prop("checked")
+        var allowAttachment = $("#trueFalseAllowAttach").prop("checked")
+        var allowPartialCredit = $("#trueFalseAllowPartialCredit").prop("checked")
+        var maximumMarks = $("#trueFalseMaximumMarks").val();
+        var maximumTime = $("#trueFalseMaximumTime").val();
+
+        var questionImages = {}
+        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview").each(function(){
+          if ($(this).find(".dz-error-message").text() == "") {
+            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+          }
+        })
+
+        var data = {
+          "grade_id" : gradeID,
+          "grade_name" : gradeName,
+          "subject_id" : subjectID,
+          "subject_name" : gradeName,
+          "topic_name" : subjectName,
+          "filter_tags" : filterTags,
+          "question_html" : questionHTML,
+          "rondomize_options" : randomizeOptions,
+          "allow_attachment" : allowAttachment,
+          "allow_partial_credit" : allowPartialCredit,
+          "maximum_marks" : maximumMarks,
+          "maximum_time" : maximumTime,
+          "question_images" : questionImages,
+        }
+        var dataJSON = JSON.stringify(data)
+        console.log(data);
+      })
+
+      $("#previewButton").on("click",function () {
+
+        $(".preview_body").children().remove()
+
+        var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
+        var allowAttachment = $("#mcqAllowAttach").prop("checked")
+        var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
+        var maximumMarks = $("#mcqMaximumMarks").val();
+        var maximumTime = $("#mcqMaximumTime").val();
+
+        var choices = []
+
+        // Set Question Images
+        var questionImages = {}
+        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function(){
+          if ($(this).find(".dz-error-message").text() == "") {
+            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+          }
+        })
+
+        var questionImageDiv = "<div class='question_images'></div>"
+        $(".preview_body").append(questionImageDiv)
+
+        $.each(questionImages, function(imgName,imgBase64){
+          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
+          $(".preview_body .question_images").append(image)
+        })
+        // ----------------------------------------------------------
+
+        // Set Question Text
+        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
+        $(".preview_body").append(questionParagraph)
+        // ----------------------------------------------------------
+
+
+
+        // Set Choices
+        $("#MultiChoice table .choice").each(function () {
+
+          let choice = {}
+
+          choice["image_name"] = $(this).find(".dz-success").find("img").attr("alt")
+          choice["image"] = mcqAllImages[$(this).find(".dz-success").find("img").attr("alt")]
+          choice["text"] = $(this).find(".choice-text").val()
+          choice["true-false"] = $(this).find(".choice-right-false").prop("checked")
+
+          choices.push(choice)
+        })
+
+
+        var totalChoices = "<div class='totalChoices'></div>"
+        $(".preview_body").append(totalChoices)
+
+
+        for (var i = 0; i < choices.length; i++) {
+          let choiceBox = "<div class='choiceBox row' data-val='" + choices[i]["text"] + "'></div>"
+          // Image & Text
+          if (choices[i]["image"] != undefined && choices[i]["text"] != "") {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            let choiceText = "<div class='col-8 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
+          } else if (choices[i]["image"] != undefined) {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
+          } else if (choices[i]["text"] != "") {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceText = "<div class='col-12 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
+          }
+        }
+
+
 
         $(".preview_body .totalChoices .choiceBox").on("click", function () {
           $(this).toggleClass("selected")

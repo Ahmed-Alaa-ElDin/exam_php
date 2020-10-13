@@ -235,6 +235,7 @@
                                       </div>
                                     </div>
                                   </div>
+                                  <!-- End Short Question  -->
 
                                   <!-- MultiChoice -->
                                   <div id="MultiChoice" class="question_type" style="display: none;">
@@ -251,8 +252,6 @@
                                           </button>
                                         </div>
                                       </div>
-
-
 
                                       <div class="table-responsive">
                                         <table class="table table-borderless" data-repeater-list="">
@@ -289,51 +288,159 @@
                                       </div>
                                       <hr>
 
-                                      <div class="form-group row">
-                                        <div class="col-lg-4">
-                                          <label> Randomize Options <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want randomized choices for every student, please turn this value ON."></i></label>
-                                          <input id="mcqRandomizeOptions" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
-                                        </div>
-                                        <div class="col-lg-4">
-                                          <label> Allow Attachment(s)  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
-                                          <input id="mcqAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
-                                        </div>
-                                        <div class="col-lg-4">
-                                          <label> Allow Partial Credit  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want to enable partial credit, please turn this option ON."></i></label>
-                                          <input id="mcqAllowPartialCredit" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
-                                        </div>
-                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-7">
+                                          <div class="form-group row">
 
-                                      <div class="form-group row">
-                                        <div class="offset-lg-2 col-lg-3">
-                                          <label>Maximum Marks ? </label><br>
-                                          <input id="mcqMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
-                                          <small class="text-muted">Set '0' if no marks required</small>
-                                        </div>
-                                        <div class="offset-lg-2 col-lg-3">
-                                          <label>Set Maximum Time ? </label><br>
-                                          <div class="input-group">
-                                            <input id="mcqMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
-                                            <div class="input-group-append">
-                                              <span class="input-group-text">Minutes</span>
+                                            <div class="col-lg-4">
+                                              <label> Randomize Options <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want randomized choices for every student, please turn this value ON."></i></label>
+                                              <input id="mcqRandomizeOptions" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <label> Allow Attachment(s)  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
+                                              <input id="mcqAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <label> Allow Partial Credit  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want to enable partial credit, please turn this option ON."></i></label>
+                                              <input id="mcqAllowPartialCredit" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
                                             </div>
                                           </div>
-                                          <small class="text-muted">Set '0' for unlimited Time</small>
-                                        </div>
-                                      </div>
-
-                                      <div class="form-group row">
-                                        <div class="col-lg-12">
-                                          <label>Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="if you would like to share some images/diagram/pdf document with this question, please attach photo here. Attached file will display to the studens with this question."></i></label>
-                                          <div class="dropzone dropzone-default dropzone-success" id="mcqAttachFilesWithQuestion">
-                                            <div class="dropzone-msg dz-message needsclick">
-                                              <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
-                                              <span class="dropzone-msg-desc">Only image files are allowed for upload</span>
+                                          <div class="form-group row">
+                                            <div class="col-lg-6">
+                                              <label>Maximum Marks ? </label><br>
+                                              <input id="mcqMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
+                                              <small class="text-muted">Set '0' if no marks required</small>
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <label>Set Maximum Time ? </label><br>
+                                              <div class="input-group">
+                                                <input id="mcqMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
+                                                <div class="input-group-append">
+                                                  <span class="input-group-text">Minutes</span>
+                                                </div>
+                                              </div>
+                                              <small class="text-muted">Set '0' for unlimited Time</small>
                                             </div>
                                           </div>
                                         </div>
+                                        <div class="col-lg-5">
+                                          <div class="form-group row">
+                                            <div class="col-lg-12">
+                                              <label>Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="if you would like to share some images/diagram/pdf document with this question, please attach photo here. Attached file will display to the studens with this question."></i></label>
+                                              <div class="dropzone dropzone-default dropzone-success" id="mcqAttachFilesWithQuestion">
+                                                <div class="dropzone-msg dz-message needsclick">
+                                                  <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                                  <span class="dropzone-msg-desc">Only image files are allowed for upload</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
                                       </div>
                                     </div>
+                                    <!-- End MultiChoice -->
+
+                                    <!-- MultiChoice -->
+                                    <div id="TrueFalse" class="question_type" style="display: none;">
+
+                                      <div class="table-responsive">
+                                        <table class="table table-borderless" data-repeater-list="">
+                                          <!-- <thead>
+                                            <th>True / False</th>
+                                            <th>Correct Answer</th>
+                                          </thead> -->
+                                          <tr>
+                                            <td class="multi-choice-td">
+                                              True
+                                            </td>
+                                            <td class="multi-choice-td pl-10" align="left">
+                                              <label class="radio radio-success">
+                                                <input type="radio" class="choice-right-false" name="radio" />
+                                                <span></span>
+                                              </label>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="multi-choice-td">
+                                              False
+                                            </td>
+                                            <td class="multi-choice-td pl-10" align="right">
+                                              <label class="radio radio-danger">
+                                                <input type="radio" class="choice-right-false" name="radio" />
+                                                <span></span>
+                                              </label>
+                                            </td>
+                                          </tr>
+                                          <!-- <tr>
+                                            <td class="multi-choice-td">
+                                              False
+                                            </td>
+                                            <td class="multi-choice-td pl-5" align="center">
+                                              <label class="radio radio-danger">
+                                                <input type="radio" class="choice-right-false" name="radio" />
+                                                <span></span>
+                                              </label>
+                                            </td>
+                                          </tr> -->
+                                        </table>
+                                      </div>
+                                      <hr>
+
+                                      <div class="row">
+                                        <div class="col-lg-7">
+                                          <div class="form-group row">
+
+                                            <div class="col-lg-4">
+                                              <label> Randomize Options <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want randomized choices for every student, please turn this value ON."></i></label>
+                                              <input id="trueFalseRandomizeOptions" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <label> Allow Attachment(s)  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
+                                              <input id="trueFalseAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <label> Allow Partial Credit  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want to enable partial credit, please turn this option ON."></i></label>
+                                              <input id="trueFalseAllowPartialCredit" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                            </div>
+                                          </div>
+                                          <div class="form-group row">
+                                            <div class="col-lg-6">
+                                              <label>Maximum Marks ? </label><br>
+                                              <input id="trueFalseMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
+                                              <small class="text-muted">Set '0' if no marks required</small>
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <label>Set Maximum Time ? </label><br>
+                                              <div class="input-group">
+                                                <input id="trueFalseMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
+                                                <div class="input-group-append">
+                                                  <span class="input-group-text">Minutes</span>
+                                                </div>
+                                              </div>
+                                              <small class="text-muted">Set '0' for unlimited Time</small>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                          <div class="form-group row">
+                                            <div class="col-lg-12">
+                                              <label>Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="if you would like to share some images/diagram/pdf document with this question, please attach photo here. Attached file will display to the studens with this question."></i></label>
+                                              <div class="dropzone dropzone-default dropzone-success" id="trueFalseAttachFilesWithQuestion">
+                                                <div class="dropzone-msg dz-message needsclick">
+                                                  <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                                  <span class="dropzone-msg-desc">Only image files are allowed for upload</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                    <!-- End MultiChoice -->
+
+
 
                                   </div>
                                 </div>
