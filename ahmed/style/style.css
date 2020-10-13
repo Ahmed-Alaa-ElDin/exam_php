@@ -61,6 +61,20 @@ margin: auto 10px;
   border-radius: 5px;
   margin: 10px;
   padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#previewBox .preview_body .choiceBox:hover,
+#previewBox .preview_body .choiceBox.selected {
+  background: #2b7acc;
+  color: #fff;
+}
+
+#previewBox .preview_body .choiceBox .choiceImg {
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 #previewBox .preview_body .choiceBox img {
@@ -82,8 +96,13 @@ margin: auto 10px;
 /* end:: Preview styling */
 
 
+/* begin:: MultiChoice */
 #MultiChoice .choice .multi-choice-td:first-of-type {
     width: 230px;
+}
+
+#MultiChoice table th {
+  text-align: center;
 }
 
 #MultiChoice .choice .multi-choice-td .dz-image {
@@ -96,7 +115,7 @@ margin: auto 10px;
 }
 
 #MultiChoice .choice .dz-preview.dz-error {
-  display: none;
+  /* display: none; */
 }
 #MultiChoice .choice .dz-preview.dz-success {
   margin: auto;
@@ -105,3 +124,4 @@ margin: auto 10px;
 #MultiChoice .choice .dz-details {
   padding: 0
 }
+/* end:: MultiChoice */

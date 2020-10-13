@@ -8,7 +8,7 @@ $(function(){
   // Activate Dropzone
   // for Question Attachment
   $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion").dropzone({
-    url: "/",
+    url: window.location.href,
     acceptedFiles: "image/*",
     addRemoveLinks: true,
 
@@ -118,7 +118,7 @@ $(function(){
           var studentAttachment = "<div class='dropzone dropzone-default dropzone-success' id='StudentAttachment'><div class='dropzone-msg dz-message needsclick'><h3 class='dropzone-msg-title'>Drop files here or click to upload.</h3><span class='dropzone-msg-desc'>Only image files are allowed for upload</span></div></div>"
           $(".preview_body").append(studentAttachment)
             $(".preview_body .dropzone").last().dropzone({
-              url: "/",
+              url: window.location.href,
               acceptedFiles: "image/*",
               addRemoveLinks: true,
             });
@@ -140,7 +140,7 @@ $(function(){
 
         // Enable Attachment box
         $("tr[data-repeater-item]").last().find(".MCQAttachments").dropzone({
-          url: "/",
+          url: window.location.href,
           acceptedFiles: "image/*",
           addRemoveLinks: true,
           maxFiles:1,
@@ -232,10 +232,7 @@ $(function(){
         var maximumMarks = $("#mcqMaximumMarks").val();
         var maximumTime = $("#mcqMaximumTime").val();
 
-
         var choices = []
-
-
 
         // Set Question Images
         var questionImages = {}
@@ -260,6 +257,8 @@ $(function(){
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
 
+
+
         // Set Choices
         $("#MultiChoice table .choice").each(function () {
 
@@ -273,27 +272,74 @@ $(function(){
           choices.push(choice)
         })
 
-        console.log(choices);
 
         var totalChoices = "<div class='totalChoices'></div>"
         $(".preview_body").append(totalChoices)
 
-        $.each(choices, function (index , object) {
-          console.log(index, object);
-          let choiceBox = "<div class='choiceBox row' data-val='" + object["text"] + "'></div>"
-          $(".preview_body .totalChoices").append(choiceBox)
+        if ($("#mcqRandomizeOptions").prop("checked")){
+          const length = choices.length
 
-          // Image & Text
-          if (object["image"] != undefined && object["text"] != "") {
-            let choiceImg = "<div class='col-4 choiceImg'><img src='" + object["image"] + "' alt='" + object["image_name"] + "'></div>"
-            let choiceText = "<div class='col-8 choiceText'><span>" + object["text"] + "</span></div>"
-            $(".preview_body .totalChoices .choiceBox").append(choiceImg).append(choiceText)
+          for (var i = 0; i < length; i++) {
+
+            let x = Math.floor (Math.random() * length);
+            console.log('X :'+  x);
+
+            choices.splice(x,1);
+
+            // range = jQuery.grep(range, function(value) {return value != x});
+            // console.log('range2 :' + range);
+
+            let choiceBox = "<div class='choiceBox row' data-val='" + choices[x]["text"] + "'></div>"
+
+            // Image & Text
+            if (choices[x]["image"] != undefined && choices[x]["text"] != "") {
+              $(".preview_body .totalChoices").append(choiceBox)
+              let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[x]["image"] + "' alt='" + choices[x]["image_name"] + "'></div>"
+              let choiceText = "<div class='col-8 choiceText'><span>" + choices[x]["text"] + "</span></div>"
+              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
+            } else if (choices[x]["image"] != undefined) {
+              $(".preview_body .totalChoices").append(choiceBox)
+              let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[x]["image"] + "' alt='" + choices[x]["image_name"] + "'></div>"
+              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
+            } else if (choices[x]["text"] != "") {
+              $(".preview_body .totalChoices").append(choiceBox)
+              let choiceText = "<div class='col-12 choiceText'><span>" + choices[x]["text"] + "</span></div>"
+              $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
+            }
           }
+
+        } else {
+
+          for (var i = 0; i < choices.length; i++) {
+            let choiceBox = "<div class='choiceBox row' data-val='" + choices[i]["text"] + "'></div>"
+            // Image & Text
+            if (choices[i]["image"] != undefined && choices[i]["text"] != "") {
+              $(".preview_body .totalChoices").append(choiceBox)
+              let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+              let choiceText = "<div class='col-8 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
+            } else if (choices[i]["image"] != undefined) {
+              $(".preview_body .totalChoices").append(choiceBox)
+              let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+              $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
+            } else if (choices[i]["text"] != "") {
+              $(".preview_body .totalChoices").append(choiceBox)
+              let choiceText = "<div class='col-12 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+              $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
+            }
+          }
+
+        }
+
+        $(".preview_body .totalChoices .choiceBox").on("click", function () {
+          $(this).toggleClass("selected")
         })
-        console.log(choices);
+
+        // ----------------------------------------------------------
+
+
       })
     }
     // end:: check if the question is MultiChoice
-
   })
-  })
+})
