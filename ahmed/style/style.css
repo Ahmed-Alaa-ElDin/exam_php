@@ -35,6 +35,7 @@ margin: auto 10px;
   width: 90%;
   margin: 10px auto;
   padding: 10px;
+  font-size: 18px;
 }
 
 #previewBox .preview_body .student_answer {
@@ -55,6 +56,29 @@ margin: auto 10px;
   width: 90%;
 }
 
+#previewBox .preview_body .choiceBox {
+  border: 1px solid #ebedf3;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+#previewBox .preview_body .choiceBox img {
+  max-height: 100px;
+  max-width: 100px;
+  display: block;
+  margin: auto;
+}
+
+#previewBox .preview_body .choiceBox .choiceText {
+  display: flex;
+  min-height: 100%;
+}
+
+#previewBox .preview_body .choiceBox .choiceText span {
+  margin: auto;
+  font-size: 18px;
+}
 /* end:: Preview styling */
 
 
