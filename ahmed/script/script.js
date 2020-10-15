@@ -259,15 +259,15 @@ $(function(){
             $(".preview_body .totalChoices").append(choiceBox)
             let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
             let choiceText = "<div class='col-8 choiceText'><span>" + choices[i]["text"] + "</span></div>"
-            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText).append("<i class='fas fa-check' style='position: absolute;right: 15px;font-size: 16px;color: #fff;top: 42%;'></i>")
           } else if (choices[i]["image"] != undefined) {
             $(".preview_body .totalChoices").append(choiceBox)
-            let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
-            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
+            let choiceImg = "<div class=' col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append("<i class='fas fa-check' style='position: absolute;right: 15px;font-size: 16px;color: #fff;top: 42%;'></i>")
           } else if (choices[i]["text"] != "") {
             $(".preview_body .totalChoices").append(choiceBox)
             let choiceText = "<div class='col-12 choiceText'><span>" + choices[i]["text"] + "</span></div>"
-            $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceText).append("<i class='fas fa-check' style='position: absolute;right: 15px;font-size: 16px;color: #fff;top: 35%;'></i>")
           }
         }
 
@@ -468,19 +468,17 @@ $(function(){
             $(".preview_body .totalChoices").append(choiceBox)
             let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
             let choiceText = "<div class='col-8 choiceText'><span>" + choices[i]["text"] + "</span></div>"
-            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText).append("<i class='fas fa-check' style='position: absolute;right: 15px;font-size: 16px;color: #fff;top: 42%;'></i>")
           } else if (choices[i]["image"] != undefined) {
             $(".preview_body .totalChoices").append(choiceBox)
-            let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
-            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
+            let choiceImg = "<div class=' col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append("<i class='fas fa-check' style='position: absolute;right: 15px;font-size: 16px;color: #fff;top: 42%;'></i>")
           } else if (choices[i]["text"] != "") {
             $(".preview_body .totalChoices").append(choiceBox)
             let choiceText = "<div class='col-12 choiceText'><span>" + choices[i]["text"] + "</span></div>"
-            $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceText).append("<i class='fas fa-check' style='position: absolute;right: 15px;font-size: 16px;color: #fff;top: 35%;'></i>")
           }
         }
-
-
 
         $(".preview_body .totalChoices .choiceBox").on("click", function () {
           $(this).addClass("selected").siblings().removeClass("selected")

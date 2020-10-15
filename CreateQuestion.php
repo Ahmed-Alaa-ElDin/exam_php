@@ -84,163 +84,163 @@
                         </div>
                         <div class="card-toolbar">
                           <a href="#" class="btn btn-light-primary font-weight-bolder mr-2">
-                            <i class="ki ki-long-arrow-back icon-xs"></i>Back</a>
-                            <div class="btn-group">
-                              <button id="saveForm" type="button" class="btn btn-primary font-weight-bolder">
-                                <i class="ki ki-check icon-xs"></i>Save Form</button>
-                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                  <ul class="nav nav-hover flex-column">
-                                    <li class="nav-item">
-                                      <a href="#" id="previewButton" class="nav-link" data-toggle="modal" data-target="#previewBox">
-                                        <i class="nav-icon flaticon-eye"></i>
-                                        <span class="nav-text">Preview</span>
-                                      </a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a href="#" class="nav-link">
-                                        <i class="nav-icon flaticon2-reload"></i>
-                                        <span class="nav-text">Save &amp; continue</span>
-                                      </a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a href="#" class="nav-link">
-                                        <i class="nav-icon flaticon2-add-1"></i>
-                                        <span class="nav-text">Save &amp; add new</span>
-                                      </a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a href="#" class="nav-link">
-                                        <i class="nav-icon flaticon2-power"></i>
-                                        <span class="nav-text">Save &amp; exit</span>
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>
+                            <i class="ki ki-long-arrow-back icon-xs"></i>
+                            Back
+                          </a>
+                          <a href="#" id="previewButton" class="btn btn-light-primary font-weight-bolder mr-2"  data-toggle="modal" data-target="#previewBox">
+                            <i class="nav-icon flaticon-eye"></i>
+                            Preview
+                          </a>
+                          <div class="btn-group">
+                            <button id="saveForm" type="button" class="btn btn-primary font-weight-bolder">
+                              <i class="ki ki-check icon-xs"></i>Save Form</button>
+                              <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                              <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                <ul class="nav nav-hover flex-column">
+                                  <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                      <i class="nav-icon flaticon2-reload"></i>
+                                      <span class="nav-text">Save &amp; continue</span>
+                                    </a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                      <i class="nav-icon flaticon2-add-1"></i>
+                                      <span class="nav-text">Save &amp; add new</span>
+                                    </a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                      <i class="nav-icon flaticon2-power"></i>
+                                      <span class="nav-text">Save &amp; exit</span>
+                                    </a>
+                                  </li>
+                                </ul>
                               </div>
                             </div>
                           </div>
-                          <div class="card-body">
-                            <!--begin::Form-->
-                            <form class="form" id="kt_form">
-                              <div class="row">
-                                <div class="col-lg-4 offset-lg-8 float-right">
+                        </div>
+                        <div class="card-body">
+                          <!--begin::Form-->
+                          <form class="form" id="kt_form">
+                            <div class="row">
+                              <div class="col-lg-4 offset-lg-8 float-right">
+                                <div class="form-group row">
+                                  <label class="col-4 col-form-label text-right">Academic Year</label>
+                                  <div class="col-8">
+                                    <select class="form-control select2 is-valid w-100"  id="AcademicYear" name="param" style="width: 100%;" >
+                                      <option value="1">2020 - 2021</option>
+                                      <option value="0">2021 - 2020</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-12">
+                                <div class="form-group row">
+                                  <div class="col-lg-3">
+                                    <label>Class / Grade</label>
+                                    <select class="form-control select2 is-valid w-100"  id="StudentClass" name="param" style="width: 100%;" >
+                                      <option value=""></option>
+
+                                      <option value="1">Grade 01</option>
+                                      <option value="0">Grade 02</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-lg-3">
+                                    <label>Subject Name</label>
+                                    <select class="form-control select2 is-valid w-100"  id="StudentSection" name="param" style="width: 100%;" >
+                                      <option value=""></option>
+                                      <option value="1">English</option>
+                                      <option value="0">Urdu</option>
+                                      <option value="2">Islamic Studies</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <label>Topic Name <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="You can write the topic name here, i.e. Environment Pollution."></i></label>
+                                    <input id="topicName" type="text" class="form-control" name="TopicName" placeholder="Environment Pollution">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <div class="col-lg-6">
+                                    <label>Filter Tags <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="You can add multiple tags with this question, these tags will help in searching the right question wile creating task"></i></label>
+                                    <select class="form-control select2 is-valid w-100" multiple=""  id="FilterTags" name="param" style="width: 100%;" >
+                                    </select>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <label>Question Type <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="We have multiple types of questions available in system, each question have their own pattren to answer"></i></label>
+                                    <select class="form-control select2 is-valid w-100"  id="QuestionType" name="param"  style="width: 100%;">
+                                      <option value=""></option>
+                                      <option value="1">Short Answer/Essay</option>
+                                      <option value="2">Multiple choice</option>
+                                      <option value="3">True/False</option>
+                                      <option value="4">Assortment</option>
+                                      <option value="5">Drag & Drop</option>
+                                      <option value="6">Image Labelling</option>
+                                      <option value="7">Fill in the blanks</option>
+                                      <option value="8">Audio/Video Based Questions</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <div class="col-lg-12">
+                                    <label>Type Your Question <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="Whatever statement you will write in this box, will be displayed as the question statement."></i></label>
+                                    <div class="summernote" id="QuestionEditor"></div>
+                                  </div>
+                                </div>
+
+                                <!-- Short Question (1)-->
+                                <div id="ShortQuestion" class="question_type" style="display: none;">
+
                                   <div class="form-group row">
-                                    <label class="col-4 col-form-label text-right">Academic Year</label>
-                                    <div class="col-8">
-                                      <select class="form-control select2 is-valid w-100"  id="AcademicYear" name="param" style="width: 100%;" >
-                                        <option value="1">2020 - 2021</option>
-                                        <option value="0">2021 - 2020</option>
-                                      </select>
+                                    <div class="col-lg-2">
+                                      <label> Allow Rich Text Editor  <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want student will able to write answer into rich text editor, please turn this value ON."></i></label>
+                                      <input id="essayAllowRichText" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                      <label> Allow Attachment(s)  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
+                                      <input id="essayAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                      <label>Maximum Marks ? </label><br>
+                                      <input id="essayMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
+                                      <small class="text-muted">Set '0' if no marks required</small>
+                                    </div>
+                                    <div class="col-lg-3">
+                                      <label>Words Count Limit ? </label><br>
+                                      <input id="essayWordCount" type="text" class="form-control" name="WordsLimit" value="0" />
+                                      <small class="text-muted">Set '0' for unlimited words</small>
+                                    </div>
+                                    <div class="col-lg-3">
+                                      <label>Set Maximum Time ? </label><br>
+                                      <div class="input-group">
+                                        <input id="essayMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
+                                        <div class="input-group-append">
+                                          <span class="input-group-text">Minutes</span>
+                                        </div>
+                                      </div>
+                                      <small class="text-muted">Set '0' for unlimited Time</small>
+                                    </div>
+                                  </div>
+
+
+                                  <div class="form-group row">
+                                    <div class="col-lg-12">
+                                      <label>Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="if you would like to share some images/diagram/pdf document with this question, please attach photo here. Attached file will display to the studens with this question."></i></label>
+                                      <div class="dropzone dropzone-default dropzone-success" id="essayAttachFilesWithQuestion">
+                                        <div class="dropzone-msg dz-message needsclick">
+                                          <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                          <span class="dropzone-msg-desc">Only image, .pdf, .doc & .docx files are allowed for upload</span>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="col-lg-12">
-                                  <div class="form-group row">
-                                    <div class="col-lg-3">
-                                      <label>Class / Grade</label>
-                                      <select class="form-control select2 is-valid w-100"  id="StudentClass" name="param" style="width: 100%;" >
-                                        <option value=""></option>
+                                <!-- End Short Question  -->
 
-                                        <option value="1">Grade 01</option>
-                                        <option value="0">Grade 02</option>
-                                      </select>
-                                    </div>
-                                    <div class="col-lg-3">
-                                      <label>Subject Name</label>
-                                      <select class="form-control select2 is-valid w-100"  id="StudentSection" name="param" style="width: 100%;" >
-                                        <option value=""></option>
-                                        <option value="1">English</option>
-                                        <option value="0">Urdu</option>
-                                        <option value="2">Islamic Studies</option>
-                                      </select>
-                                    </div>
-                                    <div class="col-lg-6">
-                                      <label>Topic Name <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="You can write the topic name here, i.e. Environment Pollution."></i></label>
-                                      <input id="topicName" type="text" class="form-control" name="TopicName" placeholder="Environment Pollution">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <div class="col-lg-6">
-                                      <label>Filter Tags <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="You can add multiple tags with this question, these tags will help in searching the right question wile creating task"></i></label>
-                                      <select class="form-control select2 is-valid w-100" multiple=""  id="FilterTags" name="param" style="width: 100%;" >
-                                      </select>
-                                    </div>
-                                    <div class="col-lg-6">
-                                      <label>Question Type <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="We have multiple types of questions available in system, each question have their own pattren to answer"></i></label>
-                                      <select class="form-control select2 is-valid w-100"  id="QuestionType" name="param"  style="width: 100%;">
-                                        <option value=""></option>
-                                        <option value="1">Short Answer/Essay</option>
-                                        <option value="2">Multiple choice</option>
-                                        <option value="3">True/False</option>
-                                        <option value="4">Assortment</option>
-                                        <option value="5">Drag & Drop</option>
-                                        <option value="6">Image Labelling</option>
-                                        <option value="7">Fill in the blanks</option>
-                                        <option value="8">Audio/Video Based Questions</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <div class="col-lg-12">
-                                      <label>Type Your Question <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="Whatever statement you will write in this box, will be displayed as the question statement."></i></label>
-                                      <div class="summernote" id="QuestionEditor"></div>
-                                    </div>
-                                  </div>
+                                <!-- MultiChoice (2)-->
+                                <div id="MultiChoice" class="question_type" style="display: none;">
 
-                                  <!-- Short Question (1)-->
-                                  <div id="ShortQuestion" class="question_type" style="display: none;">
-
-                                    <div class="form-group row">
-                                      <div class="col-lg-2">
-                                        <label> Allow Rich Text Editor  <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want student will able to write answer into rich text editor, please turn this value ON."></i></label>
-                                        <input id="essayAllowRichText" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
-                                      </div>
-                                      <div class="col-lg-2">
-                                        <label> Allow Attachment(s)  <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
-                                        <input id="essayAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
-                                      </div>
-                                      <div class="col-lg-2">
-                                        <label>Maximum Marks ? </label><br>
-                                        <input id="essayMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
-                                        <small class="text-muted">Set '0' if no marks required</small>
-                                      </div>
-                                      <div class="col-lg-3">
-                                        <label>Words Count Limit ? </label><br>
-                                        <input id="essayWordCount" type="text" class="form-control" name="WordsLimit" value="0" />
-                                        <small class="text-muted">Set '0' for unlimited words</small>
-                                      </div>
-                                      <div class="col-lg-3">
-                                        <label>Set Maximum Time ? </label><br>
-                                        <div class="input-group">
-                                          <input id="essayMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
-                                          <div class="input-group-append">
-                                            <span class="input-group-text">Minutes</span>
-                                          </div>
-                                        </div>
-                                        <small class="text-muted">Set '0' for unlimited Time</small>
-                                      </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                      <div class="col-lg-12">
-                                        <label>Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body"  data-toggle="popover" data-placement="top" data-content="if you would like to share some images/diagram/pdf document with this question, please attach photo here. Attached file will display to the studens with this question."></i></label>
-                                        <div class="dropzone dropzone-default dropzone-success" id="essayAttachFilesWithQuestion">
-                                          <div class="dropzone-msg dz-message needsclick">
-                                            <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
-                                            <span class="dropzone-msg-desc">Only image, .pdf, .doc & .docx files are allowed for upload</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- End Short Question  -->
-
-                                  <!-- MultiChoice (2)-->
-                                  <div id="MultiChoice" class="question_type" style="display: none;">
-
-                                    <div id="RepeaterContactNumber">
+                                  <div id="RepeaterContactNumber">
 
                                     <div class="row">
                                       <div class="col-lg-6">
@@ -364,8 +364,8 @@
                                           <th class="text-center">Remove</th>
                                         </thead>
                                         <!-- insert new choices here -->
-                                        </table>
-                                      </div>
+                                      </table>
+                                    </div>
                                     <hr>
 
                                     <div class="row">
@@ -559,9 +559,8 @@
               <div class="preview_body">
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary font-weight-bold">Save Answer</button>
+            <div class="modal-footer text-center">
+              <button type="button" class="btn btn-light-primary font-weight-bold text-center closePreview" data-dismiss="modal">Close</button>
             </div>
 
           </div>

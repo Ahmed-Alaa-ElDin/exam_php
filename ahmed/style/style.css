@@ -57,6 +57,7 @@ margin: auto 10px;
 }
 
 #previewBox .preview_body .choiceBox {
+  position: relative;
   border: 1px solid #ebedf3;
   border-radius: 5px;
   margin: 10px;
@@ -67,8 +68,12 @@ margin: auto 10px;
 
 #previewBox .preview_body .choiceBox:hover,
 #previewBox .preview_body .choiceBox.selected {
-  background: #2b7acc;
+  background:  #3699FF;
   color: #fff;
+}
+
+#previewBox .closePreview {
+  margin: auto;
 }
 
 #previewBox .preview_body .choiceBox .choiceImg {
@@ -90,8 +95,8 @@ margin: auto 10px;
 }
 
 #previewBox .preview_body .choiceBox .choiceText span {
-  margin: auto;
-  font-size: 18px;
+  margin: auto auto auto 20px;
+  font-size: 16px;
 }
 
 #previewBox .preview_body .choices {
