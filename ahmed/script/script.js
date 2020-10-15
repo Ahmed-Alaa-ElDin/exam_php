@@ -113,14 +113,14 @@ $(function(){
 
       $("#MultiChoice").fadeIn()
 
-      var mcqAllImages = []
+      var mcqAllImages = {}
 
       // config Question Types Fade in & out
 
       $("#MultiChoice").find("button[data-repeater-create]").on("click",function () {
 
         // Enable Attachment box
-        $("tr[data-repeater-item]").last().find(".MCQAttachments").dropzone({
+        $("#MultiChoice tr[data-repeater-item]").last().find(".MCQAttachments").dropzone({
           url: window.location.href,
           acceptedFiles: "image/*",
           addRemoveLinks: true,
@@ -287,8 +287,70 @@ $(function(){
     // begin:: check if the question is MultiChoice
     else if ($(this).val() == 3) {
 
+      var trueFalseAllImages = {}
       // config Question Types Fade in & out
       $("#TrueFalse").fadeIn()
+
+      // add new choice
+      $('#TrueFalse').find("button[data-repeater-create]").on("click", function () {
+
+        // create new node
+        let newChoice = '<tr data-repeater-item="" class="choice">\
+          <td class="multi-choice-td">\
+            <div class="dropzone dropzone-default kt_dropzone_1 TFAttachments">\
+              <div class="dropzone-msg dz-message needsclick">\
+                <h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3>\
+              </div>\
+            </div>\
+          </td>\
+          <td class="multi-choice-td">\
+            <input type="text" class="form-control choice-text" placeholder="Enter Possible Choice">\
+          </td>\
+          <td class="multi-choice-td pl-10  text-center" align="center">\
+            <label class="radio radio-lg">\
+              <input type="radio" class="choice-right-false" name="TFRadio" />\
+              <span></span></label>\
+            </td>\
+            <td class="multi-choice-td  text-center">\
+              <a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon">\
+                <i class="la la-remove"></i>\
+              </a>\
+            </td>\
+          </tr>'
+
+        $('#TrueFalse table').append(newChoice)
+
+        // activate Dropzone
+        $("#TrueFalse table .dropzone").last().dropzone({
+          url: window.location.href,
+          acceptedFiles: "image/*",
+          addRemoveLinks: true,
+          maxFiles:1,
+
+          // create base64 image link
+          init: function() {
+            this.on("addedfile", function (file) {
+              var reader = new FileReader();
+              reader.onload = function(event) {
+                var base64String = event.target.result;
+                var fileName = file.name
+                trueFalseAllImages[fileName] = base64String
+                console.log(trueFalseAllImages)
+              };
+              reader.readAsDataURL(file);
+            });
+          }
+        });
+
+        // add action to delete button
+        $("#TrueFalse table a[data-repeater-delete]").last().on("click",function () {
+          let check = confirm("Are you sure you want to delete this element?")
+          if (check) {
+            $(this).parents("tr").remove()
+          }
+        })
+      })
+
 
       // handle save form clicking
       $("#saveForm").on("click",function () {
@@ -319,7 +381,19 @@ $(function(){
           }
         })
 
-        var true_false = $("#TrueFalse table input.choice-right-false").val();
+        var choices = []
+
+        $("#TrueFalse table .choice").each(function () {
+
+          let choice = {}
+
+          choice["image_name"] = $(this).find(".dz-success img").attr("alt")
+          choice["image"] = trueFalseAllImages[$(this).find(".dz-success img").attr("alt")]
+          choice["text"] = $(this).find(".choice-text").val()
+          choice["true-false"] = $(this).find(".choice-right-false").prop("checked")
+
+          choices.push(choice)
+        })
 
 
         var data = {
@@ -336,7 +410,7 @@ $(function(){
           "maximum_marks" : maximumMarks,
           "maximum_time" : maximumTime,
           "question_images" : questionImages,
-          "true_false" : true_false
+          "choices" : choices
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
@@ -345,6 +419,8 @@ $(function(){
       $("#previewButton").on("click",function () {
 
         $(".preview_body").children().remove()
+
+        var choices = []
 
         // Set Question Images
         var questionImages = {}
@@ -367,13 +443,49 @@ $(function(){
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
 
-        // Set True/False
-        var trueFalseBlock = '<div class = "choices"> <div class="choice trueChoice">True</div> <div class="choice falseChoice">False</div> </div>'
-        $(".preview_body").append(trueFalseBlock)
+        // Set Choices
+        $("#TrueFalse table .choice").each(function () {
 
-        $("#previewBox .preview_body .choices .choice").on("click",function () {
+          let choice = {}
+
+          choice["image_name"] = $(this).find(".dz-success img").attr("alt")
+          choice["image"] = trueFalseAllImages[$(this).find(".dz-success img").attr("alt")]
+          choice["text"] = $(this).find(".choice-text").val()
+          choice["true-false"] = $(this).find(".choice-right-false").prop("checked")
+
+          choices.push(choice)
+        })
+
+
+        var totalChoices = "<div class='totalChoices'></div>"
+        $(".preview_body").append(totalChoices)
+
+
+        for (var i = 0; i < choices.length; i++) {
+          let choiceBox = "<div class='choiceBox row' data-val='" + choices[i]["text"] + "'></div>"
+          // Image & Text
+          if (choices[i]["image"] != undefined && choices[i]["text"] != "") {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            let choiceText = "<div class='col-8 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
+          } else if (choices[i]["image"] != undefined) {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceImg = "<div class='offset-4 col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceImg)
+          } else if (choices[i]["text"] != "") {
+            $(".preview_body .totalChoices").append(choiceBox)
+            let choiceText = "<div class='col-12 choiceText'><span>" + choices[i]["text"] + "</span></div>"
+            $(".preview_body .totalChoices .choiceBox").last().append(choiceText)
+          }
+        }
+
+
+
+        $(".preview_body .totalChoices .choiceBox").on("click", function () {
           $(this).addClass("selected").siblings().removeClass("selected")
         })
+
         // ----------------------------------------------------------
 
       })

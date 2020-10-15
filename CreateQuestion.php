@@ -259,7 +259,7 @@
                                           <th>Image</th>
                                           <th>Choice(s)</th>
                                           <th>Correct Answer</th>
-                                          <th class="text-right">Remove</th>
+                                          <th class="text-center">Remove</th>
                                         </thead>
                                         <tr data-repeater-item="" class="choice">
                                           <td class="multi-choice-td">
@@ -272,13 +272,13 @@
                                           <td class="multi-choice-td">
                                             <input type="text" class="form-control choice-text" placeholder="Enter Possible Choice">
                                           </td>
-                                          <td class="multi-choice-td pl-10" align="center">
-                                            <label class="checkbox checkbox-lg">
+                                          <td class="multi-choice-td pl-10  text-center" align="center">
+                                            <label class="checkbox checkbox-lg text-center">
                                               <input type="checkbox" class="choice-right-false" checked="checked" name="Checkboxes3_1" />
                                               <span></span></label>
                                             </td>
-                                            <td class="multi-choice-td">
-                                              <a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon float-right">
+                                            <td class="multi-choice-td  text-center">
+                                              <a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon">
                                                 <i class="la la-remove"></i>
                                               </a>
                                             </td>
@@ -344,36 +344,28 @@
                                   <!-- True False (3)-->
                                   <div id="TrueFalse" class="question_type" style="display: none;">
 
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                        <h4>Enter Possible Answers</h4>
+                                      </div>
+                                      <div class="col-lg-6 mb-10">
+                                        <button type="button" class="btn btn-danger float-right" data-repeater-create="" >
+                                          <i class="fas fa-plus"></i> <strong>Add New Choice</strong>
+                                        </button>
+                                      </div>
+                                    </div>
+
                                     <div class="table-responsive">
                                       <table class="table table-borderless" data-repeater-list="">
-                                        <tr>
-                                          <td class="multi-choice-td true-choice">
-                                            <label for="trueChoice">
-                                              True
-                                            </label>
-                                          </td>
-                                          <td class="multi-choice-td pl-10" align="left">
-                                            <label class="radio radio-success">
-                                              <input type="radio" class="choice-right-false" name="true-false" id="trueChoice" value="true"/>
-                                              <span></span>
-                                            </label>
-                                          </td>
-                                          <td></td>
-                                          <td></td>
-                                          <td class="multi-choice-td false-choice">
-                                            <label for="falseChoice">
-                                              False
-                                            </label>
-                                          </td>
-                                          <td class="multi-choice-td pl-10" align="right">
-                                            <label class="radio radio-danger">
-                                              <input type="radio" class="choice-right-false" name="true-false" id="falseChoice" value="false"/>
-                                              <span></span>
-                                            </label>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </div>
+                                        <thead class="text-center">
+                                          <th>Image</th>
+                                          <th>Choice(s)</th>
+                                          <th>Correct Answer</th>
+                                          <th class="text-center">Remove</th>
+                                        </thead>
+                                        <!-- insert new choices here -->
+                                        </table>
+                                      </div>
                                     <hr>
 
                                     <div class="row">
