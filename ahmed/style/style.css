@@ -123,7 +123,7 @@ margin: auto 10px;
 /* begin:: MultiChoice */
 #TrueFalse .choice .multi-choice-td:first-of-type,
 #MultiChoice .choice .multi-choice-td:first-of-type {
-    width: 230px;
+  width: 230px;
 }
 
 #TrueFalse table th ,
@@ -131,33 +131,199 @@ margin: auto 10px;
   text-align: center;
 }
 
+#DragDrop table td span,
 #TrueFalse table td span ,
 #MultiChoice table td span {
   margin: auto;
 }
 
+#DragDrop .pair .multi-choice-td .dz-image ,
 #TrueFalse .choice .multi-choice-td .dz-image ,
 #MultiChoice .choice .multi-choice-td .dz-image {
   height: auto;
 }
 
+#DragDrop .pair .multi-choice-td .dz-image img ,
 #TrueFalse .choice .multi-choice-td .dz-image img ,
 #MultiChoice .choice .multi-choice-td .dz-image img {
   width: 75px;
   margin: auto;
 }
 
+#DragDrop .pair .dz-preview.dz-success ,
 #TrueFalse .choice .dz-preview.dz-success ,
 #MultiChoice .choice .dz-preview.dz-success {
   margin: auto;
 }
 
+#DragDrop .pair .dz-details ,
 #TrueFalse .choice .dz-details ,
 #MultiChoice .choice .dz-details {
   padding: 0
 }
 /* end:: MultiChoice */
 
-/* begin:: TrueFalse */
+/* begin:: DragDrop */
 
-/* end:: TrueFalse */
+/* Image Matching */
+.preview_body .totalPairs .all_questions {
+  background-color: #3498db;
+  border-radius: 20px;
+  padding: 20px 15px
+}
+
+.preview_body .totalPairs .all_questions .question {
+  position: relative;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+
+.preview_body .totalPairs .all_answers .answer .delete_answ {
+  right: 40px;
+  top: 5px;
+}
+
+.preview_body .totalPairs .all_questions .question:not(:last-of-type) {
+  margin-right: 25px;
+}
+
+.preview_body .totalPairs .all_questions .question_img {
+  display: block;
+  width: 80%;
+  height: 130px;
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  margin: auto;
+}
+
+.preview_body .totalPairs .all_questions .question_text {
+  display: block;
+  width: 80%;
+  max-height: 150px;
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+
+.preview_body .totalPairs .all_questions .question_answer {
+  min-height: 30px;
+  background-color: #cbeaff;
+  margin: 5px auto;
+  border-radius: 10px;
+}
+
+
+.preview_body .totalPairs .all_answers {
+  margin-top: 50px;
+  background-color: #3498db;
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.preview_body .totalPairs .answer {
+  background: #cbeaff;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
+  margin: auto 20px;
+  opacity: 0.999;
+  cursor: grab;
+  margin-bottom: 10px;
+}
+
+.preview_body .totalPairs .answer .answer_img {
+  display: block;
+  width: 80%;
+  max-height: 100px;
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  margin: 10px auto;
+}
+
+/* Line Matching */
+
+/* Question */
+.preview_body .questions .question {
+  margin-top: 10px;
+  border: 5px solid #ddd;
+  border-radius: 30px;
+  padding: 5px;
+  text-align: center;
+  z-index: 5;
+  position: relative;
+}
+
+.preview_body .questions .question .question_img {
+  width: 100%;
+  max-height: 75px;
+  display: block;
+  -ms-user-select: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  margin: auto;
+}
+
+.preview_body .questions .question .question_text {
+  font-size: 16px;
+  font-weight: bold;
+  -ms-user-select: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  margin: auto;
+  display: block;
+  overflow: hidden;
+}
+
+/* Answer */
+
+.preview_body .answers .answer {
+  margin-top: 10px;
+  border: 5px solid #ddd;
+  border-radius: 30px;
+  padding: 5px;
+  text-align: center;
+  z-index: 5;
+  overflow: hidden;
+  position: relative;
+}
+
+.preview_body .answers .answer .answer_img {
+  width: 100%;
+  max-height: 75px;
+  display: block;
+  -ms-user-select: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  margin: auto;
+}
+
+.preview_body .answers .answer .answer_text {
+  font-size: 16px;
+  font-weight: bold;
+  -ms-user-select: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  margin: auto;
+  display: block;
+  overflow: hidden;
+}
+
+
+
+/* end:: DragDrop */
