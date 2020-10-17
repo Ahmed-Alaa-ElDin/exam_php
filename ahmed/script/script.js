@@ -8,7 +8,7 @@ $(function(){
 
   // Activate Dropzone
   // for Question Attachment
-  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion, #dragDropAttachFilesWithQuestion, #assortmentAttachFilesWithQuestion").dropzone({
+  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion, #dragDropAttachFilesWithQuestion, #assortmentAttachFilesWithQuestion, #fillSpaceAttachFilesWithQuestion").dropzone({
     url: window.location.href,
     acceptedFiles: "image/*,application/pdf,.doc,.docx",
     addRemoveLinks: true,
@@ -34,7 +34,7 @@ $(function(){
     // Disable the Save Form Button
     $("#saveForm").off("click");
     $("#previewButton").off("click");
-
+    $('.note-editing-area').off("keyup , change")
     $(".question_type").css("display","none");
 
     // begin:: check if the question is Short Answer/Essay
@@ -497,7 +497,7 @@ $(function(){
     }
     // end:: check if the question is TrueFalse
 
-    // begin:: check if the question is Drag & Drop
+    // begin:: check if the question is Assortment
     else if ($(this).val() == 4) {
 
       var assortmentAllImages = {}
@@ -555,6 +555,39 @@ $(function(){
         })
       })
 
+      // Sorting According Orders
+      function compareElements( a, b ) {
+        if ( a.order < b.order ){
+          return -1;
+        }
+        if ( a.order > b.order ){
+          return 1;
+        }
+        return 0;
+      }
+
+      // Sorting Rondom
+      function shuffleElements(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        while (0 !== currentIndex) {
+
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+      }
+
+      // Adding Landing Zero
+      function landingZero (str, max) {
+        str = str.toString();
+        return str.length < max ? landingZero("0" + str, max) : str;
+      }
 
       // handle save form clicking
       $("#saveForm").on("click",function () {
@@ -585,6 +618,7 @@ $(function(){
           }
         })
 
+
         var elements = []
 
         $("#Assortment table .element").each(function () {
@@ -594,7 +628,7 @@ $(function(){
           element["image_name"] = $(this).find(".dz-success img").attr("alt")
           element["image"] = assortmentAllImages[$(this).find(".dz-success img").attr("alt")]
           element["text"] = $(this).find(".element-text").val()
-          element["order"] = $(this).find(".element-order").val()
+          element["order"] = landingZero($(this).find(".element-order").val(),5)
 
           elements.push(element)
         })
@@ -616,7 +650,7 @@ $(function(){
           "maximum_marks" : maximumMarks,
           "maximum_time" : maximumTime,
           "question_images" : questionImages,
-          "elements" : elements
+          "elements" : elements.sort(compareElements)
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
@@ -657,44 +691,85 @@ $(function(){
           element["image_name"] = $(this).find(".dz-success img").attr("alt")
           element["image"] = assortmentAllImages[$(this).find(".dz-success img").attr("alt")]
           element["text"] = $(this).find(".element-text").val()
-          element["order"] = $(this).find(".element-order").val()
+          element["order"] = landingZero($(this).find(".element-order").val(),5)
 
           elements.push(element)
         })
 
 
-        var totalElements = "<div class='totalElements'></div>"
+        sortedElements = elements.sort(compareElements)
+
+
+        var totalElements = "<div class='totalElements row'><div id='random' class='col-6'></div><div id='sorted' class='col-6'></div></div>"
         $(".preview_body").append(totalElements)
 
 
-        for (var i = 0; i < elements.length; i++) {
-          let elementBox = "<div class='elementBox row' data-val='" + elements[i]["text"] + "'></div>"
+        var kanbanFixed = new jKanban({
+          element : '#sorted',
+          gutter : '10px' ,
+          dragBoards : false,
+          dragItems : false,
+          boards : [
+            {
+              'id' : 'fixed',
+              'title' : 'Sorted',
+              'class' : 'success',
+            }
+          ]
+        })
+
+        for (var i = 0; i < sortedElements.length; i++) {
           // Image & Text
-          if (elements[i]["image"] != undefined && elements[i]["text"] != "") {
-            $(".preview_body .totalElements").append(elementBox)
-            let elementImg = "<div class='col-4 elementImg'><img src='" + elements[i]["image"] + "' alt='" + elements[i]["image_name"] + "'></div>"
-            let elementText = "<div class='col-8 elementText'><span>" + elements[i]["text"] + "</span></div>"
-            $(".preview_body .totalElements .elementBox").last().append(elementImg).append(elementText)
-          } else if (elements[i]["image"] != undefined) {
-            $(".preview_body .totalElements").append(elementBox)
-            let elementImg = "<div class=' col-4 elementImg'><img src='" + elements[i]["image"] + "' alt='" + elements[i]["image_name"] + "'></div>"
-            $(".preview_body .totalElements .elementBox").last().append(elementImg)
-          } else if (elements[i]["text"] != "") {
-            $(".preview_body .totalElements").append(elementBox)
-            let elementText = "<div class='col-12 elementText'><span>" + elements[i]["text"] + "</span></div>"
-            $(".preview_body .totalElements .elementBox").last().append(elementText)
+          if (sortedElements[i]["image"] != undefined && sortedElements[i]["text"] != "") {
+            let elementImg = "<div class='col-4 elementImg'><img src='" + sortedElements[i]["image"] + "' alt='" + sortedElements[i]["image_name"] + "'></div>"
+            let elementText = "<div class='col-8 elementText'><span>" + sortedElements[i]["text"] + "</span></div>"
+            kanbanFixed.addElement("fixed",{'title': '<div class="row">' + elementImg + elementText + '</div>'})
+          } else if (sortedElements[i]["image"] != undefined) {
+            let elementImg = "<div class=' col-4 elementImg'><img src='" + sortedElements[i]["image"] + "' alt='" + sortedElements[i]["image_name"] + "'></div>"
+            kanbanFixed.addElement("fixed",{'title': '<div class="row">' + elementImg + '</div>'})
+          } else if (sortedElements[i]["text"] != "") {
+            let elementText = "<div class='col-12 elementText'><span>" + sortedElements[i]["text"] + "</span></div>"
+            kanbanFixed.addElement("fixed",{'title': '<div class="row">' + elementText + '</div>'})
           }
         }
 
-        // $(".preview_body .totalChoices .elementBox").on("click", function () {
-        //   $(this).addClass("selected").siblings().removeClass("selected")
-        // })
+        randomizedElements = shuffleElements(elements)
 
-        // ----------------------------------------------------------
+        var kanbanDynamic = new jKanban({
+          element : '#random',
+          gutter : '10px' ,
+          dragBoards : false,
+          dragItems : true,
+          boards : [
+            {
+              'id' : 'dynamic',
+              'title' : 'Unsorted',
+              'class' : 'danger',
+            }
+          ]
+        })
+
+        for (var i = 0; i < randomizedElements.length; i++) {
+          console.log(randomizedElements);
+          // Image & Text
+          if (randomizedElements[i]["image"] != undefined && randomizedElements[i]["text"] != "") {
+            let elementImg = "<div class='col-4 elementImg'><img src='" + randomizedElements[i]["image"] + "' alt='" + randomizedElements[i]["image_name"] + "'></div>"
+            let elementText = "<div class='col-8 elementText'><span>" + randomizedElements[i]["text"] + "</span></div>"
+            kanbanDynamic.addElement("dynamic",{'title': '<div class="row">' + elementImg + elementText + '</div>'})
+          } else if (randomizedElements[i]["image"] != undefined) {
+            let elementImg = "<div class=' col-4 elementImg'><img src='" + randomizedElements[i]["image"] + "' alt='" + randomizedElements[i]["image_name"] + "'></div>"
+            kanbanDynamic.addElement("dynamic",{'title': '<div class="row">' + elementImg + '</div>'})
+          } else if (randomizedElements[i]["text"] != "") {
+            let elementText = "<div class='col-12 elementText'><span>" + randomizedElements[i]["text"] + "</span></div>"
+            kanbanDynamic.addElement("dynamic",{'title': '<div class="row">' + elementText + '</div>'})
+          }
+        }
+
 
       })
 
     }
+    // begin:: check if the question is Assortment
 
     // begin:: check if the question is Drag & Drop
     else if ($(this).val() == 5) {
@@ -967,7 +1042,7 @@ $(function(){
 
       })
     }
-    // end:: check if the question is TrueFalse
+    // end:: check if the question is Drag & Drop
 
     // begin:: check if the question is fillSpaces
     else if ($(this).val() == 7) {
@@ -975,13 +1050,132 @@ $(function(){
       // config Question Types Fade in & out
       $("#FillSpace").fadeIn()
 
+      var num = 1
+
       $('.note-editing-area').on("keyup , change",function () {
         if ($(this).html().includes("___")) {
-          console.log("ghfg");
-          $(this).find("p").text().replace("___","<input type='text'>")
+          $(".fillSpaceInputs").append("<div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + num + "' data-num='" + num + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>"+ num +"</span></div><div class='input-group-append'><span class='input-group-text btn btn-danger removeAnswer'>X</span></div></div>")
+          $(this).html($(this).html().replace("___","<span data-num = '" + num + "' class='btn btn-primary removeSpan'> ((" + num + ")) </span>" + "&nbsp;"))
+          $("#placeholder" + num + "").focus()
+          num += 1
+          $(".removeAnswer").on("click", function () {
+            $(this).parents(".input-group").remove()
+            $(".note-editing-area span[data-num='" + $(this).parents(".input-group").find("input").data("num") + "']").remove()
+          })
+          $(".removeSpan").on("click", function () {
+            $(".fillSpaceInputs .input-group #placeholder" + $(this).data("num")).parents(".input-group").remove()
+            $(this).remove()
+          })
         }
       })
 
+      $("#saveForm").on("click",function () {
+        var academicYearID = $("#AcademicYear").val();
+        var academicYear = $("#AcademicYear").find("option:selected").text();
+        var gradeID = $("#StudentClass").val();
+        var gradeName = $("#StudentClass").find("option:selected").text();
+        var subjectID = $("#StudentSection").val();
+        var subjectName = $("#StudentSection").find("option:selected").text();
+        var topicName = $("#topicName").text();
+        var filterTags = [];
+        $("#FilterTags option").each(function () {
+          filterTags.push($(this).val())
+        })
+
+        var questionHTML = $('.note-editable').html()
+
+        var randomizeOptions = $("#fillSpaceRandomizeOptions").prop("checked")
+        var allowAttachment = $("#fillSpaceAllowAttach").prop("checked")
+        var allowPartialCredit = $("#fillSpaceAllowPartialCredit").prop("checked")
+        var maximumMarks = $("#fillSpaceMaximumMarks").val();
+        var maximumTime = $("#fillSpaceMaximumTime").val();
+
+        var questionImages = {}
+        $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview").each(function(){
+          if ($(this).find(".dz-error-message").text() == "") {
+            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+          }
+        })
+
+        var answers = []
+
+        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
+          var answer = {}
+          answer["answer_text"] = $(this).val()
+          answer["answer_number"] = $(this).data("num")
+          answers.push(answer)
+        })
+
+        var data = {
+          "academic_id" : academicYearID,
+          "academic_year" : academicYear,
+          "grade_id" : gradeID,
+          "grade_name" : gradeName,
+          "subject_id" : subjectID,
+          "subject_name" : gradeName,
+          "topic_name" : subjectName,
+          "filter_tags" : filterTags,
+          "question_html" : questionHTML,
+          "rondomize_options" : randomizeOptions,
+          "allow_attachment" : allowAttachment,
+          "allow_partial_credit" : allowPartialCredit,
+          "maximum_marks" : maximumMarks,
+          "maximum_time" : maximumTime,
+          "question_images" : questionImages,
+          "answers" : answers
+        }
+        var dataJSON = JSON.stringify(data)
+        console.log(data);
+      })
+
+
+      // Set Preview Box
+      $("#previewButton").on("click",function () {
+
+        $(".preview_body").children().remove()
+
+        // Set Question Images
+        var questionImages = {}
+        $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function(){
+          questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+        })
+
+        var questionImageDiv = "<div class='question_images'></div>"
+        $(".preview_body").append(questionImageDiv)
+
+        $.each(questionImages, function(imgName,imgBase64){
+          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
+          $(".preview_body .question_images").append(image)
+        })
+        // ----------------------------------------------------------
+
+        // Set Question Text
+        var questionHTML = $('.note-editable').html()
+        var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
+        $(".preview_body").append(questionParagraph)
+        // ----------------------------------------------------------
+
+        // Set Elements
+        var answers = []
+
+        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
+          var answer = {}
+          answer["answer_text"] = $(this).val()
+          answer["answer_number"] = $(this).data("num")
+          answers.push(answer)
+        })
+
+
+        var totalAnswers = "<div class='totalAnswers'></div>"
+        $(".preview_body").append(totalAnswers)
+
+
+        for (var i = 0; i < answers.length; i++) {
+          let answerBox = "<div class='answerBox row' data-val='" + answers[i]["answer_number"] + "'><div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + answers[i]["answer_number"] + "' data-num='" + answers[i]["answer_number"] + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>"+ answers[i]["answer_number"] +"</span></div><div class='input-group-append'></div></div></div>"
+          $(".preview_body .totalAnswers").append(answerBox)
+        }
+
+      })
 
     }
     // end:: check if the question is fillSpaces

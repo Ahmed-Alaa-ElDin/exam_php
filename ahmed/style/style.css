@@ -73,7 +73,6 @@ margin: auto 10px;
   border-radius: 5px;
 }
 
-#previewBox .preview_body .elementBox img ,
 #previewBox .preview_body .choiceBox img {
   max-height: 100px;
   max-width: 100px;
@@ -164,8 +163,52 @@ margin: auto 10px;
 }
 /* end:: MultiChoice */
 
-/* begin:: DragDrop */
 
+/* begin:: Assortment */
+
+#previewBox .preview_body #random .kanban-board-header ,
+#previewBox .preview_body #sorted .kanban-board-header {
+  text-align: center;
+}
+
+.gu-mirror .elementImg,
+#previewBox .preview_body #random .elementImg,
+#previewBox .preview_body #sorted .elementImg {
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.gu-mirror .elementImg img,
+#previewBox .preview_body #random .elementImg img,
+#previewBox .preview_body #sorted .elementImg img {
+  max-height: 100px;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.gu-mirror .elementText span,
+#previewBox .preview_body #random .elementText span,
+#previewBox .preview_body #sorted .elementText span {
+  margin: auto auto auto 20px;
+  font-size: 16px;
+}
+
+.gu-mirror .elementText,
+#previewBox .preview_body #random .elementText ,
+#previewBox .preview_body #sorted .elementText  {
+  display: flex;
+  min-height: 100%;
+}
+
+#previewBox .preview_body #random .kanban-board,
+#previewBox .preview_body #sorted .kanban-board {
+  width: 90% !important;
+}
+/* end:: Assortment */
+
+/* begin:: DragDrop */
 /* Image Matching */
 .preview_body .totalPairs .all_questions {
   background-color: #3498db;
@@ -253,6 +296,9 @@ margin: auto 10px;
   margin: 10px auto;
 }
 
+
+
+
 /* Line Matching */
 
 /* Question */
@@ -325,6 +371,16 @@ margin: auto 10px;
   overflow: hidden;
 }
 
-
-
 /* end:: DragDrop */
+
+
+/* begin:: Fill Space */
+#FillSpace .fillSpaceInputs .input-group {
+  margin: 10px;
+}
+
+.preview_body .totalAnswers .answerBox {
+  max-width: 90%;
+  margin: 10px auto;
+}
+/* end:: Fill Space */

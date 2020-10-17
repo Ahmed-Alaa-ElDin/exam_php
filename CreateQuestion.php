@@ -610,6 +610,18 @@
                                 <div id="FillSpace" class="question_type" style="display: none;">
 
                                   <div class="row">
+                                    <div class="col-12 text-center">
+                                      <h4>Enter Answers</h4>
+                                    </div>
+                                  </div>
+
+                                  <div class="fillSpaceInputs">
+
+                                  </div>
+
+                                  <hr>
+
+                                  <div class="row">
                                     <div class="col-lg-7">
                                       <div class="form-group row">
 
