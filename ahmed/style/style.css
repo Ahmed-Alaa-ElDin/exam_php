@@ -38,24 +38,7 @@ margin: auto 10px;
   font-size: 18px;
 }
 
-#previewBox .preview_body .student_answer {
-  display: block;
-  width: 90%;
-  margin: 10px auto;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-#previewBox .preview_body .student_answer:focus {
-  outline: none;
-}
-
-#previewBox .preview_body #StudentAttachment {
-  margin: 10px auto;
-  width: 90%;
-}
-
+#previewBox .preview_body .elementBox,
 #previewBox .preview_body .choiceBox {
   position: relative;
   border: 1px solid #ebedf3;
@@ -65,6 +48,13 @@ margin: auto 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+
+#previewBox .preview_body .elementBox {
+  border: 1px solid #3699FF;
+  background:  #3699FF;
+  color: #fff;
+}
+
 
 #previewBox .preview_body .choiceBox:hover,
 #previewBox .preview_body .choiceBox.selected {
@@ -76,12 +66,14 @@ margin: auto 10px;
   margin: auto;
 }
 
+#previewBox .preview_body .elementBox .elementImg,
 #previewBox .preview_body .choiceBox .choiceImg {
   background: #fff;
   padding: 5px;
   border-radius: 5px;
 }
 
+#previewBox .preview_body .elementBox img ,
 #previewBox .preview_body .choiceBox img {
   max-height: 100px;
   max-width: 100px;
@@ -89,12 +81,14 @@ margin: auto 10px;
   margin: auto;
 }
 
+#previewBox .preview_body .elementBox .elementText ,
 #previewBox .preview_body .choiceBox .choiceText {
   display: flex;
   min-height: 100%;
 }
 
-#previewBox .preview_body .choiceBox .choiceText span {
+#previewBox .preview_body .choiceBox .choiceText span,
+#previewBox .preview_body .elementBox .elementText span {
   margin: auto auto auto 20px;
   font-size: 16px;
 }
@@ -121,28 +115,33 @@ margin: auto 10px;
 
 
 /* begin:: MultiChoice */
+#Assortment .element .multi-choice-td:first-of-type,
 #TrueFalse .choice .multi-choice-td:first-of-type,
 #MultiChoice .choice .multi-choice-td:first-of-type {
   width: 230px;
 }
 
+#Assortment table th ,
 #TrueFalse table th ,
 #MultiChoice table th {
   text-align: center;
 }
 
+#Assortment table td span,
 #DragDrop table td span,
 #TrueFalse table td span ,
 #MultiChoice table td span {
   margin: auto;
 }
 
+#Assortment .element .multi-choice-td .dz-image ,
 #DragDrop .pair .multi-choice-td .dz-image ,
 #TrueFalse .choice .multi-choice-td .dz-image ,
 #MultiChoice .choice .multi-choice-td .dz-image {
   height: auto;
 }
 
+#Assortment .element .multi-choice-td .dz-image img ,
 #DragDrop .pair .multi-choice-td .dz-image img ,
 #TrueFalse .choice .multi-choice-td .dz-image img ,
 #MultiChoice .choice .multi-choice-td .dz-image img {
@@ -150,12 +149,14 @@ margin: auto 10px;
   margin: auto;
 }
 
+#Assortment .element .dz-preview.dz-success ,
 #DragDrop .pair .dz-preview.dz-success ,
 #TrueFalse .choice .dz-preview.dz-success ,
 #MultiChoice .choice .dz-preview.dz-success {
   margin: auto;
 }
 
+#Assortment .element .dz-details ,
 #DragDrop .pair .dz-details ,
 #TrueFalse .choice .dz-details ,
 #MultiChoice .choice .dz-details {

@@ -1,5 +1,6 @@
 $(function(){
 
+
   var allImages = {}
 
   // Set the Dropzones
@@ -7,7 +8,7 @@ $(function(){
 
   // Activate Dropzone
   // for Question Attachment
-  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion, #dragDropAttachFilesWithQuestion").dropzone({
+  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion, #dragDropAttachFilesWithQuestion, #assortmentAttachFilesWithQuestion").dropzone({
     url: window.location.href,
     acceptedFiles: "image/*,application/pdf,.doc,.docx",
     addRemoveLinks: true,
@@ -300,27 +301,27 @@ $(function(){
 
         // create new node
         let newChoice = '<tr data-repeater-item="" class="choice">\
-          <td class="multi-choice-td">\
-            <div class="dropzone dropzone-default kt_dropzone_1 TFAttachments">\
-              <div class="dropzone-msg dz-message needsclick">\
-                <h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3>\
-              </div>\
-            </div>\
-          </td>\
-          <td class="multi-choice-td">\
-            <input type="text" class="form-control choice-text" placeholder="Enter Possible Choice">\
-          </td>\
-          <td class="multi-choice-td pl-10  text-center" align="center">\
-            <label class="radio radio-lg">\
-              <input type="radio" class="choice-right-false" name="TFRadio" />\
-              <span></span></label>\
-            </td>\
-            <td class="multi-choice-td  text-center">\
-              <a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon">\
-                <i class="la la-remove"></i>\
-              </a>\
-            </td>\
-          </tr>'
+        <td class="multi-choice-td">\
+        <div class="dropzone dropzone-default kt_dropzone_1 TFAttachments">\
+        <div class="dropzone-msg dz-message needsclick">\
+        <h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3>\
+        </div>\
+        </div>\
+        </td>\
+        <td class="multi-choice-td">\
+        <input type="text" class="form-control choice-text" placeholder="Enter Possible Choice">\
+        </td>\
+        <td class="multi-choice-td pl-10  text-center" align="center">\
+        <label class="radio radio-lg">\
+        <input type="radio" class="choice-right-false" name="TFRadio" />\
+        <span></span></label>\
+        </td>\
+        <td class="multi-choice-td  text-center">\
+        <a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon">\
+        <i class="la la-remove"></i>\
+        </a>\
+        </td>\
+        </tr>'
 
         $('#TrueFalse table').append(newChoice)
 
@@ -497,6 +498,205 @@ $(function(){
     // end:: check if the question is TrueFalse
 
     // begin:: check if the question is Drag & Drop
+    else if ($(this).val() == 4) {
+
+      var assortmentAllImages = {}
+      // config Question Types Fade in & out
+      $("#Assortment").fadeIn()
+
+      // add new choice
+      $('#Assortment').find("button[data-repeater-create]").on("click", function () {
+
+        // create new node
+        let newElement = '<tr data-repeater-item="" class="element"><td class="multi-choice-td"><div class="dropzone dropzone-default kt_dropzone_1 assortmentAttachments"><div class="dropzone-msg dz-message needsclick"><h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3></div></div></td><td class="multi-choice-td"><input type="text" class="form-control element-text" placeholder="Enter Element Text"></td><td class="multi-choice-td" align="center"><input type="number" class="form-control element-order" id="' + Math.random() * 10 + '" placeholder="Enter the Order of This Element"></td><td class="multi-choice-td  text-center"><a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon"><i class="la la-remove"></i></a></td></tr>'
+
+        $('#Assortment table').append(newElement)
+
+        // activate Dropzone
+        $("#Assortment table .dropzone").last().dropzone({
+          url: window.location.href,
+          acceptedFiles: "image/*",
+          addRemoveLinks: true,
+          maxFiles:1,
+
+          // create base64 image link
+          init: function() {
+            this.on("addedfile", function (file) {
+              var reader = new FileReader();
+              reader.onload = function(event) {
+                var base64String = event.target.result;
+                var fileName = file.name
+                assortmentAllImages[fileName] = base64String
+              };
+              reader.readAsDataURL(file);
+            });
+          }
+        });
+
+        // Check Duplications
+        $("#Assortment table .element-order").on("keyup , change",function () {
+          $(this).css({"background-color":"#fff", "color" : "#000"})
+          let element = $(this)
+          let elementId = $(this).attr("id")
+          let elementOrder = $(this).val()
+          $("#Assortment table .element-order").each(function () {
+            if ($(this).val() == elementOrder && $(this).attr("id") != elementId)  {
+              element.css({"background-color":"rgba(246, 78, 96, 0.1)", "color" : "#F64E60"})
+            }
+          })
+        })
+
+        // add action to delete button
+        $("#Assortment table a[data-repeater-delete]").last().on("click",function () {
+          let check = confirm("Are you sure you want to delete this element?")
+          if (check) {
+            $(this).parents("tr").remove()
+          }
+        })
+      })
+
+
+      // handle save form clicking
+      $("#saveForm").on("click",function () {
+        var academicYearID = $("#AcademicYear").val();
+        var academicYear = $("#AcademicYear").find("option:selected").text();
+        var gradeID = $("#StudentClass").val();
+        var gradeName = $("#StudentClass").find("option:selected").text();
+        var subjectID = $("#StudentSection").val();
+        var subjectName = $("#StudentSection").find("option:selected").text();
+        var topicName = $("#topicName").text();
+        var filterTags = [];
+        $("#FilterTags option").each(function () {
+          filterTags.push($(this).val())
+        })
+
+        var questionHTML = $('#QuestionEditor').summernote('code')
+
+        var randomizeOptions = $("#assortmentRandomizeOptions").prop("checked")
+        var allowAttachment = $("#assortmentAllowAttach").prop("checked")
+        var allowPartialCredit = $("#assortmentAllowPartialCredit").prop("checked")
+        var maximumMarks = $("#assortmentMaximumMarks").val();
+        var maximumTime = $("#assortmentMaximumTime").val();
+
+        var questionImages = {}
+        $("#assortmentAttachFilesWithQuestion").find(".dz-preview").each(function(){
+          if ($(this).find(".dz-error-message").text() == "") {
+            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+          }
+        })
+
+        var elements = []
+
+        $("#Assortment table .element").each(function () {
+
+          let element = {}
+
+          element["image_name"] = $(this).find(".dz-success img").attr("alt")
+          element["image"] = assortmentAllImages[$(this).find(".dz-success img").attr("alt")]
+          element["text"] = $(this).find(".element-text").val()
+          element["order"] = $(this).find(".element-order").val()
+
+          elements.push(element)
+        })
+
+
+        var data = {
+          "academic_id" : academicYearID,
+          "academic_year" : academicYear,
+          "grade_id" : gradeID,
+          "grade_name" : gradeName,
+          "subject_id" : subjectID,
+          "subject_name" : gradeName,
+          "topic_name" : subjectName,
+          "filter_tags" : filterTags,
+          "question_html" : questionHTML,
+          "rondomize_options" : randomizeOptions,
+          "allow_attachment" : allowAttachment,
+          "allow_partial_credit" : allowPartialCredit,
+          "maximum_marks" : maximumMarks,
+          "maximum_time" : maximumTime,
+          "question_images" : questionImages,
+          "elements" : elements
+        }
+        var dataJSON = JSON.stringify(data)
+        console.log(data);
+      })
+
+      $("#previewButton").on("click",function () {
+
+        $(".preview_body").children().remove()
+
+        var elements = []
+
+        // Set Question Images
+        var questionImages = {}
+        $("#assortmentAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function(){
+          questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+        })
+
+        var questionImageDiv = "<div class='question_images'></div>"
+        $(".preview_body").append(questionImageDiv)
+
+        $.each(questionImages, function(imgName,imgBase64){
+          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
+          $(".preview_body .question_images").append(image)
+        })
+        // ----------------------------------------------------------
+
+        // Set Question Text
+        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
+        $(".preview_body").append(questionParagraph)
+        // ----------------------------------------------------------
+
+        // Set Elements
+        $("#Assortment table .element").each(function () {
+
+          let element = {}
+
+          element["image_name"] = $(this).find(".dz-success img").attr("alt")
+          element["image"] = assortmentAllImages[$(this).find(".dz-success img").attr("alt")]
+          element["text"] = $(this).find(".element-text").val()
+          element["order"] = $(this).find(".element-order").val()
+
+          elements.push(element)
+        })
+
+
+        var totalElements = "<div class='totalElements'></div>"
+        $(".preview_body").append(totalElements)
+
+
+        for (var i = 0; i < elements.length; i++) {
+          let elementBox = "<div class='elementBox row' data-val='" + elements[i]["text"] + "'></div>"
+          // Image & Text
+          if (elements[i]["image"] != undefined && elements[i]["text"] != "") {
+            $(".preview_body .totalElements").append(elementBox)
+            let elementImg = "<div class='col-4 elementImg'><img src='" + elements[i]["image"] + "' alt='" + elements[i]["image_name"] + "'></div>"
+            let elementText = "<div class='col-8 elementText'><span>" + elements[i]["text"] + "</span></div>"
+            $(".preview_body .totalElements .elementBox").last().append(elementImg).append(elementText)
+          } else if (elements[i]["image"] != undefined) {
+            $(".preview_body .totalElements").append(elementBox)
+            let elementImg = "<div class=' col-4 elementImg'><img src='" + elements[i]["image"] + "' alt='" + elements[i]["image_name"] + "'></div>"
+            $(".preview_body .totalElements .elementBox").last().append(elementImg)
+          } else if (elements[i]["text"] != "") {
+            $(".preview_body .totalElements").append(elementBox)
+            let elementText = "<div class='col-12 elementText'><span>" + elements[i]["text"] + "</span></div>"
+            $(".preview_body .totalElements .elementBox").last().append(elementText)
+          }
+        }
+
+        // $(".preview_body .totalChoices .elementBox").on("click", function () {
+        //   $(this).addClass("selected").siblings().removeClass("selected")
+        // })
+
+        // ----------------------------------------------------------
+
+      })
+
+    }
+
+    // begin:: check if the question is Drag & Drop
     else if ($(this).val() == 5) {
 
       var dragDropAllImages = {}
@@ -512,31 +712,31 @@ $(function(){
         // create new node
         let newPair =
         '<tr data-repeater-item="" class="pair">\
-          <td class="multi-choice-td">\
-            <div class="dropzone dropzone-default kt_dropzone_1 DDQuestionAttachments">\
-              <div class="dropzone-msg dz-message needsclick">\
-                <h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3>\
-              </div>\
-            </div>\
-          </td>\
-          <td class="multi-choice-td">\
-            <input type="text" class="form-control question-text" placeholder="Enter Question Text" style="min-width:200px">\
-          </td>\
-          <td class="multi-choice-td">\
-            <div class="dropzone dropzone-default kt_dropzone_1 DDAnswerAttachments">\
-              <div class="dropzone-msg dz-message needsclick">\
-                <h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3>\
-              </div>\
-            </div>\
-          </td>\
-          <td class="multi-choice-td">\
-            <input type="text" class="form-control answer-text" placeholder="Enter Answer Text"  style="min-width:200px">\
-          </td>\
-          <td class="multi-choice-td  text-center">\
-            <a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon">\
-              <i class="la la-remove"></i>\
-            </a>\
-          </td>\
+        <td class="multi-choice-td">\
+        <div class="dropzone dropzone-default kt_dropzone_1 DDQuestionAttachments">\
+        <div class="dropzone-msg dz-message needsclick">\
+        <h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3>\
+        </div>\
+        </div>\
+        </td>\
+        <td class="multi-choice-td">\
+        <input type="text" class="form-control question-text" placeholder="Enter Question Text" style="min-width:200px">\
+        </td>\
+        <td class="multi-choice-td">\
+        <div class="dropzone dropzone-default kt_dropzone_1 DDAnswerAttachments">\
+        <div class="dropzone-msg dz-message needsclick">\
+        <h3 class="dropzone-msg-title"><i class="fa fa-file fa-3x"></i></h3>\
+        </div>\
+        </div>\
+        </td>\
+        <td class="multi-choice-td">\
+        <input type="text" class="form-control answer-text" placeholder="Enter Answer Text"  style="min-width:200px">\
+        </td>\
+        <td class="multi-choice-td  text-center">\
+        <a href="javascript:;" data-repeater-delete="" class="btn font-weight-bold btn-danger btn-icon">\
+        <i class="la la-remove"></i>\
+        </a>\
+        </td>\
         </tr>'
 
         $('#DragDrop table').append(newPair)
@@ -775,93 +975,14 @@ $(function(){
       // config Question Types Fade in & out
       $("#FillSpace").fadeIn()
 
-      // handle save form clicking
-      $("#saveForm").on("click",function () {
-        var academicYearID = $("#AcademicYear").val();
-        var academicYear = $("#AcademicYear").find("option:selected").text();
-        var gradeID = $("#StudentClass").val();
-        var gradeName = $("#StudentClass").find("option:selected").text();
-        var subjectID = $("#StudentSection").val();
-        var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
-        var filterTags = [];
-        $("#FilterTags option").each(function () {
-          filterTags.push($(this).val())
-        })
-
-        var questionHTML = $('#QuestionEditor').summernote('code')
-
-        var randomizeOptions = $("#trueFalseRandomizeOptions").prop("checked")
-        var allowAttachment = $("#trueFalseAllowAttach").prop("checked")
-        var allowPartialCredit = $("#trueFalseAllowPartialCredit").prop("checked")
-        var maximumMarks = $("#trueFalseMaximumMarks").val();
-        var maximumTime = $("#trueFalseMaximumTime").val();
-
-        var questionImages = {}
-        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview").each(function(){
-          if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
-          }
-        })
-
-        var true_false = $("#TrueFalse table input.choice-right-false").val();
-
-
-        var data = {
-          "grade_id" : gradeID,
-          "grade_name" : gradeName,
-          "subject_id" : subjectID,
-          "subject_name" : gradeName,
-          "topic_name" : subjectName,
-          "filter_tags" : filterTags,
-          "question_html" : questionHTML,
-          "rondomize_options" : randomizeOptions,
-          "allow_attachment" : allowAttachment,
-          "allow_partial_credit" : allowPartialCredit,
-          "maximum_marks" : maximumMarks,
-          "maximum_time" : maximumTime,
-          "question_images" : questionImages,
-          "true_false" : true_false
+      $('.note-editing-area').on("keyup , change",function () {
+        if ($(this).html().includes("___")) {
+          console.log("ghfg");
+          $(this).find("p").text().replace("___","<input type='text'>")
         }
-        var dataJSON = JSON.stringify(data)
-        console.log(data);
       })
 
-      $("#previewButton").on("click",function () {
 
-        $(".preview_body").children().remove()
-
-        // Set Question Images
-        var questionImages = {}
-        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function(){
-          questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
-        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function(imgName,imgBase64){
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
-        })
-        // ----------------------------------------------------------
-
-        // Set Question Text
-        var questionHTML = $('#QuestionEditor').summernote('code')
-        var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
-        $(".preview_body").append(questionParagraph)
-        // ----------------------------------------------------------
-
-        // Set True/False
-        var trueFalseBlock = '<div class = "choices"> <div class="choice trueChoice">True</div> <div class="choice falseChoice">False</div> </div>'
-        $(".preview_body").append(trueFalseBlock)
-
-        $("#previewBox .preview_body .choices .choice").on("click",function () {
-          $(this).addClass("selected").siblings().removeClass("selected")
-        })
-        // ----------------------------------------------------------
-
-      })
     }
     // end:: check if the question is fillSpaces
 
