@@ -383,4 +383,11 @@ margin: auto 10px;
   max-width: 90%;
   margin: 10px auto;
 }
+
+#FillSpace .note {
+  font-size: 13px;
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 /* end:: Fill Space */

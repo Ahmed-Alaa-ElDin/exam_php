@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
 
 
   var allImages = {}
@@ -8,16 +8,16 @@ $(function(){
 
   // Activate Dropzone
   // for Question Attachment
-  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion, #dragDropAttachFilesWithQuestion, #assortmentAttachFilesWithQuestion, #fillSpaceAttachFilesWithQuestion").dropzone({
+  $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion, #dragDropAttachFilesWithQuestion, #assortmentAttachFilesWithQuestion, #fillSpaceAttachFilesWithQuestion, #imageLabelingAttachFilesWithQuestion").dropzone({
     url: window.location.href,
     acceptedFiles: "image/*,application/pdf,.doc,.docx",
     addRemoveLinks: true,
 
     // create base64 image link
-    init: function() {
+    init: function () {
       this.on("addedfile", function (file) {
         var reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function (event) {
           var base64String = event.target.result;
           var fileName = file.name
           allImages[fileName] = base64String
@@ -29,20 +29,20 @@ $(function(){
 
 
   // Set functionality upon Question Type Change
-  $("#QuestionType").on("change",function () {
+  $("#QuestionType").on("change", function () {
 
     // Disable the Save Form Button
     $("#saveForm").off("click");
     $("#previewButton").off("click");
     $('.note-editing-area').off("keyup , change")
-    $(".question_type").css("display","none");
+    $(".question_type").css("display", "none");
 
     // begin:: check if the question is Short Answer/Essay
     if ($(this).val() == 1) {
       // config Question Types Fade in & out
       $("#ShortQuestion").fadeIn()
       // Add Function to Save Form Button
-      $("#saveForm").on("click",function () {
+      $("#saveForm").on("click", function () {
         var academicYearID = $("#AcademicYear").val();
         var academicYear = $("#AcademicYear").find("option:selected").text();
         var gradeID = $("#StudentClass").val();
@@ -61,40 +61,40 @@ $(function(){
         var wordsCountLimit = $("#essayWordCount").val();
         var maximumTime = $("#essayMaximumTime").val();
         var questionImages = {}
-        $("#essayAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#essayAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
           }
         })
         var data = {
-          "academic_id" : academicYearID,
-          "academic_year" : academicYear,
-          "grade_id" : gradeID,
-          "grade_name" : gradeName,
-          "subject_id" : subjectID,
-          "subject_name" : gradeName,
-          "topic_name" : subjectName,
-          "filter_tags" : filterTags,
-          "question_html" : questionHTML,
-          "allow_rich_text" : allowRichText,
-          "allow_attachment" : allowAttachment,
-          "maximum_marks" : maximumMarks,
-          "words_count_limit" : wordsCountLimit,
-          "maximum_time" : maximumTime,
-          "question_images" : questionImages
+          "academic_id": academicYearID,
+          "academic_year": academicYear,
+          "grade_id": gradeID,
+          "grade_name": gradeName,
+          "subject_id": subjectID,
+          "subject_name": gradeName,
+          "topic_name": subjectName,
+          "filter_tags": filterTags,
+          "question_html": questionHTML,
+          "allow_rich_text": allowRichText,
+          "allow_attachment": allowAttachment,
+          "maximum_marks": maximumMarks,
+          "words_count_limit": wordsCountLimit,
+          "maximum_time": maximumTime,
+          "question_images": questionImages
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
       })
 
-      $("#previewButton").on("click",function () {
+      $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
 
         // set question images
         var questionImage = "<div class='question_images'></div>"
         $(".preview_body").append(questionImage)
-        $("#essayAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#essayAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             let image = "<img src=" + allImages[$(this).find("img").attr("alt")] + " alt=" + $(this).find("img").attr("alt") + ">"
             $(".preview_body .question_images").append(image)
@@ -120,20 +120,20 @@ $(function(){
 
       // config Question Types Fade in & out
 
-      $("#MultiChoice").find("button[data-repeater-create]").on("click",function () {
+      $("#MultiChoice").find("button[data-repeater-create]").on("click", function () {
 
         // Enable Attachment box
         $("#MultiChoice tr[data-repeater-item]").last().find(".MCQAttachments").dropzone({
           url: window.location.href,
           acceptedFiles: "image/*",
           addRemoveLinks: true,
-          maxFiles:1,
+          maxFiles: 1,
 
           // create base64 image link
-          init: function() {
+          init: function () {
             this.on("addedfile", function (file) {
               var reader = new FileReader();
-              reader.onload = function(event) {
+              reader.onload = function (event) {
                 var base64String = event.target.result;
                 var fileName = file.name
                 mcqAllImages[fileName] = base64String
@@ -145,7 +145,7 @@ $(function(){
       })
 
       // handle save form clicking
-      $("#saveForm").on("click",function () {
+      $("#saveForm").on("click", function () {
         var academicYearID = $("#AcademicYear").val();
         var academicYear = $("#AcademicYear").find("option:selected").text();
         var gradeID = $("#StudentClass").val();
@@ -166,7 +166,7 @@ $(function(){
         var maximumTime = $("#mcqMaximumTime").val();
 
         var questionImages = {}
-        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
           }
@@ -187,28 +187,28 @@ $(function(){
         })
 
         var data = {
-          "academic_id" : academicYearID,
-          "academic_year" : academicYear,
-          "grade_id" : gradeID,
-          "grade_name" : gradeName,
-          "subject_id" : subjectID,
-          "subject_name" : gradeName,
-          "topic_name" : subjectName,
-          "filter_tags" : filterTags,
-          "question_html" : questionHTML,
-          "rondomize_options" : randomizeOptions,
-          "allow_attachment" : allowAttachment,
-          "allow_partial_credit" : allowPartialCredit,
-          "maximum_marks" : maximumMarks,
-          "maximum_time" : maximumTime,
-          "question_images" : questionImages,
-          "choices" : choices
+          "academic_id": academicYearID,
+          "academic_year": academicYear,
+          "grade_id": gradeID,
+          "grade_name": gradeName,
+          "subject_id": subjectID,
+          "subject_name": gradeName,
+          "topic_name": subjectName,
+          "filter_tags": filterTags,
+          "question_html": questionHTML,
+          "rondomize_options": randomizeOptions,
+          "allow_attachment": allowAttachment,
+          "allow_partial_credit": allowPartialCredit,
+          "maximum_marks": maximumMarks,
+          "maximum_time": maximumTime,
+          "question_images": questionImages,
+          "choices": choices
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
       })
 
-      $("#previewButton").on("click",function () {
+      $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
 
@@ -216,7 +216,7 @@ $(function(){
 
         // Set Question Images
         var questionImages = {}
-        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
           }
@@ -225,7 +225,7 @@ $(function(){
         var questionImageDiv = "<div class='question_images'></div>"
         $(".preview_body").append(questionImageDiv)
 
-        $.each(questionImages, function(imgName,imgBase64){
+        $.each(questionImages, function (imgName, imgBase64) {
           let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
           $(".preview_body .question_images").append(image)
         })
@@ -330,13 +330,13 @@ $(function(){
           url: window.location.href,
           acceptedFiles: "image/*",
           addRemoveLinks: true,
-          maxFiles:1,
+          maxFiles: 1,
 
           // create base64 image link
-          init: function() {
+          init: function () {
             this.on("addedfile", function (file) {
               var reader = new FileReader();
-              reader.onload = function(event) {
+              reader.onload = function (event) {
                 var base64String = event.target.result;
                 var fileName = file.name
                 trueFalseAllImages[fileName] = base64String
@@ -348,7 +348,7 @@ $(function(){
         });
 
         // add action to delete button
-        $("#TrueFalse table a[data-repeater-delete]").last().on("click",function () {
+        $("#TrueFalse table a[data-repeater-delete]").last().on("click", function () {
           let check = confirm("Are you sure you want to delete this element?")
           if (check) {
             $(this).parents("tr").remove()
@@ -358,7 +358,7 @@ $(function(){
 
 
       // handle save form clicking
-      $("#saveForm").on("click",function () {
+      $("#saveForm").on("click", function () {
         var academicYearID = $("#AcademicYear").val();
         var academicYear = $("#AcademicYear").find("option:selected").text();
         var gradeID = $("#StudentClass").val();
@@ -380,7 +380,7 @@ $(function(){
         var maximumTime = $("#trueFalseMaximumTime").val();
 
         var questionImages = {}
-        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
           }
@@ -402,28 +402,28 @@ $(function(){
 
 
         var data = {
-          "academic_id" : academicYearID,
-          "academic_year" : academicYear,
-          "grade_id" : gradeID,
-          "grade_name" : gradeName,
-          "subject_id" : subjectID,
-          "subject_name" : gradeName,
-          "topic_name" : subjectName,
-          "filter_tags" : filterTags,
-          "question_html" : questionHTML,
-          "rondomize_options" : randomizeOptions,
-          "allow_attachment" : allowAttachment,
-          "allow_partial_credit" : allowPartialCredit,
-          "maximum_marks" : maximumMarks,
-          "maximum_time" : maximumTime,
-          "question_images" : questionImages,
-          "choices" : choices
+          "academic_id": academicYearID,
+          "academic_year": academicYear,
+          "grade_id": gradeID,
+          "grade_name": gradeName,
+          "subject_id": subjectID,
+          "subject_name": gradeName,
+          "topic_name": subjectName,
+          "filter_tags": filterTags,
+          "question_html": questionHTML,
+          "rondomize_options": randomizeOptions,
+          "allow_attachment": allowAttachment,
+          "allow_partial_credit": allowPartialCredit,
+          "maximum_marks": maximumMarks,
+          "maximum_time": maximumTime,
+          "question_images": questionImages,
+          "choices": choices
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
       })
 
-      $("#previewButton").on("click",function () {
+      $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
 
@@ -431,14 +431,14 @@ $(function(){
 
         // Set Question Images
         var questionImages = {}
-        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function(){
+        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
         })
 
         var questionImageDiv = "<div class='question_images'></div>"
         $(".preview_body").append(questionImageDiv)
 
-        $.each(questionImages, function(imgName,imgBase64){
+        $.each(questionImages, function (imgName, imgBase64) {
           let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
           $(".preview_body .question_images").append(image)
         })
@@ -517,13 +517,13 @@ $(function(){
           url: window.location.href,
           acceptedFiles: "image/*",
           addRemoveLinks: true,
-          maxFiles:1,
+          maxFiles: 1,
 
           // create base64 image link
-          init: function() {
+          init: function () {
             this.on("addedfile", function (file) {
               var reader = new FileReader();
-              reader.onload = function(event) {
+              reader.onload = function (event) {
                 var base64String = event.target.result;
                 var fileName = file.name
                 assortmentAllImages[fileName] = base64String
@@ -534,20 +534,20 @@ $(function(){
         });
 
         // Check Duplications
-        $("#Assortment table .element-order").on("keyup , change",function () {
-          $(this).css({"background-color":"#fff", "color" : "#000"})
+        $("#Assortment table .element-order").on("keyup , change", function () {
+          $(this).css({ "background-color": "#fff", "color": "#000" })
           let element = $(this)
           let elementId = $(this).attr("id")
           let elementOrder = $(this).val()
           $("#Assortment table .element-order").each(function () {
-            if ($(this).val() == elementOrder && $(this).attr("id") != elementId)  {
-              element.css({"background-color":"rgba(246, 78, 96, 0.1)", "color" : "#F64E60"})
+            if ($(this).val() == elementOrder && $(this).attr("id") != elementId) {
+              element.css({ "background-color": "rgba(246, 78, 96, 0.1)", "color": "#F64E60" })
             }
           })
         })
 
         // add action to delete button
-        $("#Assortment table a[data-repeater-delete]").last().on("click",function () {
+        $("#Assortment table a[data-repeater-delete]").last().on("click", function () {
           let check = confirm("Are you sure you want to delete this element?")
           if (check) {
             $(this).parents("tr").remove()
@@ -556,11 +556,11 @@ $(function(){
       })
 
       // Sorting According Orders
-      function compareElements( a, b ) {
-        if ( a.order < b.order ){
+      function compareElements(a, b) {
+        if (a.order < b.order) {
           return -1;
         }
-        if ( a.order > b.order ){
+        if (a.order > b.order) {
           return 1;
         }
         return 0;
@@ -584,13 +584,13 @@ $(function(){
       }
 
       // Adding Landing Zero
-      function landingZero (str, max) {
+      function landingZero(str, max) {
         str = str.toString();
         return str.length < max ? landingZero("0" + str, max) : str;
       }
 
       // handle save form clicking
-      $("#saveForm").on("click",function () {
+      $("#saveForm").on("click", function () {
         var academicYearID = $("#AcademicYear").val();
         var academicYear = $("#AcademicYear").find("option:selected").text();
         var gradeID = $("#StudentClass").val();
@@ -612,7 +612,7 @@ $(function(){
         var maximumTime = $("#assortmentMaximumTime").val();
 
         var questionImages = {}
-        $("#assortmentAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#assortmentAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
           }
@@ -628,35 +628,35 @@ $(function(){
           element["image_name"] = $(this).find(".dz-success img").attr("alt")
           element["image"] = assortmentAllImages[$(this).find(".dz-success img").attr("alt")]
           element["text"] = $(this).find(".element-text").val()
-          element["order"] = landingZero($(this).find(".element-order").val(),5)
+          element["order"] = landingZero($(this).find(".element-order").val(), 5)
 
           elements.push(element)
         })
 
 
         var data = {
-          "academic_id" : academicYearID,
-          "academic_year" : academicYear,
-          "grade_id" : gradeID,
-          "grade_name" : gradeName,
-          "subject_id" : subjectID,
-          "subject_name" : gradeName,
-          "topic_name" : subjectName,
-          "filter_tags" : filterTags,
-          "question_html" : questionHTML,
-          "rondomize_options" : randomizeOptions,
-          "allow_attachment" : allowAttachment,
-          "allow_partial_credit" : allowPartialCredit,
-          "maximum_marks" : maximumMarks,
-          "maximum_time" : maximumTime,
-          "question_images" : questionImages,
-          "elements" : elements.sort(compareElements)
+          "academic_id": academicYearID,
+          "academic_year": academicYear,
+          "grade_id": gradeID,
+          "grade_name": gradeName,
+          "subject_id": subjectID,
+          "subject_name": gradeName,
+          "topic_name": subjectName,
+          "filter_tags": filterTags,
+          "question_html": questionHTML,
+          "rondomize_options": randomizeOptions,
+          "allow_attachment": allowAttachment,
+          "allow_partial_credit": allowPartialCredit,
+          "maximum_marks": maximumMarks,
+          "maximum_time": maximumTime,
+          "question_images": questionImages,
+          "elements": elements.sort(compareElements)
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
       })
 
-      $("#previewButton").on("click",function () {
+      $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
 
@@ -664,14 +664,14 @@ $(function(){
 
         // Set Question Images
         var questionImages = {}
-        $("#assortmentAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function(){
+        $("#assortmentAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
         })
 
         var questionImageDiv = "<div class='question_images'></div>"
         $(".preview_body").append(questionImageDiv)
 
-        $.each(questionImages, function(imgName,imgBase64){
+        $.each(questionImages, function (imgName, imgBase64) {
           let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
           $(".preview_body .question_images").append(image)
         })
@@ -691,7 +691,7 @@ $(function(){
           element["image_name"] = $(this).find(".dz-success img").attr("alt")
           element["image"] = assortmentAllImages[$(this).find(".dz-success img").attr("alt")]
           element["text"] = $(this).find(".element-text").val()
-          element["order"] = landingZero($(this).find(".element-order").val(),5)
+          element["order"] = landingZero($(this).find(".element-order").val(), 5)
 
           elements.push(element)
         })
@@ -705,15 +705,15 @@ $(function(){
 
 
         var kanbanFixed = new jKanban({
-          element : '#sorted',
-          gutter : '10px' ,
-          dragBoards : false,
-          dragItems : false,
-          boards : [
+          element: '#sorted',
+          gutter: '10px',
+          dragBoards: false,
+          dragItems: false,
+          boards: [
             {
-              'id' : 'fixed',
-              'title' : 'Sorted',
-              'class' : 'success',
+              'id': 'fixed',
+              'title': 'Sorted',
+              'class': 'success',
             }
           ]
         })
@@ -723,28 +723,28 @@ $(function(){
           if (sortedElements[i]["image"] != undefined && sortedElements[i]["text"] != "") {
             let elementImg = "<div class='col-4 elementImg'><img src='" + sortedElements[i]["image"] + "' alt='" + sortedElements[i]["image_name"] + "'></div>"
             let elementText = "<div class='col-8 elementText'><span>" + sortedElements[i]["text"] + "</span></div>"
-            kanbanFixed.addElement("fixed",{'title': '<div class="row">' + elementImg + elementText + '</div>'})
+            kanbanFixed.addElement("fixed", { 'title': '<div class="row">' + elementImg + elementText + '</div>' })
           } else if (sortedElements[i]["image"] != undefined) {
             let elementImg = "<div class=' col-4 elementImg'><img src='" + sortedElements[i]["image"] + "' alt='" + sortedElements[i]["image_name"] + "'></div>"
-            kanbanFixed.addElement("fixed",{'title': '<div class="row">' + elementImg + '</div>'})
+            kanbanFixed.addElement("fixed", { 'title': '<div class="row">' + elementImg + '</div>' })
           } else if (sortedElements[i]["text"] != "") {
             let elementText = "<div class='col-12 elementText'><span>" + sortedElements[i]["text"] + "</span></div>"
-            kanbanFixed.addElement("fixed",{'title': '<div class="row">' + elementText + '</div>'})
+            kanbanFixed.addElement("fixed", { 'title': '<div class="row">' + elementText + '</div>' })
           }
         }
 
         randomizedElements = shuffleElements(elements)
 
         var kanbanDynamic = new jKanban({
-          element : '#random',
-          gutter : '10px' ,
-          dragBoards : false,
-          dragItems : true,
-          boards : [
+          element: '#random',
+          gutter: '10px',
+          dragBoards: false,
+          dragItems: true,
+          boards: [
             {
-              'id' : 'dynamic',
-              'title' : 'Unsorted',
-              'class' : 'danger',
+              'id': 'dynamic',
+              'title': 'Unsorted',
+              'class': 'danger',
             }
           ]
         })
@@ -755,13 +755,13 @@ $(function(){
           if (randomizedElements[i]["image"] != undefined && randomizedElements[i]["text"] != "") {
             let elementImg = "<div class='col-4 elementImg'><img src='" + randomizedElements[i]["image"] + "' alt='" + randomizedElements[i]["image_name"] + "'></div>"
             let elementText = "<div class='col-8 elementText'><span>" + randomizedElements[i]["text"] + "</span></div>"
-            kanbanDynamic.addElement("dynamic",{'title': '<div class="row">' + elementImg + elementText + '</div>'})
+            kanbanDynamic.addElement("dynamic", { 'title': '<div class="row">' + elementImg + elementText + '</div>' })
           } else if (randomizedElements[i]["image"] != undefined) {
             let elementImg = "<div class=' col-4 elementImg'><img src='" + randomizedElements[i]["image"] + "' alt='" + randomizedElements[i]["image_name"] + "'></div>"
-            kanbanDynamic.addElement("dynamic",{'title': '<div class="row">' + elementImg + '</div>'})
+            kanbanDynamic.addElement("dynamic", { 'title': '<div class="row">' + elementImg + '</div>' })
           } else if (randomizedElements[i]["text"] != "") {
             let elementText = "<div class='col-12 elementText'><span>" + randomizedElements[i]["text"] + "</span></div>"
-            kanbanDynamic.addElement("dynamic",{'title': '<div class="row">' + elementText + '</div>'})
+            kanbanDynamic.addElement("dynamic", { 'title': '<div class="row">' + elementText + '</div>' })
           }
         }
 
@@ -786,7 +786,7 @@ $(function(){
 
         // create new node
         let newPair =
-        '<tr data-repeater-item="" class="pair">\
+          '<tr data-repeater-item="" class="pair">\
         <td class="multi-choice-td">\
         <div class="dropzone dropzone-default kt_dropzone_1 DDQuestionAttachments">\
         <div class="dropzone-msg dz-message needsclick">\
@@ -822,13 +822,13 @@ $(function(){
           url: window.location.href,
           acceptedFiles: "image/*",
           addRemoveLinks: true,
-          maxFiles:1,
+          maxFiles: 1,
 
           // create base64 image link
-          init: function() {
+          init: function () {
             this.on("addedfile", function (file) {
               var reader = new FileReader();
-              reader.onload = function(event) {
+              reader.onload = function (event) {
                 var base64String = event.target.result;
                 var fileName = file.name
                 dragDropAllImages[fileName] = base64String
@@ -843,13 +843,13 @@ $(function(){
           url: window.location.href,
           acceptedFiles: "image/*",
           addRemoveLinks: true,
-          maxFiles:1,
+          maxFiles: 1,
 
           // create base64 image link
-          init: function() {
+          init: function () {
             this.on("addedfile", function (file) {
               var reader = new FileReader();
-              reader.onload = function(event) {
+              reader.onload = function (event) {
                 var base64String = event.target.result;
                 var fileName = file.name
                 dragDropAllImages[fileName] = base64String
@@ -860,7 +860,7 @@ $(function(){
         });
 
         // add action to delete button
-        $("#DragDrop table a[data-repeater-delete]").last().on("click",function () {
+        $("#DragDrop table a[data-repeater-delete]").last().on("click", function () {
           let check = confirm("Are you sure you want to delete this element?")
           if (check) {
             $(this).parents("tr").remove()
@@ -870,7 +870,7 @@ $(function(){
 
 
       // handle save form clicking
-      $("#saveForm").on("click",function () {
+      $("#saveForm").on("click", function () {
         var academicYearID = $("#AcademicYear").val();
         var academicYear = $("#AcademicYear").find("option:selected").text();
         var gradeID = $("#StudentClass").val();
@@ -893,7 +893,7 @@ $(function(){
         var maximumTime = $("#dragDropMaximumTime").val();
 
         var questionImages = {}
-        $("#dragDropAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#dragDropAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
           }
@@ -917,29 +917,29 @@ $(function(){
 
 
         var data = {
-          "academic_id" : academicYearID,
-          "academic_year" : academicYear,
-          "grade_id" : gradeID,
-          "grade_name" : gradeName,
-          "subject_id" : subjectID,
-          "subject_name" : gradeName,
-          "topic_name" : subjectName,
-          "filter_tags" : filterTags,
-          "question_html" : questionHTML,
-          "rondomize_options" : randomizeOptions,
-          "allow_attachment" : allowAttachment,
-          "allow_partial_credit" : allowPartialCredit,
-          "maximum_marks" : maximumMarks,
-          "maximum_time" : maximumTime,
-          "display_type" : displayType,
-          "question_images" : questionImages,
-          "pairs" : pairs
+          "academic_id": academicYearID,
+          "academic_year": academicYear,
+          "grade_id": gradeID,
+          "grade_name": gradeName,
+          "subject_id": subjectID,
+          "subject_name": gradeName,
+          "topic_name": subjectName,
+          "filter_tags": filterTags,
+          "question_html": questionHTML,
+          "rondomize_options": randomizeOptions,
+          "allow_attachment": allowAttachment,
+          "allow_partial_credit": allowPartialCredit,
+          "maximum_marks": maximumMarks,
+          "maximum_time": maximumTime,
+          "display_type": displayType,
+          "question_images": questionImages,
+          "pairs": pairs
         }
         var dataJSON = JSON.stringify(data)
         console.log(data);
       })
 
-      $("#previewButton").on("click",function () {
+      $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
 
@@ -950,7 +950,7 @@ $(function(){
 
         // Set Question Images
         var questionImages = {}
-        $("#dragDropAttachFilesWithQuestion").find(".dz-preview").each(function(){
+        $("#dragDropAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
           }
@@ -959,7 +959,7 @@ $(function(){
         var questionImageDiv = "<div class='question_images'></div>"
         $(".preview_body").append(questionImageDiv)
 
-        $.each(questionImages, function(imgName,imgBase64){
+        $.each(questionImages, function (imgName, imgBase64) {
           let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
           $(".preview_body .question_images").append(image)
         })
@@ -999,16 +999,16 @@ $(function(){
             if (pairs[i]["question_image"] != undefined && pairs[i]["question_text"] != "") {
               $(".preview_body .totalPairs .all_questions").prepend('<div class="col-4"><div class="question"><img src="' + pairs[i]["question_image"] + '" class="question_img" alt="' + pairs[i]["question_image_name"] + '"><span class="question_text">' + pairs[i]["question_text"] + '</span><div class="question_answer empty"></div></div>')
             } else if (pairs[i]["question_image"] != undefined) {
-              $(".preview_body .totalPairs .all_questions").prepend('<div class="col-4"><div class="question"><img src="'+ pairs[i]["question_image"] +'" class="question_img" alt="' + pairs[i]["question_image_name"] + '"><div class="question_answer empty"></div></div>')
+              $(".preview_body .totalPairs .all_questions").prepend('<div class="col-4"><div class="question"><img src="' + pairs[i]["question_image"] + '" class="question_img" alt="' + pairs[i]["question_image_name"] + '"><div class="question_answer empty"></div></div>')
             } else if (pairs[i]["question_text"] != "") {
               $(".preview_body .totalPairs .all_questions").prepend('<div class="col-4"><div class="question"><span class="question_text">' + pairs[i]["question_text"] + '</span><div class="question_answer empty"></div></div>')
             }
             if (pairs[i]["answer_image"] != undefined && pairs[i]["answer_text"] != "") {
-              $(".preview_body .totalPairs .all_answers").prepend('<div class="col-4 answer_block not_empty"><div class="answer"><img src="' + pairs[i]["answer_image"] +'" class="answer_img" alt="'+ pairs[i]["answer_image_name"] +'"><span class="answer_text">'+ pairs[i]["answer_text"] +'</div>')
+              $(".preview_body .totalPairs .all_answers").prepend('<div class="col-4 answer_block not_empty"><div class="answer"><img src="' + pairs[i]["answer_image"] + '" class="answer_img" alt="' + pairs[i]["answer_image_name"] + '"><span class="answer_text">' + pairs[i]["answer_text"] + '</div>')
             } else if (pairs[i]["answer_image"] != undefined) {
-              $(".preview_body .totalPairs .all_answers").prepend('<div class="col-4 answer_block not_empty"><div class="answer"><img src="' + pairs[i]["answer_image"] +'" class="answer_img" alt="'+ pairs[i]["answer_image_name"] +'"></div>')
+              $(".preview_body .totalPairs .all_answers").prepend('<div class="col-4 answer_block not_empty"><div class="answer"><img src="' + pairs[i]["answer_image"] + '" class="answer_img" alt="' + pairs[i]["answer_image_name"] + '"></div>')
             } else if (pairs[i]["answer_text"] != "") {
-              $(".preview_body .totalPairs .all_answers").prepend('<div class="col-4 answer_block not_empty"><div class="answer"><span class="answer_text">'+ pairs[i]["answer_text"] +'</div>')
+              $(".preview_body .totalPairs .all_answers").prepend('<div class="col-4 answer_block not_empty"><div class="answer"><span class="answer_text">' + pairs[i]["answer_text"] + '</div>')
             }
           }
         } else if (displayType == "line") {
@@ -1016,18 +1016,18 @@ $(function(){
           $(".preview_body").append(allRows)
           for (var i = 0; i < pairs.length; i++) {
             if (pairs[i]["question_image"] != undefined && pairs[i]["question_text"] != "") {
-              $(".preview_body .questions").append('<li class="question row"><img class="col-4 question_img" src="' + pairs[i]["question_image"] + '" alt="'+ pairs[i]["question_image_name"] +'"><span class="col-8 question_text">' + pairs[i]["question_text"] + '</span></li>')
+              $(".preview_body .questions").append('<li class="question row"><img class="col-4 question_img" src="' + pairs[i]["question_image"] + '" alt="' + pairs[i]["question_image_name"] + '"><span class="col-8 question_text">' + pairs[i]["question_text"] + '</span></li>')
             } else if (pairs[i]["question_image"] != undefined) {
-              $(".preview_body .questions").append('<li class="question row"><img class="col-12 question_img" src="' + pairs[i]["question_image"] + '" alt="'+ pairs[i]["question_image_name"] +'"></li>')
+              $(".preview_body .questions").append('<li class="question row"><img class="col-12 question_img" src="' + pairs[i]["question_image"] + '" alt="' + pairs[i]["question_image_name"] + '"></li>')
             } else if (pairs[i]["question_text"] != "") {
               $(".preview_body .questions").append('<li class="question row"><span class="col-12 question_text">' + pairs[i]["question_text"] + '</span></li>')
             }
             if (pairs[i]["answer_image"] != undefined && pairs[i]["answer_text"] != "") {
-              $(".preview_body .answers").append('<li class="answer row"><span class="col-8 answer_text">'+ pairs[i]["answer_text"] +'</span><img class="col-4 answer_img" src="'+ pairs[i]["answer_image"] +'" alt="'+ pairs[i]["answer_image_name"] +'"></li>')
+              $(".preview_body .answers").append('<li class="answer row"><span class="col-8 answer_text">' + pairs[i]["answer_text"] + '</span><img class="col-4 answer_img" src="' + pairs[i]["answer_image"] + '" alt="' + pairs[i]["answer_image_name"] + '"></li>')
             } else if (pairs[i]["answer_image"] != undefined) {
-              $(".preview_body .answers").append('<li class="answer row"><img class="col-12 answer_img" src="'+ pairs[i]["answer_image"] +'" alt="'+ pairs[i]["answer_image_name"] +'"></li>')
+              $(".preview_body .answers").append('<li class="answer row"><img class="col-12 answer_img" src="' + pairs[i]["answer_image"] + '" alt="' + pairs[i]["answer_image_name"] + '"></li>')
             } else if (pairs[i]["answer_text"] != "") {
-              $(".preview_body .answers").append('<li class="answer row"><span class="col-12 answer_text">'+ pairs[i]["answer_text"] +'</span></li>')
+              $(".preview_body .answers").append('<li class="answer row"><span class="col-12 answer_text">' + pairs[i]["answer_text"] + '</span></li>')
             }
           }
         }
@@ -1044,140 +1044,171 @@ $(function(){
     }
     // end:: check if the question is Drag & Drop
 
+    // begin:: check if the question is Image Labeling
+    else if ($(this).val() == 6) {
+
+      // config Question Types Fade in & out
+      $("#ImageLabeling").fadeIn()
+
+      let imageLabelingAllImages = {}
+
+      $("#imageLabelingQuestionUpload").dropzone({
+        url: window.location.href,
+        acceptedFiles: "image/*",
+        addRemoveLinks: true,
+        maxFiles: 1,
+
+        // create base64 image link
+        init: function () {
+          this.on("addedfile", function (file) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+              var base64String = event.target.result;
+              var fileName = file.name
+              imageLabelingAllImages[fileName] = base64String
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+      });
+    }
+  
+    // end:: check if the question is Image Labeling
+
     // begin:: check if the question is fillSpaces
     else if ($(this).val() == 7) {
 
-      // config Question Types Fade in & out
-      $("#FillSpace").fadeIn()
+  // config Question Types Fade in & out
+  $("#FillSpace").fadeIn()
 
-      var num = 1
+  var num = 1
 
-      $('.note-editing-area').on("keyup , change",function () {
-        if ($(this).html().includes("___")) {
-          $(".fillSpaceInputs").append("<div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + num + "' data-num='" + num + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>"+ num +"</span></div><div class='input-group-append'><span class='input-group-text btn btn-danger removeAnswer'>X</span></div></div>")
-          $(this).html($(this).html().replace("___","<span data-num = '" + num + "' class='btn btn-primary removeSpan'> ((" + num + ")) </span>" + "&nbsp;"))
-          $("#placeholder" + num + "").focus()
-          num += 1
-          $(".removeAnswer").on("click", function () {
-            $(this).parents(".input-group").remove()
-            $(".note-editing-area span[data-num='" + $(this).parents(".input-group").find("input").data("num") + "']").remove()
-          })
-          $(".removeSpan").on("click", function () {
-            $(".fillSpaceInputs .input-group #placeholder" + $(this).data("num")).parents(".input-group").remove()
-            $(this).remove()
-          })
-        }
+  $('.note-editing-area').on("keyup , change", function () {
+    if ($(this).html().includes("___")) {
+      $(".fillSpaceInputs").append("<div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + num + "' data-num='" + num + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + num + "</span></div><div class='input-group-append'><span class='input-group-text btn btn-danger removeAnswer'>X</span></div></div>")
+      $(this).html($(this).html().replace("___", "<span data-num = '" + num + "' class='btn btn-primary removeSpan'> ((" + num + ")) </span>" + "&nbsp;"))
+      $("#placeholder" + num + "").focus()
+      num += 1
+      $(".removeAnswer").on("click", function () {
+        $(this).parents(".input-group").remove()
+        $(".note-editing-area span[data-num='" + $(this).parents(".input-group").find("input").data("num") + "']").remove()
       })
-
-      $("#saveForm").on("click",function () {
-        var academicYearID = $("#AcademicYear").val();
-        var academicYear = $("#AcademicYear").find("option:selected").text();
-        var gradeID = $("#StudentClass").val();
-        var gradeName = $("#StudentClass").find("option:selected").text();
-        var subjectID = $("#StudentSection").val();
-        var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
-        var filterTags = [];
-        $("#FilterTags option").each(function () {
-          filterTags.push($(this).val())
-        })
-
-        var questionHTML = $('.note-editable').html()
-
-        var randomizeOptions = $("#fillSpaceRandomizeOptions").prop("checked")
-        var allowAttachment = $("#fillSpaceAllowAttach").prop("checked")
-        var allowPartialCredit = $("#fillSpaceAllowPartialCredit").prop("checked")
-        var maximumMarks = $("#fillSpaceMaximumMarks").val();
-        var maximumTime = $("#fillSpaceMaximumTime").val();
-
-        var questionImages = {}
-        $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview").each(function(){
-          if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
-          }
-        })
-
-        var answers = []
-
-        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
-          var answer = {}
-          answer["answer_text"] = $(this).val()
-          answer["answer_number"] = $(this).data("num")
-          answers.push(answer)
-        })
-
-        var data = {
-          "academic_id" : academicYearID,
-          "academic_year" : academicYear,
-          "grade_id" : gradeID,
-          "grade_name" : gradeName,
-          "subject_id" : subjectID,
-          "subject_name" : gradeName,
-          "topic_name" : subjectName,
-          "filter_tags" : filterTags,
-          "question_html" : questionHTML,
-          "rondomize_options" : randomizeOptions,
-          "allow_attachment" : allowAttachment,
-          "allow_partial_credit" : allowPartialCredit,
-          "maximum_marks" : maximumMarks,
-          "maximum_time" : maximumTime,
-          "question_images" : questionImages,
-          "answers" : answers
-        }
-        var dataJSON = JSON.stringify(data)
-        console.log(data);
+      $(".removeSpan").on("click", function () {
+        $(".fillSpaceInputs .input-group #placeholder" + $(this).data("num")).parents(".input-group").remove()
+        $(this).remove()
       })
-
-
-      // Set Preview Box
-      $("#previewButton").on("click",function () {
-
-        $(".preview_body").children().remove()
-
-        // Set Question Images
-        var questionImages = {}
-        $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function(){
-          questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
-        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function(imgName,imgBase64){
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
-        })
-        // ----------------------------------------------------------
-
-        // Set Question Text
-        var questionHTML = $('.note-editable').html()
-        var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
-        $(".preview_body").append(questionParagraph)
-        // ----------------------------------------------------------
-
-        // Set Elements
-        var answers = []
-
-        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
-          var answer = {}
-          answer["answer_text"] = $(this).val()
-          answer["answer_number"] = $(this).data("num")
-          answers.push(answer)
-        })
-
-
-        var totalAnswers = "<div class='totalAnswers'></div>"
-        $(".preview_body").append(totalAnswers)
-
-
-        for (var i = 0; i < answers.length; i++) {
-          let answerBox = "<div class='answerBox row' data-val='" + answers[i]["answer_number"] + "'><div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + answers[i]["answer_number"] + "' data-num='" + answers[i]["answer_number"] + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>"+ answers[i]["answer_number"] +"</span></div><div class='input-group-append'></div></div></div>"
-          $(".preview_body .totalAnswers").append(answerBox)
-        }
-
-      })
-
     }
+  })
+
+  $("#saveForm").on("click", function () {
+    var academicYearID = $("#AcademicYear").val();
+    var academicYear = $("#AcademicYear").find("option:selected").text();
+    var gradeID = $("#StudentClass").val();
+    var gradeName = $("#StudentClass").find("option:selected").text();
+    var subjectID = $("#StudentSection").val();
+    var subjectName = $("#StudentSection").find("option:selected").text();
+    var topicName = $("#topicName").text();
+    var filterTags = [];
+    $("#FilterTags option").each(function () {
+      filterTags.push($(this).val())
+    })
+
+    var questionHTML = $('.note-editable').html()
+
+    var randomizeOptions = $("#fillSpaceRandomizeOptions").prop("checked")
+    var allowAttachment = $("#fillSpaceAllowAttach").prop("checked")
+    var allowPartialCredit = $("#fillSpaceAllowPartialCredit").prop("checked")
+    var maximumMarks = $("#fillSpaceMaximumMarks").val();
+    var maximumTime = $("#fillSpaceMaximumTime").val();
+
+    var questionImages = {}
+    $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview").each(function () {
+      if ($(this).find(".dz-error-message").text() == "") {
+        questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+      }
+    })
+
+    var answers = []
+
+    $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
+      var answer = {}
+      answer["answer_text"] = $(this).val()
+      answer["answer_number"] = $(this).data("num")
+      answers.push(answer)
+    })
+
+    var data = {
+      "academic_id": academicYearID,
+      "academic_year": academicYear,
+      "grade_id": gradeID,
+      "grade_name": gradeName,
+      "subject_id": subjectID,
+      "subject_name": gradeName,
+      "topic_name": subjectName,
+      "filter_tags": filterTags,
+      "question_html": questionHTML,
+      "rondomize_options": randomizeOptions,
+      "allow_attachment": allowAttachment,
+      "allow_partial_credit": allowPartialCredit,
+      "maximum_marks": maximumMarks,
+      "maximum_time": maximumTime,
+      "question_images": questionImages,
+      "answers": answers
+    }
+    var dataJSON = JSON.stringify(data)
+    console.log(data);
+  })
+
+
+  // Set Preview Box
+  $("#previewButton").on("click", function () {
+
+    $(".preview_body").children().remove()
+
+    // Set Question Images
+    var questionImages = {}
+    $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+      questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+    })
+
+    var questionImageDiv = "<div class='question_images'></div>"
+    $(".preview_body").append(questionImageDiv)
+
+    $.each(questionImages, function (imgName, imgBase64) {
+      let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
+      $(".preview_body .question_images").append(image)
+    })
+    // ----------------------------------------------------------
+
+    // Set Question Text
+    var questionHTML = $('.note-editable').html()
+    var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
+    $(".preview_body").append(questionParagraph)
+    // ----------------------------------------------------------
+
+    // Set Elements
+    var answers = []
+
+    $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
+      var answer = {}
+      answer["answer_text"] = $(this).val()
+      answer["answer_number"] = $(this).data("num")
+      answers.push(answer)
+    })
+
+
+    var totalAnswers = "<div class='totalAnswers'></div>"
+    $(".preview_body").append(totalAnswers)
+
+
+    for (var i = 0; i < answers.length; i++) {
+      let answerBox = "<div class='answerBox row' data-val='" + answers[i]["answer_number"] + "'><div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + answers[i]["answer_number"] + "' data-num='" + answers[i]["answer_number"] + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + answers[i]["answer_number"] + "</span></div><div class='input-group-append'></div></div></div>"
+      $(".preview_body .totalAnswers").append(answerBox)
+    }
+
+  })
+
+}
     // end:: check if the question is fillSpaces
 
   })
