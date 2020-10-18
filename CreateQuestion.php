@@ -609,6 +609,7 @@
                                 <!-- fill spaces (7) -->
                                 <div id="FillSpace" class="question_type" style="display: none;">
 
+                                  <p class="note text-center" style="color: red, font-weight: 12px">If You Want to Make a Space, Just Write 3 Underscore (___)</p>
                                   <div class="row">
                                     <div class="col-12 text-center">
                                       <h4>Enter Answers</h4>
