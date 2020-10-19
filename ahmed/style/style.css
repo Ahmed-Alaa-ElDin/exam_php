@@ -384,6 +384,9 @@ margin: auto 10px;
   margin: 5px auto;
   padding: 1px 10px 1px 27px;
   width: 100%;
+  font-size: 15px;
+  min-height: 27px;
+  display: inline-block;
 }
 
 .preview_body .student_answer:focus,
@@ -417,6 +420,7 @@ margin: auto 10px;
 
 
 
+.preview_body .preview_question_img_div .student_mark ,
 .preview_body .preview_question_img_div .mark ,
 #ImageLabeling .question_img_div .mark {
   position: absolute;
@@ -428,13 +432,14 @@ margin: auto 10px;
   cursor: pointer;
 }
 
+.preview_body .left_group .student_image_tag ,
 .preview_body .left_group .image_tag ,
 #ImageLabeling .left_group .image_tag {
   color: #fff;
   border-radius: 0 40% 40% 0;
   padding: 5px;
   width: 25px;
-  height: 25px;
+  height: 28px;
   display: inline-block;
   font-size: 10px;
   text-align: center;
@@ -450,7 +455,7 @@ margin: auto 10px;
   border-radius: 40% 0 0 40%;
   padding: 5px;
   width: 25px;
-  height: 25px;
+  height: 28px;
   display: inline-block;
   font-size: 10px;
   text-align: center;
@@ -467,7 +472,7 @@ margin: auto 10px;
   border-radius: 0 40% 40% 0;
   padding: 5px;
   width: 25px;
-  height: 25px;
+  height: 28px;
   display: inline-block;
   font-size: 10px;
   text-align: center;
@@ -478,13 +483,14 @@ margin: auto 10px;
 }
 
 
+.preview_body .right_group .student_image_tag,
 .preview_body .right_group .image_tag,
 #ImageLabeling .right_group .image_tag {
   color: #fff;
   border-radius: 40% 0 0 40%;
   padding: 5px;
   width: 25px;
-  height: 25px;
+  height: 28px;
   display: inline-block;
   font-size: 10px;
   text-align: center;
@@ -494,7 +500,25 @@ margin: auto 10px;
   cursor: pointer;
 } 
 
+.preview_body .choices_div {
+  display: flex;
+  border: 3px solid #3699FF;
+  background-color: #fff;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 10px auto 20px;
+  padding: 5px 10px;
+}
 
+.preview_body .choices_div .student_choice {
+  display: inline-block;
+  margin: 5px;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: grab;
+  opacity: 0.9999;
+}
 /* end:: Image Labeling */
 
 
