@@ -28,6 +28,39 @@ $(function () {
   });
 
 
+  let imageLabelingAllImages = {}
+  $("#imageLabelingQuestionUpload").dropzone({
+    url: window.location.href,
+    acceptedFiles: "image/*",
+    addRemoveLinks: true,
+    maxFiles: 1,
+
+    // create base64 image link
+    init: function () {
+      this.on("addedfile", function (file) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          var base64String = event.target.result;
+          var fileName = file.name
+          imageLabelingAllImages[fileName] = base64String
+        };
+        reader.readAsDataURL(file);
+      });
+    },
+
+    complete: function () {
+      let workingImageName = $("#imageLabelingQuestionUpload .dz-success .dz-filename").text()
+      let workingImageBase64 = imageLabelingAllImages[workingImageName]
+      $("#imageLabelingQuestionUpload").parent().fadeOut()
+      $(".clearMark").fadeIn()
+      $(".deleteImg").fadeIn()
+      $("#ImageLabeling .mark, #ImageLabeling .input_div").remove()
+      $(".question_img_div img").attr("src", workingImageBase64).attr("alt", workingImageName)
+      answer_no = 0
+    }
+  });
+
+
   // Set functionality upon Question Type Change
   $("#QuestionType").on("change", function () {
 
@@ -1053,38 +1086,7 @@ $(function () {
       // Set select2
       $('#imageLabelingDisplayType').select2();
 
-      let imageLabelingAllImages = {}
 
-      $("#imageLabelingQuestionUpload").dropzone({
-        url: window.location.href,
-        acceptedFiles: "image/*",
-        addRemoveLinks: true,
-        maxFiles: 1,
-
-        // create base64 image link
-        init: function () {
-          this.on("addedfile", function (file) {
-            var reader = new FileReader();
-            reader.onload = function (event) {
-              var base64String = event.target.result;
-              var fileName = file.name
-              imageLabelingAllImages[fileName] = base64String
-            };
-            reader.readAsDataURL(file);
-          });
-        },
-
-        complete: function () {
-          let workingImageName = $("#imageLabelingQuestionUpload .dz-success .dz-filename").text()
-          let workingImageBase64 = imageLabelingAllImages[workingImageName]
-          $("#imageLabelingQuestionUpload").parent().fadeOut()
-          $(".clearMark").fadeIn()
-          $(".deleteImg").fadeIn()
-          $("#ImageLabeling .mark, #ImageLabeling .input_div").remove()
-          $(".question_img_div img").attr("src", workingImageBase64).attr("alt", workingImageName)
-          answer_no = 0
-        }
-      });
 
       $("#ImageLabeling .clearMark").on("click", function () {
         if (confirm("Are you sure, you want to clear all tags ??")) {
@@ -1092,7 +1094,7 @@ $(function () {
           answer_no = 0
         }
       })
-      
+
       $("#ImageLabeling .deleteImg").on("click", function () {
         if (confirm("Are you sure, you want to remove the image ??")) {
           $(".clearMark").fadeOut()
@@ -1114,7 +1116,6 @@ $(function () {
       // Add Click Event
       $("#ImageLabeling .question_img_div").on("click", function (e) {
 
-
         // Set Answer ID
         answer_no += 1
 
@@ -1124,7 +1125,7 @@ $(function () {
 
         // Add Items In Left Side
         if (e.pageX < $(".question_img_div img").offset().left + ($(".question_img_div img").css("width").replace("px", "")) / 2) {
-          
+
           //Choose Color
           let randomNumber = Math.floor(Math.random() * colors_left.length)
           let randomColor = colors_left[randomNumber]
@@ -1135,20 +1136,20 @@ $(function () {
           // Add Text Box
           newElement = `<div style="position:relative" data-id = "${answer_no}" class="input_div"><span class="image_tag" style="background-color:${randomColor}">${answer_no}</span><input type="text" class="answer" id="${answer_no}" style="border:2px solid ${randomColor}; color:${randomColor}; font-weight: bold"><span class="delete_input" style="background-color:#f64e60; color:#fff">X</span></div>`
           $(".left_group").append(newElement)
-          
+
           $("#ImageLabeling .question_img_div").append(`<span class = 'btn mark' id='${answer_no}' data-positionx='${(e.pageX - $('#ImageLabeling .question_img_div img').offset().left) / $('#ImageLabeling .question_img_div img').css("width").replace("px", "")}' data-positiony='${(e.pageY - $('#ImageLabeling .question_img_div img').offset().top) / $('#ImageLabeling .question_img_div img').css("height").replace("px", "")}'  style=' background-color: ${randomColor} ; top: ${e.pageY - $('#ImageLabeling .question_img_div img').first().offset().top - 9}px; left: ${e.pageX - $('#ImageLabeling .question_img_div img').first().offset().left - 8}px;'>${answer_no}</span>`)
-          
+
           $(`.answer[id=${answer_no}]`).focus()
-          
-          $(`div[data-id = "${answer_no}"] .delete_input`).last().on("click",function () {
+
+          $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
             if (confirm("Are you sure, you want to remove this tag ?")) {
               $("#ImageLabeling .mark[id='" + $(this).parent().data("id") + "']").remove()
               $(this).parent().remove();
             }
           })
 
-        } 
-        
+        }
+
         // Add Items In Right Side
         else if (e.pageX > $(".question_img_div img").offset().left + ($(".question_img_div img").css("width").replace("px", "")) / 2) {
           //Choose Color
@@ -1166,7 +1167,7 @@ $(function () {
 
           $(".answer[id=" + answer_no + "]").focus()
 
-          $(`div[data-id = "${answer_no}"] .delete_input`).last().on("click",function () {
+          $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
             if (confirm("Are you sure, you want to remove this tag ?")) {
               $("#ImageLabeling .mark[id='" + $(this).parent().data("id") + "']").remove()
               $(this).parent().remove();
@@ -1211,7 +1212,7 @@ $(function () {
 
         var spaces = []
 
-        $("#ImageLabeling .left_group .input_div, #ImageLabeling .right_group .input_div").each(function() {
+        $("#ImageLabeling .left_group .input_div, #ImageLabeling .right_group .input_div").each(function () {
           let space = {}
 
           space["answer_number"] = $(this).data("id")
@@ -1223,8 +1224,8 @@ $(function () {
           spaces.push(space)
         })
 
-        var questionImageBase64 = $("#ImageLabeling .question_img_div img").attr('src') 
-        var questionImageName = $("#ImageLabeling .question_img_div img").attr('alt') 
+        var questionImageBase64 = $("#ImageLabeling .question_img_div img").attr('src')
+        var questionImageName = $("#ImageLabeling .question_img_div img").attr('alt')
 
         var data = {
           "academic_id": academicYearID,
@@ -1251,15 +1252,13 @@ $(function () {
         console.log(data);
 
       })
-    
+
       $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
-        
-        var questionImageBase64 = $("#ImageLabeling .question_img_div img").attr('src') 
-        var questionImageName = $("#ImageLabeling .question_img_div img").attr('alt')
 
-        var pairs = []
+        var questionImageBase64 = $("#ImageLabeling .question_img_div img").attr('src')
+        var questionImageName = $("#ImageLabeling .question_img_div img").attr('alt')
 
         // Set Question Images
         var questionImages = {}
@@ -1286,7 +1285,7 @@ $(function () {
 
         var spaces = []
 
-        $("#ImageLabeling .left_group .input_div, #ImageLabeling .right_group .input_div").each(function() {
+        $("#ImageLabeling .left_group .input_div, #ImageLabeling .right_group .input_div").each(function () {
           let space = {}
 
           space["answer_number"] = $(this).data("id")
@@ -1298,51 +1297,158 @@ $(function () {
           spaces.push(space)
         })
 
-        if ($("#imageLabelingDisplayType").val() == "dragging") {
-          $(".preview_body").append('<div class="choices_div"></div>\
-            <br>\
-            <div class="row">\
-              <div class="col-4 left_group">\
-              </div>\
-              <div class="col-4 preview_question_img_div" style="position:relative">\
-              </div>\
-              <div class="col-4 right_group">\
-              </div>\
-            </div>')
-          
-            let quesImage = `<img id="preview_img" src=${questionImageBase64} alt=${questionImageName}>`
-            $('.preview_body .preview_question_img_div').append(quesImage)
-            
-            setTimeout(function(){
+        console.log(spaces);
 
-              for (i = 0 ; i < spaces.length ; i++) {
-                let choice = `<span class="choice bg-primary" draggable="true">${spaces[i]["answer_text"]}</span>`
-                $('.preview_body .choices_div').append(choice)
-  
-                let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px","")}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px","")}px'>${spaces[i]["answer_number"]}</span>`
-                $('.preview_body .preview_question_img_div').append(marker)
-                
-                if (spaces[i]["position_x"] < 0.5) {
-                  newElement = `<div style="position:relative" data-id = "${spaces[i]["answer_number"]}" class="student_input_div"><span class="image_tag" style="background-color:${spaces[i]["answer_color"]}">${spaces[i]["answer_number"]}</span><input type="text" class="student_answer" id="${spaces[i]["answer_number"]}" style="border:2px solid ${spaces[i]["answer_color"]}; color:${spaces[i]["answer_color"]}; font-weight: bold"></div>`
-                  $(".preview_body .left_group").append(newElement)
-                } else {
-                  newElement = `<div style="position:relative" data-id = "${spaces[i]["answer_number"]}" class="student_input_div"><input type="text" class="student_answer" id="${spaces[i]["answer_number"]}" style="border:2px solid ${spaces[i]["answer_color"]}; color:${spaces[i]["answer_color"]}; font-weight: bold"><span class="image_tag" style="background-color:${spaces[i]["answer_color"]}" >${spaces[i]["answer_number"]}</span></div>`
-                  $(".preview_body .right_group").append(newElement)
-                }
-                $(".preview_body .mark").click(function (e) {
-                  e.stopPropagation()
-                  $(`.preview_body .input_div[data-id='${$(this).attr("id")}'] .student_answer`).focus()
-                })
-              }
-            }, 1000)
-          
-            
-        } else if ($("#imageLabelingDisplayType").val() == "enumerate") {
-          console.log("enumerate");
+        $(".preview_body").append('<div class="row">\
+            <div class="col-4 left_group">\
+            </div>\
+            <div class="col-4 preview_question_img_div" style="position:relative">\
+            </div>\
+            <div class="col-4 right_group">\
+            </div>\
+          </div>')
+
+        if(questionImageBase64) {
+          let quesImage = `<img id="preview_img" src="${questionImageBase64}" alt="${questionImageName}">`
+          $('.preview_body .preview_question_img_div').append(quesImage)
         }
 
+        if ($("#imageLabelingDisplayType").val() == "fill") {
+
+          setTimeout(function () {
+
+            for (i = 0; i < spaces.length; i++) {
+              let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
+              $('.preview_body .preview_question_img_div').append(marker)
+
+              if (spaces[i]["position_x"] < 0.5) {
+                newElement = `<div style="position:relative" data-id = "${spaces[i]["answer_number"]}" class="student_input_div"><span class="image_tag" style="background-color:${spaces[i]["answer_color"]}">${spaces[i]["answer_number"]}</span><input type="text" class="student_answer" id="${spaces[i]["answer_number"]}" style="border:2px solid ${spaces[i]["answer_color"]}; color:${spaces[i]["answer_color"]}; font-weight: bold"></div>`
+                $(".preview_body .left_group").append(newElement)
+
+              } else {
+                newElement = `<div style="position:relative" data-id = "${spaces[i]["answer_number"]}" class="student_input_div"><input type="text" class="student_answer" id="${spaces[i]["answer_number"]}" style="border:2px solid ${spaces[i]["answer_color"]}; color:${spaces[i]["answer_color"]}; font-weight: bold"><span class="image_tag" style="background-color:${spaces[i]["answer_color"]}" >${spaces[i]["answer_number"]}</span></div>`
+                $(".preview_body .right_group").append(newElement)
+              }
+
+              $(".preview_body .mark").click(function (e) {
+                e.stopPropagation()
+                $(`.preview_body .student_input_div[data-id='${$(this).attr("id")}'] .student_answer`).focus()
+              })
+            }
+          }, 1000)
+
+        } else if ($("#imageLabelingDisplayType").val() == "dragging") {
+
+          setTimeout(function () {
+
+            for (i = 0; i < spaces.length; i++) {
+              if (spaces[i]["answer_text"] != "") {
+                let choice = `<span class="student_choice bg-primary" draggable="true">${spaces[i]["answer_text"]}</span>`
+                $('.preview_body .choices_div').append(choice)
+
+                let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
+                $('.preview_body .preview_question_img_div').append(marker)
+
+                if (spaces[i]["position_x"] < 0.5) {
+                  newElement = `<div style="position:relative" data-id = "${spaces[i]["answer_number"]}" class="student_input_div"><span class="image_tag" style="background-color:${spaces[i]["answer_color"]}">${spaces[i]["answer_number"]}</span><div class="student_answer" id="${spaces[i]["answer_number"]}" style="border:2px solid ${spaces[i]["answer_color"]}; color:${spaces[i]["answer_color"]}; font-weight: bold"></div></div>`
+                  $(".preview_body .left_group").append(newElement)
+
+                } else {
+                  newElement = `<div style="position:relative" data-id = "${spaces[i]["answer_number"]}" class="student_input_div"><div class="student_answer" id="${spaces[i]["answer_number"]}" style="border:2px solid ${spaces[i]["answer_color"]}; color:${spaces[i]["answer_color"]}; font-weight: bold"></div><span class="image_tag" style="background-color:${spaces[i]["answer_color"]}" >${spaces[i]["answer_number"]}</span></div>`
+                  $(".preview_body .right_group").append(newElement)
+                }
+
+                $(".preview_body .mark").click(function (e) {
+                  e.stopPropagation()
+                  $(`.preview_body .student_input_div[data-id='${$(this).attr("id")}'] .student_answer`).focus()
+                })
+              }
+            }
+          }, 1000)
 
 
+        } else if ($("#imageLabelingDisplayType").val() == "enumerate") {
+          console.log("Alaa");
+          
+          var curMousePos = { x: 0, y: 0 }
+          var colors_left = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#95a5a6", "#7f8c8d"]
+          var colors_right = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#95a5a6", "#7f8c8d"]
+          var answer_no = 0
+    
+    
+          // Add Click Event
+          setTimeout(function(){
+            
+          
+            $(".preview_question_img_div #preview_img").on("click", function (e) {
+              console.log("Ahmed");
+      
+              // Set Answer ID
+              answer_no += 1
+      
+              // Set Mouse Position
+              curMousePos.x = e.pageX
+              curMousePos.y = e.pageY
+      
+              // Add Items In Left Side
+              if (e.pageX <= $("#preview_img").offset().left + ($("#preview_img").css("width").replace("px", "")) / 2) {
+      
+                //Choose Color
+                let randomNumber = Math.floor(Math.random() * colors_left.length)
+                let randomColor = colors_left[randomNumber]
+                colors_left.splice(randomNumber, 1)
+                if (colors_left.length == 0) {
+                  colors_left = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#bdc3c7", "#95a5a6", "#7f8c8d"]
+                }
+                // Add Text Box
+                newElement = `<div style="position:relative" data-id = "${answer_no}" class="student_input_div"><span class="student_image_tag" style="background-color:${randomColor}">${answer_no}</span><input type="text" class="student_answer" id="${answer_no}" style="border:2px solid ${randomColor}; color:${randomColor}; font-weight: bold"><span class="delete_input" style="background-color:#f64e60; color:#fff">X</span></div>`
+                $(".preview_body .left_group").append(newElement)
+      
+                $(".preview_body .preview_question_img_div").append(`<span class = 'btn student_mark' id='${answer_no}' data-positionx='${(e.pageX - $('.preview_question_img_div #preview_img').offset().left) / $('.preview_question_img_div #preview_img').css("width").replace("px", "")}' data-positiony='${(e.pageY - $('.preview_question_img_div #preview_img').offset().top) / $('.preview_question_img_div #preview_img').css("height").replace("px", "")}'  style=' background-color: ${randomColor} ; top: ${e.pageY - $('.preview_question_img_div #preview_img').first().offset().top - 9}px; left: ${e.pageX - $('.preview_question_img_div #preview_img').first().offset().left - 8}px;'>${answer_no}</span>`)
+      
+                $(`.student_answer[id=${answer_no}]`).focus()
+      
+                $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
+                  if (confirm("Are you sure, you want to remove this tag ?")) {
+                    $(".preview_body .student_mark[id='" + $(this).parent().data("id") + "']").remove()
+                    $(this).parent().remove();
+                  }
+                })
+      
+              }
+      
+              // Add Items In Right Side
+              else if (e.pageX > $("#preview_img").offset().left + ($("#preview_img").css("width").replace("px", "")) / 2) {
+                //Choose Color
+                let randomNumber = Math.floor(Math.random() * colors_right.length)
+                let randomColor = colors_right[randomNumber]
+                colors_right.splice(randomNumber, 1)
+                if (colors_right.length == 0) {
+                  colors_right = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#bdc3c7", "#95a5a6", "#7f8c8d"]
+                }
+                // Add Text Box
+                newElement = `<div style="position:relative" data-id = "${answer_no}" class="student_input_div"><span class="delete_input" style="background-color:#f64e60; color:#fff">X</span><input type="text" class="student_answer" id="${answer_no}" style="border:2px solid ${randomColor}; color:${randomColor}; font-weight: bold"><span class="student_image_tag" style="background-color:${randomColor}" >${answer_no}</span></div>`
+                $(".preview_body .right_group").append(newElement)
+      
+                $(".preview_body .preview_question_img_div").append(`<span class = 'btn student_mark' id='${answer_no}' data-positionx='${(e.pageX - $('.preview_question_img_div #preview_img').offset().left) / $('.preview_question_img_div #preview_img').css("width").replace("px", "")}' data-positiony='${(e.pageY - $('.preview_question_img_div #preview_img').offset().top) / $('.preview_question_img_div #preview_img').css("height").replace("px", "")}'  style=' background-color: ${randomColor} ; top: ${e.pageY - $('.preview_question_img_div #preview_img').first().offset().top - 9}px; left: ${e.pageX - $('.preview_question_img_div #preview_img').first().offset().left - 8}px;'>${answer_no}</span>`)
+      
+                $(".preview_body .student_answer[id=" + answer_no + "]").focus()
+      
+                $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
+                  if (confirm("Are you sure, you want to remove this tag ?")) {
+                    $(".preview_body .student_mark[id='" + $(this).parent().data("id") + "']").remove()
+                    $(this).parent().remove();
+                  }
+                })
+              }
+      
+              $(".preview_body .student_mark").click(function (e) {
+                e.stopPropagation()
+                $(`.preview_body .student_input_div[data-id='${$(this).attr("id")}'] .student_answer`).focus()
+              })
+            })
+          },1000)
+        }
       })
     }
 
@@ -1351,138 +1457,138 @@ $(function () {
     // begin:: check if the question is fillSpaces
     else if ($(this).val() == 7) {
 
-        // config Question Types Fade in & out
-        $("#FillSpace").fadeIn()
+      // config Question Types Fade in & out
+      $("#FillSpace").fadeIn()
 
-        var num = 1
+      var num = 1
 
-        $('.note-editing-area').on("keyup , change", function () {
-          if ($(this).html().includes("___")) {
-            $(".fillSpaceInputs").append("<div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + num + "' data-num='" + num + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + num + "</span></div><div class='input-group-append'><span class='input-group-text btn btn-danger removeAnswer'>X</span></div></div>")
-            $(this).html($(this).html().replace("___", "<span data-num = '" + num + "' class='btn btn-primary removeSpan'> ((" + num + ")) </span>" + "&nbsp;"))
-            $("#placeholder" + num + "").focus()
-            num += 1
-            $(".removeAnswer").on("click", function () {
-              $(this).parents(".input-group").remove()
-              $(".note-editing-area span[data-num='" + $(this).parents(".input-group").find("input").data("num") + "']").remove()
-            })
-            $(".removeSpan").on("click", function () {
-              $(".fillSpaceInputs .input-group #placeholder" + $(this).data("num")).parents(".input-group").remove()
-              $(this).remove()
-            })
-          }
+      $('.note-editing-area').on("keyup , change", function () {
+        if ($(this).html().includes("___")) {
+          $(".fillSpaceInputs").append("<div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + num + "' data-num='" + num + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + num + "</span></div><div class='input-group-append'><span class='input-group-text btn btn-danger removeAnswer'>X</span></div></div>")
+          $(this).html($(this).html().replace("___", "<span data-num = '" + num + "' class='btn btn-primary removeSpan'> ((" + num + ")) </span>" + "&nbsp;"))
+          $("#placeholder" + num + "").focus()
+          num += 1
+          $(".removeAnswer").on("click", function () {
+            $(this).parents(".input-group").remove()
+            $(".note-editing-area span[data-num='" + $(this).parents(".input-group").find("input").data("num") + "']").remove()
+          })
+          $(".removeSpan").on("click", function () {
+            $(".fillSpaceInputs .input-group #placeholder" + $(this).data("num")).parents(".input-group").remove()
+            $(this).remove()
+          })
+        }
+      })
+
+      $("#saveForm").on("click", function () {
+        var academicYearID = $("#AcademicYear").val();
+        var academicYear = $("#AcademicYear").find("option:selected").text();
+        var gradeID = $("#StudentClass").val();
+        var gradeName = $("#StudentClass").find("option:selected").text();
+        var subjectID = $("#StudentSection").val();
+        var subjectName = $("#StudentSection").find("option:selected").text();
+        var topicName = $("#topicName").text();
+        var filterTags = [];
+        $("#FilterTags option").each(function () {
+          filterTags.push($(this).val())
         })
 
-        $("#saveForm").on("click", function () {
-          var academicYearID = $("#AcademicYear").val();
-          var academicYear = $("#AcademicYear").find("option:selected").text();
-          var gradeID = $("#StudentClass").val();
-          var gradeName = $("#StudentClass").find("option:selected").text();
-          var subjectID = $("#StudentSection").val();
-          var subjectName = $("#StudentSection").find("option:selected").text();
-          var topicName = $("#topicName").text();
-          var filterTags = [];
-          $("#FilterTags option").each(function () {
-            filterTags.push($(this).val())
-          })
+        var questionHTML = $('.note-editable').html()
 
-          var questionHTML = $('.note-editable').html()
+        var randomizeOptions = $("#fillSpaceRandomizeOptions").prop("checked")
+        var allowAttachment = $("#fillSpaceAllowAttach").prop("checked")
+        var allowPartialCredit = $("#fillSpaceAllowPartialCredit").prop("checked")
+        var maximumMarks = $("#fillSpaceMaximumMarks").val();
+        var maximumTime = $("#fillSpaceMaximumTime").val();
 
-          var randomizeOptions = $("#fillSpaceRandomizeOptions").prop("checked")
-          var allowAttachment = $("#fillSpaceAllowAttach").prop("checked")
-          var allowPartialCredit = $("#fillSpaceAllowPartialCredit").prop("checked")
-          var maximumMarks = $("#fillSpaceMaximumMarks").val();
-          var maximumTime = $("#fillSpaceMaximumTime").val();
-
-          var questionImages = {}
-          $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview").each(function () {
-            if ($(this).find(".dz-error-message").text() == "") {
-              questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
-            }
-          })
-
-          var answers = []
-
-          $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
-            var answer = {}
-            answer["answer_text"] = $(this).val()
-            answer["answer_number"] = $(this).data("num")
-            answers.push(answer)
-          })
-
-          var data = {
-            "academic_id": academicYearID,
-            "academic_year": academicYear,
-            "grade_id": gradeID,
-            "grade_name": gradeName,
-            "subject_id": subjectID,
-            "subject_name": subjectName,
-            "topic_name": topicName,
-            "filter_tags": filterTags,
-            "question_html": questionHTML,
-            "rondomize_options": randomizeOptions,
-            "allow_attachment": allowAttachment,
-            "allow_partial_credit": allowPartialCredit,
-            "maximum_marks": maximumMarks,
-            "maximum_time": maximumTime,
-            "question_images": questionImages,
-            "answers": answers
-          }
-          var dataJSON = JSON.stringify(data)
-          console.log(data);
-        })
-
-
-        // Set Preview Box
-        $("#previewButton").on("click", function () {
-
-          $(".preview_body").children().remove()
-
-          // Set Question Images
-          var questionImages = {}
-          $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+        var questionImages = {}
+        $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview").each(function () {
+          if ($(this).find(".dz-error-message").text() == "") {
             questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
-          })
-
-          var questionImageDiv = "<div class='question_images'></div>"
-          $(".preview_body").append(questionImageDiv)
-
-          $.each(questionImages, function (imgName, imgBase64) {
-            let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-            $(".preview_body .question_images").append(image)
-          })
-          // ----------------------------------------------------------
-
-          // Set Question Text
-          var questionHTML = $('.note-editable').html()
-          var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
-          $(".preview_body").append(questionParagraph)
-          // ----------------------------------------------------------
-
-          // Set Elements
-          var answers = []
-
-          $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
-            var answer = {}
-            answer["answer_text"] = $(this).val()
-            answer["answer_number"] = $(this).data("num")
-            answers.push(answer)
-          })
-
-
-          var totalAnswers = "<div class='totalAnswers'></div>"
-          $(".preview_body").append(totalAnswers)
-
-
-          for (var i = 0; i < answers.length; i++) {
-            let answerBox = "<div class='answerBox row' data-val='" + answers[i]["answer_number"] + "'><div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + answers[i]["answer_number"] + "' data-num='" + answers[i]["answer_number"] + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + answers[i]["answer_number"] + "</span></div><div class='input-group-append'></div></div></div>"
-            $(".preview_body .totalAnswers").append(answerBox)
           }
-
         })
 
-      }
-      // end:: check if the question is fillSpaces
+        var answers = []
 
-    })
+        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
+          var answer = {}
+          answer["answer_text"] = $(this).val()
+          answer["answer_number"] = $(this).data("num")
+          answers.push(answer)
+        })
+
+        var data = {
+          "academic_id": academicYearID,
+          "academic_year": academicYear,
+          "grade_id": gradeID,
+          "grade_name": gradeName,
+          "subject_id": subjectID,
+          "subject_name": subjectName,
+          "topic_name": topicName,
+          "filter_tags": filterTags,
+          "question_html": questionHTML,
+          "rondomize_options": randomizeOptions,
+          "allow_attachment": allowAttachment,
+          "allow_partial_credit": allowPartialCredit,
+          "maximum_marks": maximumMarks,
+          "maximum_time": maximumTime,
+          "question_images": questionImages,
+          "answers": answers
+        }
+        var dataJSON = JSON.stringify(data)
+        console.log(data);
+      })
+
+
+      // Set Preview Box
+      $("#previewButton").on("click", function () {
+
+        $(".preview_body").children().remove()
+
+        // Set Question Images
+        var questionImages = {}
+        $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+          questionImages[$(this).find("img").attr("alt")] = allImages[$(this).find("img").attr("alt")]
+        })
+
+        var questionImageDiv = "<div class='question_images'></div>"
+        $(".preview_body").append(questionImageDiv)
+
+        $.each(questionImages, function (imgName, imgBase64) {
+          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
+          $(".preview_body .question_images").append(image)
+        })
+        // ----------------------------------------------------------
+
+        // Set Question Text
+        var questionHTML = $('.note-editable').html()
+        var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
+        $(".preview_body").append(questionParagraph)
+        // ----------------------------------------------------------
+
+        // Set Elements
+        var answers = []
+
+        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
+          var answer = {}
+          answer["answer_text"] = $(this).val()
+          answer["answer_number"] = $(this).data("num")
+          answers.push(answer)
+        })
+
+
+        var totalAnswers = "<div class='totalAnswers'></div>"
+        $(".preview_body").append(totalAnswers)
+
+
+        for (var i = 0; i < answers.length; i++) {
+          let answerBox = "<div class='answerBox row' data-val='" + answers[i]["answer_number"] + "'><div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + answers[i]["answer_number"] + "' data-num='" + answers[i]["answer_number"] + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + answers[i]["answer_number"] + "</span></div><div class='input-group-append'></div></div></div>"
+          $(".preview_body .totalAnswers").append(answerBox)
+        }
+
+      })
+
+    }
+    // end:: check if the question is fillSpaces
+
+  })
 })
