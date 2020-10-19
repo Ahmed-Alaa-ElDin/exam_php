@@ -1116,7 +1116,6 @@ $(function () {
       // Add Click Event
       $("#ImageLabeling .question_img_div").on("click", function (e) {
 
-
         // Set Answer ID
         answer_no += 1
 
@@ -1142,7 +1141,7 @@ $(function () {
 
           $(`.answer[id=${answer_no}]`).focus()
 
-          $(`div[data-id = "${answer_no}"] .delete_input`).last().on("click", function () {
+          $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
             if (confirm("Are you sure, you want to remove this tag ?")) {
               $("#ImageLabeling .mark[id='" + $(this).parent().data("id") + "']").remove()
               $(this).parent().remove();
@@ -1300,19 +1299,21 @@ $(function () {
 
         console.log(spaces);
 
+        $(".preview_body").append('<div class="row">\
+            <div class="col-4 left_group">\
+            </div>\
+            <div class="col-4 preview_question_img_div" style="position:relative">\
+            </div>\
+            <div class="col-4 right_group">\
+            </div>\
+          </div>')
+
+        if(questionImageBase64) {
+          let quesImage = `<img id="preview_img" src="${questionImageBase64}" alt="${questionImageName}">`
+          $('.preview_body .preview_question_img_div').append(quesImage)
+        }
 
         if ($("#imageLabelingDisplayType").val() == "fill") {
-          $(".preview_body").append('<div class="row">\
-              <div class="col-4 left_group">\
-              </div>\
-              <div class="col-4 preview_question_img_div" style="position:relative">\
-              </div>\
-              <div class="col-4 right_group">\
-              </div>\
-            </div>')
-
-          let quesImage = `<img id="preview_img" src=${questionImageBase64} alt=${questionImageName}>`
-          $('.preview_body .preview_question_img_div').append(quesImage)
 
           setTimeout(function () {
 
@@ -1337,19 +1338,6 @@ $(function () {
           }, 1000)
 
         } else if ($("#imageLabelingDisplayType").val() == "dragging") {
-          $(".preview_body").append('<div class="choices_div"></div>\
-            <br>\
-            <div class="row">\
-              <div class="col-4 left_group">\
-              </div>\
-              <div class="col-4 preview_question_img_div" style="position:relative">\
-              </div>\
-              <div class="col-4 right_group">\
-              </div>\
-            </div>')
-
-          let quesImage = `<img id="preview_img" src=${questionImageBase64} alt=${questionImageName}>`
-          $('.preview_body .preview_question_img_div').append(quesImage)
 
           setTimeout(function () {
 
@@ -1380,11 +1368,87 @@ $(function () {
 
 
         } else if ($("#imageLabelingDisplayType").val() == "enumerate") {
-          console.log("enumerate");
+          console.log("Alaa");
+          
+          var curMousePos = { x: 0, y: 0 }
+          var colors_left = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#95a5a6", "#7f8c8d"]
+          var colors_right = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#95a5a6", "#7f8c8d"]
+          var answer_no = 0
+    
+    
+          // Add Click Event
+          setTimeout(function(){
+            
+          
+            $(".preview_question_img_div #preview_img").on("click", function (e) {
+              console.log("Ahmed");
+      
+              // Set Answer ID
+              answer_no += 1
+      
+              // Set Mouse Position
+              curMousePos.x = e.pageX
+              curMousePos.y = e.pageY
+      
+              // Add Items In Left Side
+              if (e.pageX <= $("#preview_img").offset().left + ($("#preview_img").css("width").replace("px", "")) / 2) {
+      
+                //Choose Color
+                let randomNumber = Math.floor(Math.random() * colors_left.length)
+                let randomColor = colors_left[randomNumber]
+                colors_left.splice(randomNumber, 1)
+                if (colors_left.length == 0) {
+                  colors_left = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#bdc3c7", "#95a5a6", "#7f8c8d"]
+                }
+                // Add Text Box
+                newElement = `<div style="position:relative" data-id = "${answer_no}" class="student_input_div"><span class="student_image_tag" style="background-color:${randomColor}">${answer_no}</span><input type="text" class="student_answer" id="${answer_no}" style="border:2px solid ${randomColor}; color:${randomColor}; font-weight: bold"><span class="delete_input" style="background-color:#f64e60; color:#fff">X</span></div>`
+                $(".preview_body .left_group").append(newElement)
+      
+                $(".preview_body .preview_question_img_div").append(`<span class = 'btn student_mark' id='${answer_no}' data-positionx='${(e.pageX - $('.preview_question_img_div #preview_img').offset().left) / $('.preview_question_img_div #preview_img').css("width").replace("px", "")}' data-positiony='${(e.pageY - $('.preview_question_img_div #preview_img').offset().top) / $('.preview_question_img_div #preview_img').css("height").replace("px", "")}'  style=' background-color: ${randomColor} ; top: ${e.pageY - $('.preview_question_img_div #preview_img').first().offset().top - 9}px; left: ${e.pageX - $('.preview_question_img_div #preview_img').first().offset().left - 8}px;'>${answer_no}</span>`)
+      
+                $(`.student_answer[id=${answer_no}]`).focus()
+      
+                $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
+                  if (confirm("Are you sure, you want to remove this tag ?")) {
+                    $(".preview_body .student_mark[id='" + $(this).parent().data("id") + "']").remove()
+                    $(this).parent().remove();
+                  }
+                })
+      
+              }
+      
+              // Add Items In Right Side
+              else if (e.pageX > $("#preview_img").offset().left + ($("#preview_img").css("width").replace("px", "")) / 2) {
+                //Choose Color
+                let randomNumber = Math.floor(Math.random() * colors_right.length)
+                let randomColor = colors_right[randomNumber]
+                colors_right.splice(randomNumber, 1)
+                if (colors_right.length == 0) {
+                  colors_right = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#bdc3c7", "#95a5a6", "#7f8c8d"]
+                }
+                // Add Text Box
+                newElement = `<div style="position:relative" data-id = "${answer_no}" class="student_input_div"><span class="delete_input" style="background-color:#f64e60; color:#fff">X</span><input type="text" class="student_answer" id="${answer_no}" style="border:2px solid ${randomColor}; color:${randomColor}; font-weight: bold"><span class="student_image_tag" style="background-color:${randomColor}" >${answer_no}</span></div>`
+                $(".preview_body .right_group").append(newElement)
+      
+                $(".preview_body .preview_question_img_div").append(`<span class = 'btn student_mark' id='${answer_no}' data-positionx='${(e.pageX - $('.preview_question_img_div #preview_img').offset().left) / $('.preview_question_img_div #preview_img').css("width").replace("px", "")}' data-positiony='${(e.pageY - $('.preview_question_img_div #preview_img').offset().top) / $('.preview_question_img_div #preview_img').css("height").replace("px", "")}'  style=' background-color: ${randomColor} ; top: ${e.pageY - $('.preview_question_img_div #preview_img').first().offset().top - 9}px; left: ${e.pageX - $('.preview_question_img_div #preview_img').first().offset().left - 8}px;'>${answer_no}</span>`)
+      
+                $(".preview_body .student_answer[id=" + answer_no + "]").focus()
+      
+                $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
+                  if (confirm("Are you sure, you want to remove this tag ?")) {
+                    $(".preview_body .student_mark[id='" + $(this).parent().data("id") + "']").remove()
+                    $(this).parent().remove();
+                  }
+                })
+              }
+      
+              $(".preview_body .student_mark").click(function (e) {
+                e.stopPropagation()
+                $(`.preview_body .student_input_div[data-id='${$(this).attr("id")}'] .student_answer`).focus()
+              })
+            })
+          },1000)
         }
-
-
-
       })
     }
 

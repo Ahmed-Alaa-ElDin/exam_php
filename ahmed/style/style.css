@@ -405,7 +405,6 @@ margin: auto 10px;
 #ImageLabeling .question_img_div {
   cursor: pointer;
   position: relative;
-  /* text-align: center; */
 }
 
 .preview_body .preview_question_img_div {
@@ -421,6 +420,7 @@ margin: auto 10px;
 
 
 
+.preview_body .preview_question_img_div .student_mark ,
 .preview_body .preview_question_img_div .mark ,
 #ImageLabeling .question_img_div .mark {
   position: absolute;
@@ -432,6 +432,7 @@ margin: auto 10px;
   cursor: pointer;
 }
 
+.preview_body .left_group .student_image_tag ,
 .preview_body .left_group .image_tag ,
 #ImageLabeling .left_group .image_tag {
   color: #fff;
@@ -482,6 +483,7 @@ margin: auto 10px;
 }
 
 
+.preview_body .right_group .student_image_tag,
 .preview_body .right_group .image_tag,
 #ImageLabeling .right_group .image_tag {
   color: #fff;
