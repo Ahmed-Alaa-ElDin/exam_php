@@ -607,7 +607,7 @@
                         <div id="ImageLabeling" class="question_type" style="display: none;">
 
                           <div class="row">
-                            <div class="offset-lg-3 col-lg-3 text-center font-weight-bold">
+                            <div class="offset-lg-4 col-lg-4 text-center font-weight-bold">
                               <label>Upload Question's Image</label>
                               <div class="dropzone dropzone-default dropzone-success" id="imageLabelingQuestionUpload">
                                 <div class="dropzone-msg dz-message needsclick">
@@ -616,18 +616,16 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-lg-3" style="display: flex;">
-                              <a class="confirmImage btn btn-primary" data-toggle="modal" data-target="#editingBox" style="margin: auto;">Confirm Image / clear Marks</a>
+                            <div class="col-lg-6" style="display: flex;">
+                              <a class="clearMark btn btn-warning" style="margin: auto; display:none">Clear All Marks</a>
+                            </div>
+                            <div class="col-lg-6" style="display: flex;">
+                              <a class="deleteImg btn btn-danger" style="margin: auto; display:none">Delete Image</a>
                             </div>
                           </div>
                           <hr>
-
-
                           
-                          <div class="preview_body row">
-                            <div class="arrows">
-
-                            </div>
+                          <div class="editing_body row">
                             <div class="col-4 left_group">
                             </div>
                             <div class="col-4 question_img_div">
@@ -635,7 +633,6 @@
                             </div>
                             <div class="col-4 right_group">
                             </div>
-                            
                           </div>
 
                           <hr>
@@ -661,8 +658,9 @@
                                 <div class="col-lg-5">
                                   <label>Display Type</label><br>
                                   <select id="imageLabelingDisplayType" class="form-control select2 is-valid w-100" name="display_type">
-                                    <option value="dragging">Answer Dragging</option>
-                                    <option value="enumerate">Enumeration</option>
+                                    <option value="dragging">Display answer to students</option>
+                                    <option value="fill">Don't display answer to students</option>
+                                    <option value="enumerate">Student can answer of their choice </option>
                                   </select>
                                 </div>
                                 <div class="col-lg-3">
