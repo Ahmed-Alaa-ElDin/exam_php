@@ -27,7 +27,9 @@
 <!--begin::Body-->
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-  <!--begin::Main-->
+
+
+<!--begin::Main-->
   <!--begin::Header Mobile-->
   <?php require_once 'MobileHeader.php'; ?>
   <!--end::Header Mobile-->
@@ -605,7 +607,7 @@
                         <div id="ImageLabeling" class="question_type" style="display: none;">
 
                           <div class="row">
-                            <div class="col-lg-9 text-center font-weight-bold">
+                            <div class="offset-lg-3 col-lg-3 text-center font-weight-bold">
                               <label>Upload Question's Image</label>
                               <div class="dropzone dropzone-default dropzone-success" id="imageLabelingQuestionUpload">
                                 <div class="dropzone-msg dz-message needsclick">
@@ -615,10 +617,27 @@
                               </div>
                             </div>
                             <div class="col-lg-3" style="display: flex;">
-                              <a class="confirmImage btn btn-primary" data-toggle="modal" data-target="#editingBox" style="margin: auto;">Confirm Image</a>
+                              <a class="confirmImage btn btn-primary" data-toggle="modal" data-target="#editingBox" style="margin: auto;">Confirm Image / clear Marks</a>
                             </div>
                           </div>
+                          <hr>
+
+
                           
+                          <div class="preview_body row">
+                            <div class="arrows">
+
+                            </div>
+                            <div class="col-4 left_group">
+                            </div>
+                            <div class="col-4 question_img_div">
+                              <img src="" alt="">
+                            </div>
+                            <div class="col-4 right_group">
+                            </div>
+                            
+                          </div>
+
                           <hr>
 
                           <div class="row">
@@ -639,12 +658,19 @@
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-5">
+                                  <label>Display Type</label><br>
+                                  <select id="imageLabelingDisplayType" class="form-control select2 is-valid w-100" name="display_type">
+                                    <option value="dragging">Answer Dragging</option>
+                                    <option value="enumerate">Enumeration</option>
+                                  </select>
+                                </div>
+                                <div class="col-lg-3">
                                   <label>Maximum Marks ? </label><br>
                                   <input id="imageLabelingMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
                                   <small class="text-muted">Set '0' if no marks required</small>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                   <label>Set Maximum Time ? </label><br>
                                   <div class="input-group">
                                     <input id="imageLabelingMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
@@ -670,28 +696,6 @@
                               </div>
                             </div>
 
-                          </div>
-
-
-                          <div class="modal fade" id="editingBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="previewModalLabel">Preview Box</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <i aria-hidden="true" class="ki ki-close"></i>
-                                  </button>
-                                </div>
-                                <div class="modal-body" data-scroll="true">
-                                  <div class="preview_body">
-                                  </div>
-                                </div>
-                                <div class="modal-footer text-center">
-                                  <button type="button" class="btn btn-light-primary font-weight-bold text-center closePreview" data-dismiss="modal">Close</button>
-                                </div>
-
-                              </div>
-                            </div>
                           </div>
 
 
