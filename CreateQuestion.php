@@ -624,13 +624,8 @@
                             </div>
                           </div>
                           <hr>
-
-
                           
                           <div class="editing_body row">
-                            <div class="arrows">
-
-                            </div>
                             <div class="col-4 left_group">
                             </div>
                             <div class="col-4 question_img_div">
@@ -638,7 +633,6 @@
                             </div>
                             <div class="col-4 right_group">
                             </div>
-                            
                           </div>
 
                           <hr>
@@ -664,8 +658,9 @@
                                 <div class="col-lg-5">
                                   <label>Display Type</label><br>
                                   <select id="imageLabelingDisplayType" class="form-control select2 is-valid w-100" name="display_type">
-                                    <option value="dragging">Answer Dragging</option>
-                                    <option value="enumerate">Enumeration</option>
+                                    <option value="dragging">Display answer to students</option>
+                                    <option value="fill">Don't display answer to students</option>
+                                    <option value="enumerate">Student can answer of their choice </option>
                                   </select>
                                 </div>
                                 <div class="col-lg-3">
