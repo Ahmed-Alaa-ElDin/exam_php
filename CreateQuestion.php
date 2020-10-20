@@ -131,10 +131,10 @@
                   <!--begin::Form-->
                   <form class="form" id="kt_form">
                     <div class="row">
-                      <div class="col-lg-4 offset-lg-8 float-right">
+                      <div class="col-lg-12">
                         <div class="form-group row">
-                          <label class="col-4 col-form-label text-right">Academic Year</label>
-                          <div class="col-8">
+                          <label class="col-6 col-form-label text-right">Academic Year</label>
+                          <div class="col-6 text-left">
                             <select class="form-control select2 is-valid w-100" id="AcademicYear" name="param" style="width: 100%;">
                               <option value="1">2020 - 2021</option>
                               <option value="0">2021 - 2020</option>
@@ -860,11 +860,11 @@
     <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
       <div class="modal-content">
         <div class="modal-header row">
-          <h5 class="modal-title col-lg-5" id="previewModalLabel">
+          <h5 class="modal-title col-lg-6" id="previewModalLabel">
             Preview Question Type :
             <span class="previewQuestionType"></span>
           </h5>
-          <h5 class="modal-subject col-lg-6">
+          <h5 class="modal-subject col-lg-5">
             <span class="grade"></span>
             <span>|</span>
             <span class="subject"></span>

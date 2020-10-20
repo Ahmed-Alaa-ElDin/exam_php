@@ -4,21 +4,23 @@ $(function () {
     // Edit Preview class According to Question Type 
     setTimeout(() => {
       `${$("#previewBox").find(".grade").text($("#StudentClass").siblings(".select2-container").find("#select2-StudentClass-container").text())}`
-    }, 10); 
+    }, 10);
   })
 
   $("#StudentSection").change(function () {
     setTimeout(() => {
       `${$("#previewBox").find(".subject").text($("#StudentSection").siblings(".select2-container").find("#select2-StudentSection-container").text())}`
-    }, 10); 
+    }, 10);
   })
-  var allImages = {}
+
 
   // Set the Dropzones for All Questions
   Dropzone.autoDiscover = false;
 
   // Activate Dropzone
   // for Question Attachment
+  var allImages = {}
+
   $("#essayAttachFilesWithQuestion, #mcqAttachFilesWithQuestion, #trueFalseAttachFilesWithQuestion, #dragDropAttachFilesWithQuestion, #assortmentAttachFilesWithQuestion, #fillSpaceAttachFilesWithQuestion, #imageLabelingAttachFilesWithQuestion").dropzone({
     url: window.location.href,
     acceptedFiles: "image/*,application/pdf,.doc,.docx",
@@ -31,7 +33,6 @@ $(function () {
         reader.onload = function (event) {
           var base64String = event.target.result;
           var fileName = file.name
-          console.log(fileName);
           allImages[fileName] = base64String
         };
         reader.readAsDataURL(file);
@@ -76,6 +77,7 @@ $(function () {
 
   // Set Dropzone for Audio Video
   let audioVideoAllUploads = {}
+
   $("#audioVideoQuestionUpload").dropzone({
     url: window.location.href,
     addRemoveLinks: true,
@@ -94,14 +96,14 @@ $(function () {
     }
   });
 
-  
+
   // Set functionality upon Question Type Change
   $("#QuestionType").on("change", function () {
-    
+
     // Edit Preview Tilte According to Question Type 
     setTimeout(() => {
       `${$("#previewBox").find(".previewQuestionType").text($("#QuestionType").siblings(".select2-container").find("#select2-QuestionType-container").text())}`
-    }, 10); 
+    }, 10);
 
     // Disable the Save Form Button
     $("#saveForm").off("click");
@@ -111,9 +113,11 @@ $(function () {
 
     // begin:: check if the question is Short Answer/Essay
     if ($(this).val() == 1) {
+
       // config Question Types Fade in & out
       $("#ShortQuestion").fadeIn()
       // Add Function to Save Form Button
+
       $("#saveForm").on("click", function () {
         var academicYearID = $("#AcademicYear").val();
         var academicYear = $("#AcademicYear").find("option:selected").text();
@@ -165,33 +169,44 @@ $(function () {
         $(".preview_options").children().remove()
 
         // Set Options
-        // Rich Text
-        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Rich Text</span><span class="col-lg-4" id="allowRichText">${$("#essayAllowRichText").prop("checked")?"Yes":"No"}</span></div>`)
-        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="allowAttachment">${$("#essayAllowAttach").prop("checked")?"Yes":"No"}</span></div>`)
-        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="maximumMarks">${$("#essayMaximumMarks").val() != 0?$("#essayMaximumMarks").val():"N/A"}</span></div>`)
-        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Words Count Limit</span><span class="col-lg-4" id="wordsCountLimit">${$("#essayWordCount").val() != 0?$("#essayWordCount").val():"N/A"}</span></div>`)
-        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="essayMaximumTime">${$("#essayMaximumTime").val() != 0?$("#essayMaximumTime").val() + " Minutes":"N/A"}</span></div>`)
+        // Allow Rich Text
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Rich Text</span><span class="col-lg-4" id="allowRichText">${$("#essayAllowRichText").prop("checked") ? "Yes" : "No"}</span></div>`)
 
-        
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="allowAttachment">${$("#essayAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="maximumMarks">${$("#essayMaximumMarks").val() != 0 ? $("#essayMaximumMarks").val() : "N/A"}</span></div>`)
+
+        // Words Count Limit
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Words Count Limit</span><span class="col-lg-4" id="wordsCountLimit">${$("#essayWordCount").val() != 0 ? $("#essayWordCount").val() : "N/A"}</span></div>`)
+
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="essayMaximumTime">${$("#essayMaximumTime").val() != 0 ? $("#essayMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
+
+
         // set question text
         var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
-        
+
         // set question Uploads
         var questionUploads = {}
         $("#essayAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        var questionUpload = `<div class='text-center question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
-        $(".preview_body").append(questionUpload)
-        $.each(questionUploads, function (fileName, fileBase64) {
-          let file = `<a class= "fileName" href="#">${fileName}</a>`
-          $(".preview_body .question_uploads").append(file)
-        })
-      
-    })
-  }
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
+
+      })
+    }
     // end:: check if the question is Short Answer/Essay
 
     // begin:: check if the question is MultiChoice
@@ -251,7 +266,8 @@ $(function () {
         var questionImages = {}
         $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
+            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+          }
         })
 
         var choices = []
@@ -293,24 +309,26 @@ $(function () {
       $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
+        $(".preview_options").children().remove()
+
+        // Set Options
+        // randomize Options
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Randomize Options</span><span class="col-lg-4" id="mcqRandomizeOptions">${$("#mcqRandomizeOptions").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="mcqAllowAttach">${$("#mcqAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Partial Credit
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="mcqAllowPartialCredit">${$("#mcqAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="mcqMaximumMarks">${$("#mcqMaximumMarks").val() != 0 ? $("#mcqMaximumMarks").val() : "N/A"}</span></div>`)
+
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="mcqMaximumTime">${$("#mcqMaximumTime").val() != 0 ? $("#mcqMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
+
 
         var choices = []
-
-        // Set Question Images
-        var questionImages = {}
-        $("#mcqAttachFilesWithQuestion").find(".dz-preview").each(function () {
-          if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
-        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function (imgName, imgBase64) {
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
-        })
-        // ----------------------------------------------------------
 
         // Set Question Text
         var questionHTML = $('#QuestionEditor').summernote('code')
@@ -318,7 +336,21 @@ $(function () {
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
 
-
+        // set question Uploads
+        var questionUploads = {}
+        $("#mcqAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+          questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+        })
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
+        // ----------------------------------------------------------
 
         // Set Choices
         $("#MultiChoice table .choice").each(function () {
@@ -421,7 +453,6 @@ $(function () {
                 var base64String = event.target.result;
                 var fileName = file.name
                 trueFalseAllImages[fileName] = base64String
-                console.log(trueFalseAllImages)
               };
               reader.readAsDataURL(file);
             });
@@ -463,7 +494,8 @@ $(function () {
         var questionImages = {}
         $("#trueFalseAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
+            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+          }
         })
 
         var choices = []
@@ -506,27 +538,46 @@ $(function () {
       $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
+        $(".preview_options").children().remove()
+
+        // Set Options
+        // randomize Options
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Randomize Options</span><span class="col-lg-4" id="trueFalseRandomizeOptions">${$("#trueFalseRandomizeOptions").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="trueFalseAllowAttach">${$("#trueFalseAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Partial Credit
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="trueFalseAllowPartialCredit">${$("#trueFalseAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="trueFalseMaximumMarks">${$("#trueFalseMaximumMarks").val() != 0 ? $("#trueFalseMaximumMarks").val() : "N/A"}</span></div>`)
+
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="trueFalseMaximumTime">${$("#trueFalseMaximumTime").val() != 0 ? $("#trueFalseMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
 
         var choices = []
-
-        // Set Question Images
-        var questionImages = {}
-        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
-          questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function (imgName, imgBase64) {
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
-        })
-        // ----------------------------------------------------------
 
         // Set Question Text
         var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
+        // ----------------------------------------------------------
+
+        // set question Uploads
+        var questionUploads = {}
+        $("#trueFalseAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+          questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+        })
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
         // ----------------------------------------------------------
 
         // Set Choices
@@ -693,7 +744,8 @@ $(function () {
         var questionImages = {}
         $("#assortmentAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
+            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+          }
         })
 
 
@@ -737,28 +789,33 @@ $(function () {
       $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
+        $(".preview_options").children().remove()
+
+        // Set Options
+        // randomize Options
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Randomize Options</span><span class="col-lg-4" id="assortmentRandomizeOptions">${$("#assortmentRandomizeOptions").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="assortmentAllowAttach">${$("#assortmentAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Partial Credit
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="assortmentAllowPartialCredit">${$("#assortmentAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="assortmentMaximumMarks">${$("#assortmentMaximumMarks").val() != 0 ? $("#assortmentMaximumMarks").val() : "N/A"}</span></div>`)
+
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="assortmentMaximumTime">${$("#assortmentMaximumTime").val() != 0 ? $("#assortmentMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
 
         var elements = []
-
-        // Set Question Images
-        var questionImages = {}
-        $("#assortmentAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
-          questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function (imgName, imgBase64) {
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
-        })
-        // ----------------------------------------------------------
 
         // Set Question Text
         var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
+
+
 
         // Set Elements
         $("#Assortment table .element").each(function () {
@@ -772,6 +829,21 @@ $(function () {
 
           elements.push(element)
         })
+
+        // set question Uploads
+        var questionUploads = {}
+        $("#assortmentAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+          questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+        })
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
 
 
         sortedElements = elements.sort(compareElements)
@@ -827,7 +899,6 @@ $(function () {
         })
 
         for (var i = 0; i < randomizedElements.length; i++) {
-          console.log(randomizedElements);
           // Image & Text
           if (randomizedElements[i]["image"] != undefined && randomizedElements[i]["text"] != "") {
             let elementImg = "<div class='col-4 elementImg'><img src='" + randomizedElements[i]["image"] + "' alt='" + randomizedElements[i]["image_name"] + "'></div>"
@@ -972,7 +1043,8 @@ $(function () {
         var questionImages = {}
         $("#dragDropAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
+            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+          }
         })
 
         var pairs = []
@@ -1018,27 +1090,31 @@ $(function () {
       $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
+        $(".preview_options").children().remove()
+
+        // Set Options
+        // randomize Options
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Randomize Options</span><span class="col-lg-4" id="dragDropRandomizeOptions">${$("#dragDropRandomizeOptions").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="dragDropAllowAttach">${$("#dragDropAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Partial Credit
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="dragDropAllowPartialCredit">${$("#dragDropAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Display Type
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">display Type</span><span class="col-lg-4" id="dragDropDisplayType">${$("#dragDropDisplayType").val() == "image" ? "Image Matching" : "Line Matching"}</span></div>`)
+
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="dragDropMaximumMarks">${$("#dragDropMaximumMarks").val() != 0 ? $("#dragDropMaximumMarks").val() : "N/A"}</span></div>`)
+
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="dragDropMaximumTime">${$("#dragDropMaximumTime").val() != 0 ? $("#dragDropMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
+
 
         var pairs = []
 
         var displayType = $("#dragDropDisplayType").val();
-
-
-        // Set Question Images
-        var questionImages = {}
-        $("#dragDropAttachFilesWithQuestion").find(".dz-preview").each(function () {
-          if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
-        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function (imgName, imgBase64) {
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
-        })
-        // ----------------------------------------------------------
 
         // Set Question Text
         var questionHTML = $('#QuestionEditor').summernote('code')
@@ -1046,6 +1122,21 @@ $(function () {
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
 
+        // set question Uploads
+        var questionUploads = {}
+        $("#dragDropAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+          questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+        })
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
+        
         // Set Choices
         $("#DragDrop table .pair").each(function () {
 
@@ -1087,7 +1178,7 @@ $(function () {
             }
           }
         } else if (displayType == "line") {
-          let allRows = '<div class="row"><div class="col-4"><ul class="questions list-unstyled text-center"></ul></div><div class="offset-4 col-4"><ul class="answers list-unstyled text-center"></ul></div></div>'
+          let allRows = '<div class="row lineMatchingDiv"><div class="col-4"><ul class="questions list-unstyled text-center"></ul></div><div class="offset-4 col-4"><ul class="answers list-unstyled text-center"></ul></div></div>'
           $(".preview_body").append(allRows)
           for (var i = 0; i < pairs.length; i++) {
             if (pairs[i]["question_image"] != undefined && pairs[i]["question_text"] != "") {
@@ -1127,8 +1218,6 @@ $(function () {
 
       // Set select2
       $('#imageLabelingDisplayType').select2();
-
-
 
       $("#ImageLabeling .clearMark").on("click", function () {
         if (confirm("Are you sure, you want to clear all tags ??")) {
@@ -1248,7 +1337,8 @@ $(function () {
         var questionImages = {}
         $("#imageLabelingAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
+            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+          }
         })
 
         var spaces = []
@@ -1297,32 +1387,53 @@ $(function () {
       $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
+        $(".preview_options").children().remove()
+
+        // Set Options
+        // randomize Options
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Randomize Options</span><span class="col-lg-4" id="imageLabelingRandomizeOptions">${$("#imageLabelingRandomizeOptions").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="imageLabelingAllowAttach">${$("#imageLabelingAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Allow Partial Credit
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="imageLabelingAllowPartialCredit">${$("#imageLabelingAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Display Type
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">display Type</span><span class="col-lg-4" id="imageLabelingDisplayType">${$("#imageLabelingDisplayType").val() == "dragging" ? "Display answer to students" : $("#imageLabelingDisplayType").val() == "fill" ? "Don't display answer to students": $("#imageLabelingDisplayType").val() == "enumerate" ? "Student can answer of their choice":"None"}</span></div>`)
+
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="imageLabelingMaximumMarks">${$("#imageLabelingMaximumMarks").val() != 0 ? $("#imageLabelingMaximumMarks").val() : "N/A"}</span></div>`)
+
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="imageLabelingMaximumTime">${$("#imageLabelingMaximumTime").val() != 0 ? $("#imageLabelingMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
 
         var questionImageBase64 = $("#ImageLabeling .question_img_div img").attr('src')
         var questionImageName = $("#ImageLabeling .question_img_div img").attr('alt')
 
-        // Set Question Images
-        var questionImages = {}
-        $("#imageLabelingAttachFilesWithQuestion").find(".dz-preview").each(function () {
-          if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
-        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function (imgName, imgBase64) {
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
-        })
-        // ----------------------------------------------------------
 
         // Set Question Text
         var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
-
+        
+        // set question Uploads
+        var questionUploads = {}
+        $("#imageLabelingAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
+          questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+        })
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
+        // ----------------------------------------------------------
+        
         var spaces = []
 
         $("#ImageLabeling .left_group .input_div, #ImageLabeling .right_group .input_div").each(function () {
@@ -1337,18 +1448,28 @@ $(function () {
           spaces.push(space)
         })
 
-        console.log(spaces);
+        if ($("#imageLabelingDisplayType").val() == "dragging") {
+          $(".preview_body").append(`<div class="choices_div"></div>\
+          <div class="row">\
+              <div class="col-4 left_group">\
+              </div>\
+              <div class="col-4 preview_question_img_div" style="position:relative">\
+              </div>\
+              <div class="col-4 right_group">\
+              </div>\
+            </div>`)
+        } else {
+          $(".preview_body").append(`<div class="row">\
+              <div class="col-4 left_group">\
+              </div>\
+              <div class="col-4 preview_question_img_div" style="position:relative">\
+              </div>\
+              <div class="col-4 right_group">\
+              </div>\
+            </div>`)
+        }
 
-        $(".preview_body").append('<div class="row">\
-            <div class="col-4 left_group">\
-            </div>\
-            <div class="col-4 preview_question_img_div" style="position:relative">\
-            </div>\
-            <div class="col-4 right_group">\
-            </div>\
-          </div>')
-
-        if(questionImageBase64) {
+        if (questionImageBase64) {
           let quesImage = `<img id="preview_img" src="${questionImageBase64}" alt="${questionImageName}">`
           $('.preview_body .preview_question_img_div').append(quesImage)
         }
@@ -1358,7 +1479,7 @@ $(function () {
           setTimeout(function () {
 
             for (i = 0; i < spaces.length; i++) {
-              let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
+              let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")-10}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
               $('.preview_body .preview_question_img_div').append(marker)
 
               if (spaces[i]["position_x"] < 0.5) {
@@ -1386,7 +1507,7 @@ $(function () {
                 let choice = `<span class="student_choice bg-primary" draggable="true">${spaces[i]["answer_text"]}</span>`
                 $('.preview_body .choices_div').append(choice)
 
-                let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
+                let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")-10}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
                 $('.preview_body .preview_question_img_div').append(marker)
 
                 if (spaces[i]["position_x"] < 0.5) {
@@ -1408,31 +1529,29 @@ $(function () {
 
 
         } else if ($("#imageLabelingDisplayType").val() == "enumerate") {
-          console.log("Alaa");
-          
+
           var curMousePos = { x: 0, y: 0 }
           var colors_left = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#95a5a6", "#7f8c8d"]
           var colors_right = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#95a5a6", "#7f8c8d"]
           var answer_no = 0
-    
-    
+
+
           // Add Click Event
-          setTimeout(function(){
-            
-          
+          setTimeout(function () {
+
+
             $(".preview_question_img_div #preview_img").on("click", function (e) {
-              console.log("Ahmed");
-      
+
               // Set Answer ID
               answer_no += 1
-      
+
               // Set Mouse Position
               curMousePos.x = e.pageX
               curMousePos.y = e.pageY
-      
+
               // Add Items In Left Side
               if (e.pageX <= $("#preview_img").offset().left + ($("#preview_img").css("width").replace("px", "")) / 2) {
-      
+
                 //Choose Color
                 let randomNumber = Math.floor(Math.random() * colors_left.length)
                 let randomColor = colors_left[randomNumber]
@@ -1443,20 +1562,20 @@ $(function () {
                 // Add Text Box
                 newElement = `<div style="position:relative" data-id = "${answer_no}" class="student_input_div"><span class="student_image_tag" style="background-color:${randomColor}">${answer_no}</span><input type="text" class="student_answer" id="${answer_no}" style="border:2px solid ${randomColor}; color:${randomColor}; font-weight: bold"><span class="delete_input" style="background-color:#f64e60; color:#fff">X</span></div>`
                 $(".preview_body .left_group").append(newElement)
-      
+
                 $(".preview_body .preview_question_img_div").append(`<span class = 'btn student_mark' id='${answer_no}' data-positionx='${(e.pageX - $('.preview_question_img_div #preview_img').offset().left) / $('.preview_question_img_div #preview_img').css("width").replace("px", "")}' data-positiony='${(e.pageY - $('.preview_question_img_div #preview_img').offset().top) / $('.preview_question_img_div #preview_img').css("height").replace("px", "")}'  style=' background-color: ${randomColor} ; top: ${e.pageY - $('.preview_question_img_div #preview_img').first().offset().top - 9}px; left: ${e.pageX - $('.preview_question_img_div #preview_img').first().offset().left - 8}px;'>${answer_no}</span>`)
-      
+
                 $(`.student_answer[id=${answer_no}]`).focus()
-      
+
                 $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
                   if (confirm("Are you sure, you want to remove this tag ?")) {
                     $(".preview_body .student_mark[id='" + $(this).parent().data("id") + "']").remove()
                     $(this).parent().remove();
                   }
                 })
-      
+
               }
-      
+
               // Add Items In Right Side
               else if (e.pageX > $("#preview_img").offset().left + ($("#preview_img").css("width").replace("px", "")) / 2) {
                 //Choose Color
@@ -1469,11 +1588,11 @@ $(function () {
                 // Add Text Box
                 newElement = `<div style="position:relative" data-id = "${answer_no}" class="student_input_div"><span class="delete_input" style="background-color:#f64e60; color:#fff">X</span><input type="text" class="student_answer" id="${answer_no}" style="border:2px solid ${randomColor}; color:${randomColor}; font-weight: bold"><span class="student_image_tag" style="background-color:${randomColor}" >${answer_no}</span></div>`
                 $(".preview_body .right_group").append(newElement)
-      
+
                 $(".preview_body .preview_question_img_div").append(`<span class = 'btn student_mark' id='${answer_no}' data-positionx='${(e.pageX - $('.preview_question_img_div #preview_img').offset().left) / $('.preview_question_img_div #preview_img').css("width").replace("px", "")}' data-positiony='${(e.pageY - $('.preview_question_img_div #preview_img').offset().top) / $('.preview_question_img_div #preview_img').css("height").replace("px", "")}'  style=' background-color: ${randomColor} ; top: ${e.pageY - $('.preview_question_img_div #preview_img').first().offset().top - 9}px; left: ${e.pageX - $('.preview_question_img_div #preview_img').first().offset().left - 8}px;'>${answer_no}</span>`)
-      
+
                 $(".preview_body .student_answer[id=" + answer_no + "]").focus()
-      
+
                 $(`div[data-id = "${answer_no}"] .delete_input`).on("click", function () {
                   if (confirm("Are you sure, you want to remove this tag ?")) {
                     $(".preview_body .student_mark[id='" + $(this).parent().data("id") + "']").remove()
@@ -1481,13 +1600,13 @@ $(function () {
                   }
                 })
               }
-      
+
               $(".preview_body .student_mark").click(function (e) {
                 e.stopPropagation()
                 $(`.preview_body .student_input_div[data-id='${$(this).attr("id")}'] .student_answer`).focus()
               })
             })
-          },1000)
+          }, 1000)
         }
       })
     }
@@ -1543,7 +1662,8 @@ $(function () {
         var questionImages = {}
         $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
-            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]          }
+            questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
+          }
         })
 
         var answers = []
@@ -1576,27 +1696,45 @@ $(function () {
         var dataJSON = JSON.stringify(data)
         console.log(data);
       })
-
-
+      
       // Set Preview Box
       $("#previewButton").on("click", function () {
-
+        
         $(".preview_body").children().remove()
+        $(".preview_options").children().remove()
+        
+        // Set Options
+        // randomize Options
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Randomize Options</span><span class="col-lg-4" id="fillSpaceRandomizeOptions">${$("#fillSpaceRandomizeOptions").prop("checked") ? "Yes" : "No"}</span></div>`)
+  
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="fillSpaceAllowAttach">${$("#fillSpaceAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+  
+        // Allow Partial Credit
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="fillSpaceAllowPartialCredit">${$("#fillSpaceAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
+  
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="fillSpaceMaximumMarks">${$("#fillSpaceMaximumMarks").val() != 0 ? $("#fillSpaceMaximumMarks").val() : "N/A"}</span></div>`)
+  
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="fillSpaceMaximumTime">${$("#fillSpaceMaximumTime").val() != 0 ? $("#fillSpaceMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
 
-        // Set Question Images
-        var questionImages = {}
+        // set question Uploads
+        var questionUploads = {}
         $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
-          questionImages[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]        })
-
-        var questionImageDiv = "<div class='question_images'></div>"
-        $(".preview_body").append(questionImageDiv)
-
-        $.each(questionImages, function (imgName, imgBase64) {
-          let image = "<img src=" + imgBase64 + " alt=" + imgName + ">"
-          $(".preview_body .question_images").append(image)
+          questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
         // ----------------------------------------------------------
-
+       
         // Set Question Text
         var questionHTML = $('.note-editable').html()
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
@@ -1655,7 +1793,8 @@ $(function () {
         var questionUploads = {}
         $("#audioVideoQuestionUpload").find(".dz-preview").each(function () {
           if ($(this).find(".dz-error-message").text() == "") {
-            questionUploads[$(this).find("span[data-dz-name]").text()] = audioVideoAllUploads[$(this).find("span[data-dz-name]").text()]}
+            questionUploads[$(this).find("span[data-dz-name]").text()] = audioVideoAllUploads[$(this).find("span[data-dz-name]").text()]
+          }
         })
 
         var data = {
@@ -1681,26 +1820,40 @@ $(function () {
       $("#previewButton").on("click", function () {
 
         $(".preview_body").children().remove()
+        $(".preview_options").children().remove()
 
-        
+        // Set Options
+        // Allow Attachments
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="audioVideoAllowAttach">${$("#audioVideoAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
+
+        // Maximum Marks
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="audioVideoMaximumMarks">${$("#audioVideoMaximumMarks").val() != 0 ? $("#audioVideoMaximumMarks").val() : "N/A"}</span></div>`)
+
+        // Maximum Time
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="audioVideoMaximumTime">${$("#audioVideoMaximumTime").val() != 0 ? $("#audioVideoMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
+
+
         // Set Question Text
         var questionHTML = $('.note-editable').html()
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
-        
+
         // Set Question Uploads
         var questionUploads = {}
         $("#audioVideoQuestionUpload").find(".dz-preview.dz-success").each(function () {
-          questionUploads[$(this).find("span[data-dz-name]").text()] = audioVideoAllUploads[$(this).find("span[data-dz-name]").text()]})
-
-        var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
-        $(".preview_body").append(questionUploadsDiv)
-
-        $.each(questionUploads, function (fileName, fileBase64) {
-          let file = `<a class= "fileName" href="#">${fileName}</a>`
-          $(".preview_body .question_uploads").append(file)
+          questionUploads[$(this).find("span[data-dz-name]").text()] = audioVideoAllUploads[$(this).find("span[data-dz-name]").text()]
         })
+
+        if(Object.keys(questionUploads).length){
+          var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
+          $(".preview_body").append(questionUploadsDiv)
+  
+          $.each(questionUploads, function (fileName, fileBase64) {
+            let file = `<a class= "fileName" href="#">${fileName}</a>`
+            $(".preview_body .question_uploads").append(file)
+          })
+        }
         // ----------------------------------------------------------
       })
 
