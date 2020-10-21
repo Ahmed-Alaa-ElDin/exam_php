@@ -189,7 +189,7 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <div class="col-lg-12">
+                          <div class="col-lg-12 question_text">
                             <label>Type Your Question <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="Whatever statement you will write in this box, will be displayed as the question statement."></i></label>
                             <div class="summernote" id="QuestionEditor"></div>
                           </div>

@@ -110,6 +110,7 @@ $(function () {
     $("#previewButton").off("click");
     $('.note-editing-area').off("keyup , change")
     $(".question_type").css("display", "none");
+    $('#QuestionEditor').summernote("reset");
 
     // begin:: check if the question is Short Answer/Essay
     if ($(this).val() == 1) {
@@ -1741,25 +1742,10 @@ $(function () {
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
 
-        // Set Elements
-        var answers = []
-
-        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
-          var answer = {}
-          answer["answer_text"] = $(this).val()
-          answer["answer_number"] = $(this).data("num")
-          answers.push(answer)
+        // Set Elements             
+        $(".preview_body .question_text span").each(function(i) {
+          $(this).replaceWith(`<input type='text' class='form-control placeholder' id='placeholder${i+1}' data-num='${i+1}' style="display:inline-block; width:auto; margin: 1px auto; height: 35px;">`)
         })
-
-
-        var totalAnswers = "<div class='totalAnswers'></div>"
-        $(".preview_body").append(totalAnswers)
-
-
-        for (var i = 0; i < answers.length; i++) {
-          let answerBox = "<div class='answerBox row' data-val='" + answers[i]["answer_number"] + "'><div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + answers[i]["answer_number"] + "' data-num='" + answers[i]["answer_number"] + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + answers[i]["answer_number"] + "</span></div><div class='input-group-append'></div></div></div>"
-          $(".preview_body .totalAnswers").append(answerBox)
-        }
 
       })
 
