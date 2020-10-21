@@ -110,6 +110,9 @@ $(function () {
     $("#previewButton").off("click");
     $('.note-editing-area').off("keyup , change")
     $(".question_type").css("display", "none");
+
+    $("#QuestionEditor").siblings(".note-editor").find(".note-editable.card-block span").remove()
+    $(".fillSpaceInputs").children().remove()
     $('#QuestionEditor').summernote("reset");
 
     // begin:: check if the question is Short Answer/Essay
@@ -131,7 +134,7 @@ $(function () {
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var allowRichText = $("#essayAllowRichText").prop("checked")
         var allowAttachment = $("#essayAllowAttach").prop("checked")
         var maximumMarks = $("#essayMaximumMarks").val();
@@ -187,7 +190,7 @@ $(function () {
 
 
         // set question text
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
 
@@ -257,7 +260,7 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
         var allowAttachment = $("#mcqAllowAttach").prop("checked")
         var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
@@ -332,7 +335,7 @@ $(function () {
         var choices = []
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -484,7 +487,7 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#trueFalseRandomizeOptions").prop("checked")
         var allowAttachment = $("#trueFalseAllowAttach").prop("checked")
@@ -560,7 +563,7 @@ $(function () {
         var choices = []
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -734,7 +737,7 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#assortmentRandomizeOptions").prop("checked")
         var allowAttachment = $("#assortmentAllowAttach").prop("checked")
@@ -811,7 +814,7 @@ $(function () {
         var elements = []
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -1032,7 +1035,7 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#dragDropRandomizeOptions").prop("checked")
         var allowAttachment = $("#dragDropAllowAttach").prop("checked")
@@ -1118,7 +1121,7 @@ $(function () {
         var displayType = $("#dragDropDisplayType").val();
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -1414,7 +1417,7 @@ $(function () {
 
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').summernote('code')
+        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
