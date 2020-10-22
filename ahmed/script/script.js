@@ -125,7 +125,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -160,7 +160,7 @@ $(function () {
           "question_images": questionImages
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       $("#previewButton").on("click", function () {
@@ -250,7 +250,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -477,7 +477,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -727,7 +727,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -1025,7 +1025,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -1319,7 +1319,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -1645,7 +1645,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -1778,7 +1778,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
