@@ -107,13 +107,11 @@ $(function () {
 
     // Check Details Button Label
     if ($(this).val() == 7) {
-      $("#detailsButtonLabel").text("Display Question Text Area")
       $("#AdvanceSearchElements").addClass("show")
-      $("#questionTextInput").css("display","none")
+      $("#questionTextInput label").text("Type Hint for this Question")
     } else {
-      $("#detailsButtonLabel").text("Add Further Details of this question")
+      $("#questionTextInput label").text("Type Your Question")
       $("#AdvanceSearchElements").removeClass("show")
-      $("#questionTextInput").css("display","block")
     }
     
     // Disable the Save Form Button
@@ -1667,7 +1665,7 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('.note-editable').html()
+        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#fillSpaceRandomizeOptions").prop("checked")
         var allowAttachment = $("#fillSpaceAllowAttach").prop("checked")
@@ -1752,7 +1750,7 @@ $(function () {
         // ----------------------------------------------------------
        
         // Set Question Text
-        var questionHTML = $('.note-editable').html()
+        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
