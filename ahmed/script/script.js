@@ -111,10 +111,6 @@ $(function () {
     $('.note-editing-area').off("keyup , change")
     $(".question_type").css("display", "none");
 
-    $("#QuestionEditor").siblings(".note-editor").find(".note-editable.card-block span").remove()
-    $(".fillSpaceInputs").children().remove()
-    $('#QuestionEditor').summernote("reset");
-
     // begin:: check if the question is Short Answer/Essay
     if ($(this).val() == 1) {
 
@@ -129,12 +125,12 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var allowRichText = $("#essayAllowRichText").prop("checked")
         var allowAttachment = $("#essayAllowAttach").prop("checked")
         var maximumMarks = $("#essayMaximumMarks").val();
@@ -164,7 +160,7 @@ $(function () {
           "question_images": questionImages
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       $("#previewButton").on("click", function () {
@@ -190,7 +186,7 @@ $(function () {
 
 
         // set question text
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
 
@@ -254,13 +250,13 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
         var allowAttachment = $("#mcqAllowAttach").prop("checked")
         var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
@@ -335,7 +331,7 @@ $(function () {
         var choices = []
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -481,13 +477,13 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
 
         var randomizeOptions = $("#trueFalseRandomizeOptions").prop("checked")
         var allowAttachment = $("#trueFalseAllowAttach").prop("checked")
@@ -563,7 +559,7 @@ $(function () {
         var choices = []
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -731,13 +727,13 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
 
         var randomizeOptions = $("#assortmentRandomizeOptions").prop("checked")
         var allowAttachment = $("#assortmentAllowAttach").prop("checked")
@@ -814,7 +810,7 @@ $(function () {
         var elements = []
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -1029,13 +1025,13 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
 
         var randomizeOptions = $("#dragDropRandomizeOptions").prop("checked")
         var allowAttachment = $("#dragDropAllowAttach").prop("checked")
@@ -1121,7 +1117,7 @@ $(function () {
         var displayType = $("#dragDropDisplayType").val();
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -1323,7 +1319,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -1417,7 +1413,7 @@ $(function () {
 
 
         // Set Question Text
-        var questionHTML = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $('#QuestionEditor').summernote('code')
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
@@ -1649,7 +1645,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
@@ -1745,10 +1741,25 @@ $(function () {
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
 
-        // Set Elements             
-        $(".preview_body .question_text span").each(function(i) {
-          $(this).replaceWith(`<input type='text' class='form-control placeholder' id='placeholder${i+1}' data-num='${i+1}' style="display:inline-block; width:auto; margin: 1px auto; height: 35px;">`)
+        // Set Elements
+        var answers = []
+
+        $("#FillSpace .fillSpaceInputs .input-group .placeholder").each(function () {
+          var answer = {}
+          answer["answer_text"] = $(this).val()
+          answer["answer_number"] = $(this).data("num")
+          answers.push(answer)
         })
+
+
+        var totalAnswers = "<div class='totalAnswers'></div>"
+        $(".preview_body").append(totalAnswers)
+
+
+        for (var i = 0; i < answers.length; i++) {
+          let answerBox = "<div class='answerBox row' data-val='" + answers[i]["answer_number"] + "'><div class='input-group'><input type='text' class='form-control placeholder' id='placeholder" + answers[i]["answer_number"] + "' data-num='" + answers[i]["answer_number"] + "'><div class='input-group-append'><span class='input-group-text' style='min-width:50px; display:block; margin: auto'>" + answers[i]["answer_number"] + "</span></div><div class='input-group-append'></div></div></div>"
+          $(".preview_body .totalAnswers").append(answerBox)
+        }
 
       })
 
@@ -1767,7 +1778,7 @@ $(function () {
         var gradeName = $("#StudentClass").find("option:selected").text();
         var subjectID = $("#StudentSection").val();
         var subjectName = $("#StudentSection").find("option:selected").text();
-        var topicName = $("#topicName").text();
+        var topicName = $("#topicName").val();
         var filterTags = [];
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
