@@ -119,9 +119,10 @@
 
                                             <div class="row">
                                                 <div class="col-lg-12">
-
-                                                    <span class="text-danger">Q - 1/10: </span>Question Statement will display here ?
-
+                                                    <span class="text-danger">Q - 1/10: </span>
+                                                    <span class="questionText">
+                                                        
+                                                    </span> 
                                                     <hr>
                                                 </div>
 

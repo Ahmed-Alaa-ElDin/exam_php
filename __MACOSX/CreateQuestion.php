@@ -27,6 +27,8 @@
 <!--begin::Body-->
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+
+
   <!--begin::Main-->
   <!--begin::Header Mobile-->
   <?php require_once 'MobileHeader.php'; ?>
@@ -129,10 +131,10 @@
                   <!--begin::Form-->
                   <form class="form" id="kt_form">
                     <div class="row">
-                      <div class="col-lg-4 offset-lg-8 float-right">
+                      <div class="col-lg-12">
                         <div class="form-group row">
-                          <label class="col-4 col-form-label text-right">Academic Year</label>
-                          <div class="col-8">
+                          <label class="col-6 col-form-label text-right">Academic Year</label>
+                          <div class="col-6 text-left">
                             <select class="form-control select2 is-valid w-100" id="AcademicYear" name="param" style="width: 100%;">
                               <option value="1">2020 - 2021</option>
                               <option value="0">2021 - 2020</option>
@@ -196,49 +198,60 @@
                         <!-- Short Question (1)-->
                         <div id="ShortQuestion" class="question_type" style="display: none;">
 
-                          <div class="form-group row">
-                            <div class="col-lg-2">
-                              <label> Allow Rich Text Editor <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want student will able to write answer into rich text editor, please turn this value ON."></i></label>
-                              <input id="essayAllowRichText" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
-                            </div>
-                            <div class="col-lg-2">
-                              <label> Allow Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
-                              <input id="essayAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
-                            </div>
-                            <div class="col-lg-2">
-                              <label>Maximum Marks ? </label><br>
-                              <input id="essayMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
-                              <small class="text-muted">Set '0' if no marks required</small>
-                            </div>
-                            <div class="col-lg-3">
-                              <label>Words Count Limit ? </label><br>
-                              <input id="essayWordCount" type="text" class="form-control" name="WordsLimit" value="0" />
-                              <small class="text-muted">Set '0' for unlimited words</small>
-                            </div>
-                            <div class="col-lg-3">
-                              <label>Set Maximum Time ? </label><br>
-                              <div class="input-group">
-                                <input id="essayMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
-                                <div class="input-group-append">
-                                  <span class="input-group-text">Minutes</span>
+                          <div class="row">
+                            <div class="col-lg-7">
+                              <div class="form-group col-lg-12 row">
+                                <div class="col-lg-6">
+                                  <label> Allow Rich Text Editor <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want student will able to write answer into rich text editor, please turn this value ON."></i></label>
+                                  <input id="essayAllowRichText" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                </div>
+                                <div class="col-lg-6">
+                                  <label> Allow Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
+                                  <input id="essayAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
                                 </div>
                               </div>
-                              <small class="text-muted">Set '0' for unlimited Time</small>
+                              <div class="form-group col-lg-12 row">
+                                <div class="col-lg-4">
+                                  <label>Maximum Marks ? </label><br>
+                                  <input id="essayMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
+                                  <small class="text-muted">Set '0' if no marks required</small>
+                                </div>
+                                <div class="col-lg-4">
+                                  <label>Words Count Limit ? </label><br>
+                                  <input id="essayWordCount" type="text" class="form-control" name="WordsLimit" value="0" />
+                                  <small class="text-muted">Set '0' for unlimited words</small>
+                                </div>
+                                <div class="col-lg-4">
+                                  <label class="text-left">Set Maximum Time ? </label>
+                                  <br>
+                                  <div class="input-group text-right">
+                                    <input id="essayMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text">Minutes</span>
+                                    </div>
+                                  </div>
+                                  <small class="text-muted">Set '0' for unlimited Time</small>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-5">
+                              <div class="form-group row">
+                                <div class="col-lg-12">
+                                  <label>Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="if you would like to share some images/diagram/pdf document with this question, please attach photo here. Attached file will display to the studens with this question."></i></label>
+                                  <div class="dropzone dropzone-default dropzone-success" id="essayAttachFilesWithQuestion">
+                                    <div class="dropzone-msg dz-message needsclick">
+                                      <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                      <span class="dropzone-msg-desc">Only image, .pdf, .doc & .docx files are allowed for upload</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
 
 
-                          <div class="form-group row">
-                            <div class="col-lg-12">
-                              <label>Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="if you would like to share some images/diagram/pdf document with this question, please attach photo here. Attached file will display to the studens with this question."></i></label>
-                              <div class="dropzone dropzone-default dropzone-success" id="essayAttachFilesWithQuestion">
-                                <div class="dropzone-msg dz-message needsclick">
-                                  <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
-                                  <span class="dropzone-msg-desc">Only image, .pdf, .doc & .docx files are allowed for upload</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+
+
                         </div>
                         <!-- End Short Question  -->
 
@@ -605,7 +618,7 @@
                         <div id="ImageLabeling" class="question_type" style="display: none;">
 
                           <div class="row">
-                            <div class="col-lg-9 text-center font-weight-bold">
+                            <div class="offset-lg-4 col-lg-4 text-center font-weight-bold">
                               <label>Upload Question's Image</label>
                               <div class="dropzone dropzone-default dropzone-success" id="imageLabelingQuestionUpload">
                                 <div class="dropzone-msg dz-message needsclick">
@@ -614,11 +627,25 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-lg-3" style="display: flex;">
-                              <a class="confirmImage btn btn-primary" data-toggle="modal" data-target="#editingBox" style="margin: auto;">Confirm Image</a>
+                            <div class="col-lg-6" style="display: flex;">
+                              <a class="clearMark btn btn-warning" style="margin: auto; display:none">Clear All Marks</a>
+                            </div>
+                            <div class="col-lg-6" style="display: flex;">
+                              <a class="deleteImg btn btn-danger" style="margin: auto; display:none">Delete Image</a>
                             </div>
                           </div>
-                          
+                          <hr>
+
+                          <div class="editing_body row">
+                            <div class="col-4 left_group">
+                            </div>
+                            <div class="col-4 question_img_div">
+                              <img src="" alt="">
+                            </div>
+                            <div class="col-4 right_group">
+                            </div>
+                          </div>
+
                           <hr>
 
                           <div class="row">
@@ -639,12 +666,20 @@
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-5">
+                                  <label>Display Type</label><br>
+                                  <select id="imageLabelingDisplayType" class="form-control select2 is-valid w-100" name="display_type">
+                                    <option value="dragging">Display answer to students</option>
+                                    <option value="fill">Don't display answer to students</option>
+                                    <option value="enumerate">Student can answer of their choice </option>
+                                  </select>
+                                </div>
+                                <div class="col-lg-3">
                                   <label>Maximum Marks ? </label><br>
                                   <input id="imageLabelingMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
                                   <small class="text-muted">Set '0' if no marks required</small>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                   <label>Set Maximum Time ? </label><br>
                                   <div class="input-group">
                                     <input id="imageLabelingMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
@@ -670,28 +705,6 @@
                               </div>
                             </div>
 
-                          </div>
-
-
-                          <div class="modal fade" id="editingBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="previewModalLabel">Preview Box</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <i aria-hidden="true" class="ki ki-close"></i>
-                                  </button>
-                                </div>
-                                <div class="modal-body" data-scroll="true">
-                                  <div class="preview_body">
-                                  </div>
-                                </div>
-                                <div class="modal-footer text-center">
-                                  <button type="button" class="btn btn-light-primary font-weight-bold text-center closePreview" data-dismiss="modal">Close</button>
-                                </div>
-
-                              </div>
-                            </div>
                           </div>
 
 
@@ -772,9 +785,46 @@
                         <!-- End fill spaces -->
 
                         <!-- Audio/Video (8) -->
-                        <!-- <div id="Audio/Video" class="question_type" style="display: none;">
+                        <div id="AudioVideo" class="question_type" style="display: none;">
 
-                                </div> -->
+                          <div class="row">
+                            <div class="col-lg-7">
+                              <div class="form-group row text-center">
+                                <div class="col-lg-4">
+                                  <label> Allow Attachment(s) <i class="far fa-question-circle fa-1x text-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="If you want while answer if students can upload attachment, please turn this option ON."></i></label>
+                                  <input id="audioVideoAllowAttach" data-switch="true" type="checkbox" checked="checked" data-on-color="primary" data-size="medium" />
+                                </div>
+                                <div class="col-lg-4">
+                                  <label>Maximum Marks ? </label><br>
+                                  <input id="audioVideoMaximumMarks" type="text" class="form-control" name="MaximumMarks" value="0" />
+                                  <small class="text-muted">Set '0' if no marks required</small>
+                                </div>
+                                <div class="col-lg-4">
+                                  <label>Set Maximum Time ? </label><br>
+                                  <div class="input-group">
+                                    <input id="audioVideoMaximumTime" type="text" class="form-control" placeholder="Maximum Time Limit" aria-describedby="basic-addon2" value="0">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text">Minutes</span>
+                                    </div>
+                                  </div>
+                                  <small class="text-muted">Set '0' for unlimited Time</small>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-5 text-center font-weight-bold">
+                              <label>Upload Question's Audio / Video</label>
+                              <div class="dropzone dropzone-default dropzone-success" id="audioVideoQuestionUpload">
+                                <div class="dropzone-msg dz-message needsclick">
+                                  <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                  <span class="dropzone-msg-desc">Audio / Video are allowed for upload</span>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+
+
+                        </div>
                         <!-- End Audio/Video -->
 
                       </div>
@@ -809,14 +859,25 @@
   <div class="modal fade" id="previewBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="previewModalLabel">Preview Box</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-header row">
+          <h5 class="modal-title col-lg-6" id="previewModalLabel">
+            Preview Question Type :
+            <span class="previewQuestionType"></span>
+          </h5>
+          <h5 class="modal-subject col-lg-5">
+            <span class="grade"></span>
+            <span>|</span>
+            <span class="subject"></span>
+          </h5>
+          <button type="button" class="col-lg-1 close" data-dismiss="modal" aria-label="Close">
             <i aria-hidden="true" class="ki ki-close"></i>
           </button>
         </div>
-        <div class="modal-body" data-scroll="true">
-          <div class="preview_body">
+        <div class="modal-body row" data-scroll="true">
+          <div class="preview_body col-lg-9">
+          </div>
+          <div class="preview_options col-lg-3">
+
           </div>
         </div>
         <div class="modal-footer text-center">
