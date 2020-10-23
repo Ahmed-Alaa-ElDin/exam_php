@@ -189,7 +189,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <div class="col-lg-12">
+                                                        <div class="col-lg-12" id="questionTextInput">
                                                             <label>Type Your Question</label>
                                                             <input type="text" class="form-control" value="" placeholder="Type Your Question Statement">
 
@@ -201,7 +201,10 @@
                                                             <!--end::Body-->
                                                             <div class="accordion accordion-solid accordion-panel accordion-svg-toggle mb-10" id="AdvanceSearch">
                                                                 <div class="float-left btn btn-sm btn-light-primary font-weight-bolder text-uppercase collapsed mt-3" data-toggle="collapse" data-target="#AdvanceSearchElements" aria-expanded="false" role="button">
-                                                                    <span data-toggle="popover" data-placement="top" data-content="Whatever statement you will write in this box, will be displayed as the question statement.">Add Further Details of this question
+                                                                    <span data-toggle="popover" data-placement="top" data-content="Whatever statement you will write in this box, will be displayed as the question statement."> 
+                                                                        <span id = "detailsButtonLabel">
+                                                                            Add Further Details of this question
+                                                                        </span> 
                                                                         <span class="svg-icon svg-icon-primary">
                                                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                                                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
