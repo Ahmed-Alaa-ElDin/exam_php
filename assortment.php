@@ -25,12 +25,15 @@
         <link rel="stylesheet" href="ahmed_student/style/style.css">
         <!-- end:: Ahmed's style -->
 
+        <!-- begin:: jkanban's style -->
+            <link rel="stylesheet" href="ahmed_student/style/jkanban.min.css">
+        <!-- end:: jkanban's style -->
 
     </head>
     <!--end::Head-->
 
     <!--begin::Body-->
-    <body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"  >
+    <body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading assortment"  >
 
         <!--begin::Main-->
         <!--begin::Header Mobile-->
@@ -97,7 +100,7 @@
 
                                 <div class="col-lg-12">
 
-                                    <div class="card card-custom" id="answer">
+                                    <div class="card card-custom">
 
                                         <div class="card-header flex-wrap py-5">
                                             <div class="card-title">
@@ -117,45 +120,36 @@
 
                                                 <!--end::Time-->
                                             </div>
-                                            
                                         </div>
-                                        
-                                        
+
+
                                         <div class="card-body">
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
-                                                You Have <strong>Less Than 60 seconds</strong>
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
                                             <!--begin: Datatable-->
 
-                                            <div class="row" >
+                                            <div class="row">
                                                 <div class="col-lg-12">
                                                     <span class="text-danger">Q - 1/10: </span>
                                                     <span class="questionText">
                                                         
                                                     </span> 
-                                                    <br>
-                                                    <br>
-                                                    <p style="font-weight:bold;">Further Details</p>
-                                                    <p class="questionDetails">
-
-                                                    </p>
                                                     <hr>
                                                 </div>
 
-                                                <div class="col-lg-12">
-                                                    <h4>Type Your Answer here</h4>
-                                                </div>
                                                 <div class="col-lg-9">
-                                                    <div class="form-group">
-
-                                                        <div class="summernote" id= "answerSummernote"></div>
-                                                        <textarea class="form-control" placeholder="Type Your Answer here" cols="8" rows="10"></textarea>
-                                                        <br>
-                                                        <span class="wordsCount text-danger font-weight-bold"></span> 
+                                                    <div>
+                                                        <h4>Reassort the Left Side Elements <small>(Drag & Drop)</small></h4>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <div class='totalElements row'>
+                                                            <div id='random' class='col-6'>
+
+                                                            </div>
+                                                            <div id='sorted' class='col-6'>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
                                                     <div class="form-group" id="answerAttachments">
                                                         <label>Upload Files:</label>
                                                         <div class="dropzone dropzone-multi" id="StudentAnswerAttachment">
@@ -305,9 +299,12 @@
 
         <?php require_once './scripts.php'; ?>
 
-        <script src="ahmed_student/script/html2canvas.min.js" type="text/javascript"></script>
         <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
-        <script src="ahmed_student/script/short_answer.js" type="text/javascript"></script>
+        <script src="ahmed_student/script/assortment.js" type="text/javascript"></script>
+        <!-- begin:: jkanban -->
+        <script src="ahmed_student/script/jkanban.min.js" type="text/javascript"></script>
+        <!-- end:: jkanban -->
+
         <!--end::Page Scripts-->
     </body>
     <!--end::Body-->

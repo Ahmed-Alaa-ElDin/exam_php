@@ -1,5 +1,8 @@
 $(function () {
 
+  // MakeTextBoxUrduEnabled(textInputTest)
+  // $("#questionTextInput input").UrduEditor("14px")
+
   $("#StudentClass").change(function () {
     // Edit Preview class According to Question Type 
     setTimeout(() => {
@@ -144,7 +147,8 @@ $(function () {
         $("#FilterTags option").each(function () {
           filterTags.push($(this).val())
         })
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val()
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var allowRichText = $("#essayAllowRichText").prop("checked")
         var allowAttachment = $("#essayAllowAttach").prop("checked")
         var maximumMarks = $("#essayMaximumMarks").val();
@@ -166,6 +170,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details": questionDetails,
           "allow_rich_text": allowRichText,
           "allow_attachment": allowAttachment,
           "maximum_marks": maximumMarks,
@@ -174,7 +179,7 @@ $(function () {
           "question_images": questionImages
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       $("#previewButton").on("click", function () {
@@ -201,6 +206,7 @@ $(function () {
 
         // set question text
         var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
 
@@ -270,7 +276,9 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val();
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        
         var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
         var allowAttachment = $("#mcqAllowAttach").prop("checked")
         var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
@@ -308,6 +316,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details": questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -317,7 +326,7 @@ $(function () {
           "choices": choices
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       $("#previewButton").on("click", function () {
@@ -497,7 +506,8 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val();
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#trueFalseRandomizeOptions").prop("checked")
         var allowAttachment = $("#trueFalseAllowAttach").prop("checked")
@@ -537,6 +547,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details" : questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -546,7 +557,7 @@ $(function () {
           "choices": choices
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       $("#previewButton").on("click", function () {
@@ -747,7 +758,8 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val();
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#assortmentRandomizeOptions").prop("checked")
         var allowAttachment = $("#assortmentAllowAttach").prop("checked")
@@ -788,6 +800,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details" : questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -797,7 +810,7 @@ $(function () {
           "elements": elements.sort(compareElements)
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       $("#previewButton").on("click", function () {
@@ -821,15 +834,15 @@ $(function () {
         // Maximum Time
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="assortmentMaximumTime">${$("#assortmentMaximumTime").val() != 0 ? $("#assortmentMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
 
-        var elements = []
-
+        
         // Set Question Text
         var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
-
-
+        
+        
+        var elements = []
 
         // Set Elements
         $("#Assortment table .element").each(function () {
@@ -849,23 +862,23 @@ $(function () {
         $("#assortmentAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
   
-          $.each(questionUploads, function (fileName, fileBase64) {
+          $.each(questionUploads, function (fileName) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
           })
         }
 
 
-        sortedElements = elements.sort(compareElements)
-
-
+        
+        
         var totalElements = "<div class='totalElements row'><div id='random' class='col-6'></div><div id='sorted' class='col-6'></div></div>"
         $(".preview_body").append(totalElements)
-
+        
+        sortedElements = elements.sort(compareElements)
 
         var kanbanFixed = new jKanban({
           element: '#sorted',
@@ -1045,7 +1058,8 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val();
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#dragDropRandomizeOptions").prop("checked")
         var allowAttachment = $("#dragDropAllowAttach").prop("checked")
@@ -1088,6 +1102,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details": questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -1098,7 +1113,7 @@ $(function () {
           "pairs": pairs
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       $("#previewButton").on("click", function () {
@@ -1339,7 +1354,8 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val();
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#imageLabelingRandomizeOptions").prop("checked")
         var allowAttachment = $("#imageLabelingAllowAttach").prop("checked")
@@ -1382,6 +1398,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details": questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -1394,7 +1411,7 @@ $(function () {
           "question_image_name": questionImageName
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
 
       })
 
@@ -1665,7 +1682,8 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val();
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var randomizeOptions = $("#fillSpaceRandomizeOptions").prop("checked")
         var allowAttachment = $("#fillSpaceAllowAttach").prop("checked")
@@ -1699,6 +1717,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details": questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -1708,7 +1727,7 @@ $(function () {
           "answers": answers
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
       
       // Set Preview Box
@@ -1783,7 +1802,8 @@ $(function () {
           filterTags.push($(this).val())
         })
 
-        var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
+        var questionHTML = $("#questionTextInput input").val();
+        var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
 
         var allowAttachment = $("#audioVideoAllowAttach").prop("checked")
         var maximumMarks = $("#audioVideoMaximumMarks").val();
@@ -1806,13 +1826,14 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
+          "question_details" : questionDetails,
           "allow_attachment": allowAttachment,
           "maximum_marks": maximumMarks,
           "maximum_time": maximumTime,
           "question_uploads": questionUploads,
         }
         var dataJSON = JSON.stringify(data)
-        console.log(data);
+        console.log(dataJSON);
       })
 
       // Set Preview Box

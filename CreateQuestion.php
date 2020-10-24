@@ -22,6 +22,11 @@
         <link rel="stylesheet" href="ahmed/style/jkanban.min.css">
         <!-- end:: jkanban's style -->
 
+        <!-- begin:: UrduEditor's style -->
+        <link rel="stylesheet" href="ahmed/style/UrduEditor.css">
+        <!-- end:: UrduEditor's style -->
+
+
     </head>
     <!--end::Head-->
     <!--begin::Body-->
@@ -191,7 +196,7 @@
                                                     <div class="form-group row">
                                                         <div class="col-lg-12" id="questionTextInput">
                                                             <label>Type Your Question</label>
-                                                            <input type="text" class="form-control" value="" placeholder="Type Your Question Statement">
+                                                            <input type="text" class="form-control" value="" placeholder="Type Your Question Statement" id="textInputTest">
 
 
                                                         </div>
@@ -940,6 +945,10 @@
         <!-- begin:: jkanban -->
         <script src="ahmed/script/jkanban.min.js" type="text/javascript"></script>
         <!-- end:: jkanban -->
+
+        <!-- begin:: UrduEditor -->
+        <script src="ahmed/script/urdutextbox.js" type="text/javascript"></script>
+        <!-- end:: UrduEditor -->
 
         <!-- begin:: Ahmed's Script -->
         <script src="ahmed/script/script.js" type="text/javascript"></script>
