@@ -23,9 +23,11 @@
         <!-- end:: jkanban's style -->
 
         <!-- begin:: UrduEditor's style -->
-        <link rel="stylesheet" href="ahmed/style/UrduEditor.css">
+        <!-- <link rel="stylesheet" href="ahmed/style/UrduEditor.css"> -->
         <!-- end:: UrduEditor's style -->
-
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+        <link href="ahmed/style/keyboard.css" rel="stylesheet"> 
+        <!-- <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css">  -->
 
     </head>
     <!--end::Head-->
@@ -196,8 +198,8 @@
                                                     <div class="form-group row">
                                                         <div class="col-lg-12" id="questionTextInput">
                                                             <label>Type Your Question</label>
-                                                            <input type="text" class="form-control" value="" placeholder="Type Your Question Statement" id="textInputTest">
-
+                                                            <input type="text" class="form-control keyboardInput keyboard" value="" placeholder="Type Your Question Statement">
+                                                            <img class="tooltip-tipsy icon" title="Click to open the virtual keyboard" src="ahmed/img/keyboard.svg">
 
                                                         </div>
 
@@ -333,7 +335,10 @@
                                                                             </div>
                                                                         </td>
                                                                         <td class="multi-choice-td">
-                                                                            <input type="text" class="form-control choice-text" placeholder="Enter Possible Choice">
+                                                                            <div class="inputKeyboard">
+                                                                                <input type="text" class="form-control choice-text keyboard" placeholder="Enter Possible Choice">
+                                                                                <img class="tooltip-tipsy icon" title="Click to open the virtual keyboard" src="ahmed/img/keyboard.svg">
+                                                                            </div>
                                                                         </td>
                                                                         <td class="multi-choice-td pl-10  text-center" align="center">
                                                                             <label class="checkbox checkbox-lg text-center">
@@ -942,12 +947,17 @@
 
         <?php require_once './scripts.php'; ?>
 
+        <!-- <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>  -->
+        <script src="ahmed/script/jquery.keyboard.js"></script>
+        <script src="ahmed/script/jquery.keyboard.extension-all.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+        
         <!-- begin:: jkanban -->
         <script src="ahmed/script/jkanban.min.js" type="text/javascript"></script>
         <!-- end:: jkanban -->
 
         <!-- begin:: UrduEditor -->
-        <script src="ahmed/script/urdutextbox.js" type="text/javascript"></script>
+        <!-- <script src="ahmed/script/urdutextbox.js" type="text/javascript"></script> -->
         <!-- end:: UrduEditor -->
 
         <!-- begin:: Ahmed's Script -->

@@ -1,7 +1,133 @@
 $(function () {
+  $.keyboard.layouts['ms-Arabic (101)'] = {
+    "name": "ms-Arabic (101)",
+    "lang": ["ar"],
+    "normal": [
+      "\u0630 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+      "{tab} \u0636 \u0635 \u062B \u0642 \u0641 \u063A \u0639 \u0647 \u062E \u062D \u062C \u062F \\",
+      "\u0634 \u0633 \u064A \u0628 \u0644 \u0627 \u062A \u0646 \u0645 \u0643 \u0637 {enter}",
+      "{shift} \u0626 \u0621 \u0624 \u0631 \u0644\u0627 \u0649 \u0629 \u0648 \u0632 \u0638 {shift}",
+      "{accept} {space} {cancel}"
+    ],
+    "shift": [
+      "\u0651 ! @ # $ % ^ & * ) ( _ + {bksp}",
+      "{tab} \u064E \u064B \u064F \u064C \u0644\u0625 \u0625 \u2018 \u00F7 \u00D7 \u061B < > |",
+      "\u0650 \u064D ] [ \u0644\u0623 \u0623 \u0640 \u060C / : \" {enter}",
+      "{shift} ~ \u0652 } { \u0644\u0622 \u0622 \u2019 , . \u061F {shift}",
+      "{accept} {space} {cancel}"
+    ]
+  };
+  $.keyboard.layouts['ms-Urdu'] = {
+    "name": "ms-Urdu",
+    "lang": ["ur"],
+    "normal": [
+      "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+      "{tab} \u0637 \u0635 \u06be \u062f \u0679 \u067e \u062a \u0628 \u062c \u062d ] [ \\",
+      "\u0645 \u0648 \u0631 \u0646 \u0644 \u06c1 \u0627 \u06a9 \u06cc \u061b ' {enter}",
+      "{shift} \\ \u0642 \u0641 \u06d2 \u0633 \u0634 \u063a \u0639 \u060c \u06d4 / {shift}",
+      "{accept} {space} {cancel}"
+    ],
+    "shift": [
+      "~ ! @ # $ \u066a ^ \u06d6 \u066d ) ( _ + {bksp}",
+      "{tab} \u0638 \u0636 \u0630 \u0688 \u062b \u0651 \u06c3 \u0640 \u0686 \u062e } { |",
+      "\u0698 \u0632 \u0691 \u06ba \u06c2 \u0621 \u0622 \u06af \u064a : \" {enter}",
+      "{shift} | {ZWJ} {ZWNJ} \u06d3 {LRM} \u0624 \u0626 {RLM} > < \u061f {shift}",
+      "{accept} {space} {cancel}"
+    ]
+  };
+  jQuery.keyboard.layouts['ms-US English'] = {
+    "name": "ms-US English (Latin)",
+    "lang": ["en"],
+    "normal": [
+      "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+      "{tab} q w e r t y u i o p [ ] \u005c",
+      "a s d f g h j k l ; ' {enter}",
+      "{shift} \u005c z x c v b n m , . / {shift}",
+      "{accept} {space} {cancel}"
+    ],
+    "shift": [
+      "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
+      "{tab} Q W E R T Y U I O P { } |",
+      "A S D F G H J K L : \u0022 {enter}",
+      "{shift} | Z X C V B N M < > / {shift}",
+      "{accept} {space} {cancel}"
+    ]
+  };
 
-  // MakeTextBoxUrduEnabled(textInputTest)
-  // $("#questionTextInput input").UrduEditor("14px")
+  var keyboardOptions = {
+    language: null,
+    layout: 'ms-US English',
+    usePreview: false,
+    reposition: true,
+    usePreview: false,
+    alwaysOpen: false,
+    initialFocus: true,
+    noFocus: false,
+    stayOpen: false,
+    userClosed: false,
+    ignoreEsc: false,
+    autoAccept: true,
+    autoAcceptOnEsc: true,
+    lockInput: false,
+    restrictInput: false,
+    restrictInclude: '',
+    acceptValid: true,
+    autoAcceptOnValid: false,
+    cancelClose: true,
+    tabNavigation: false,
+    enterNavigation: false,
+    enterMod: 'altKey',
+    stopAtEnd: true,
+    appendLocally: false,
+    appendTo: 'body',
+    stickyShift: true,
+    preventPaste: false,
+    caretToEnd: false,
+    scrollAdjustment: 10,
+    maxLength: false,
+    maxInsert: true,
+    repeatDelay: 500,
+    repeatRate: 20,
+    resetDefault: false,
+    openOn: '',
+    keyBinding: 'mousedown touchstart',
+    useWheel: true,
+    useCombos: true,
+  }
+
+  var typingOptions = {
+    showTyping: true,
+    lockTypeIn: false,
+    delay: 250,
+    hoverDelay: 250
+  }
+
+  $('.keyboard').first().keyboard(keyboardOptions).addTyping(typingOptions);
+
+  // Typing Extension
+  $('.icon').click(function () {
+    $('.keyboard').getkeyboard().reveal()
+  });
+
+
+  $("#StudentSection").on("change", function () {
+    if ($(this).val() == 0) {
+      $(".keyboard").each(function() {
+        $(this).getkeyboard().options.layout = "ms-Urdu"
+        keyboardOptions.layout = "ms-Urdu"
+      })
+    } else if ($(this).val() == 2) {
+      $(".keyboard").each(function() {
+        $(this).getkeyboard().options.layout = "ms-Arabic (101)"
+        keyboardOptions.layout = "ms-Arabic (101)"
+      })
+    } else {
+      $(".keyboard").each(function() {
+        $(this).getkeyboard().options.layout = "ms-US English"
+        keyboardOptions.layout = "ms-US English"
+      })
+    }
+  })
 
   $("#StudentClass").change(function () {
     // Edit Preview class According to Question Type 
@@ -116,17 +242,18 @@ $(function () {
       $("#questionTextInput label").text("Type Your Question")
       $("#AdvanceSearchElements").removeClass("show")
     }
-    
+
     // Disable the Save Form Button
     $("#saveForm").off("click");
     $("#previewButton").off("click");
     $('.note-editing-area').off("keyup , change")
     $(".question_type").css("display", "none");
-    
+
     $("#questionTextInput input").val("")
     $("#QuestionEditor").siblings(".note-editor").find(".note-editable.card-block span").remove()
     $(".fillSpaceInputs").children().remove()
     $('#QuestionEditor').summernote("reset");
+
 
     // begin:: check if the question is Short Answer/Essay
     if ($(this).val() == 1) {
@@ -206,7 +333,7 @@ $(function () {
 
         // set question text
         var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
-        
+
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
 
@@ -215,10 +342,10 @@ $(function () {
         $("#essayAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName, fileBase64) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
@@ -240,6 +367,11 @@ $(function () {
 
       $("#MultiChoice").find("button[data-repeater-create]").on("click", function () {
 
+        $('.keyboard').last().keyboard(keyboardOptions).addTyping(typingOptions);
+
+        $(".icon").last().on("click", function () {
+          $(this).siblings('input').getkeyboard().reveal()
+        })
         // Enable Attachment box
         $("#MultiChoice tr[data-repeater-item]").last().find(".MCQAttachments").dropzone({
           url: window.location.href,
@@ -278,7 +410,7 @@ $(function () {
 
         var questionHTML = $("#questionTextInput input").val();
         var questionDetails = $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
-        
+
         var randomizeOptions = $("#mcqRandomizeOptions").prop("checked")
         var allowAttachment = $("#mcqAllowAttach").prop("checked")
         var allowPartialCredit = $("#mcqAllowPartialCredit").prop("checked")
@@ -364,10 +496,10 @@ $(function () {
         $("#mcqAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName, fileBase64) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
@@ -547,7 +679,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
-          "question_details" : questionDetails,
+          "question_details": questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -594,10 +726,10 @@ $(function () {
         $("#trueFalseAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName, fileBase64) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
@@ -800,7 +932,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
-          "question_details" : questionDetails,
+          "question_details": questionDetails,
           "rondomize_options": randomizeOptions,
           "allow_attachment": allowAttachment,
           "allow_partial_credit": allowPartialCredit,
@@ -834,14 +966,14 @@ $(function () {
         // Maximum Time
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="assortmentMaximumTime">${$("#assortmentMaximumTime").val() != 0 ? $("#assortmentMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
 
-        
+
         // Set Question Text
         var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
-        
-        
+
+
         var elements = []
 
         // Set Elements
@@ -865,7 +997,7 @@ $(function () {
         if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
@@ -873,11 +1005,11 @@ $(function () {
         }
 
 
-        
-        
+
+
         var totalElements = "<div class='totalElements row'><div id='random' class='col-6'></div><div id='sorted' class='col-6'></div></div>"
         $(".preview_body").append(totalElements)
-        
+
         sortedElements = elements.sort(compareElements)
 
         var kanbanFixed = new jKanban({
@@ -1156,16 +1288,16 @@ $(function () {
         $("#dragDropAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName, fileBase64) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
           })
         }
-        
+
         // Set Choices
         $("#DragDrop table .pair").each(function () {
 
@@ -1431,7 +1563,7 @@ $(function () {
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="imageLabelingAllowPartialCredit">${$("#imageLabelingAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
 
         // Display Type
-        $(".preview_options").append(`<div class="row"><span class="col-lg-8">display Type</span><span class="col-lg-4" id="imageLabelingDisplayType">${$("#imageLabelingDisplayType").val() == "dragging" ? "Display answer to students" : $("#imageLabelingDisplayType").val() == "fill" ? "Don't display answer to students": $("#imageLabelingDisplayType").val() == "enumerate" ? "Student can answer of their choice":"None"}</span></div>`)
+        $(".preview_options").append(`<div class="row"><span class="col-lg-8">display Type</span><span class="col-lg-4" id="imageLabelingDisplayType">${$("#imageLabelingDisplayType").val() == "dragging" ? "Display answer to students" : $("#imageLabelingDisplayType").val() == "fill" ? "Don't display answer to students" : $("#imageLabelingDisplayType").val() == "enumerate" ? "Student can answer of their choice" : "None"}</span></div>`)
 
         // Maximum Marks
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="imageLabelingMaximumMarks">${$("#imageLabelingMaximumMarks").val() != 0 ? $("#imageLabelingMaximumMarks").val() : "N/A"}</span></div>`)
@@ -1448,23 +1580,23 @@ $(function () {
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
         $(".preview_body").append(questionParagraph)
         // ----------------------------------------------------------
-        
+
         // set question Uploads
         var questionUploads = {}
         $("#imageLabelingAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName, fileBase64) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
           })
         }
         // ----------------------------------------------------------
-        
+
         var spaces = []
 
         $("#ImageLabeling .left_group .input_div, #ImageLabeling .right_group .input_div").each(function () {
@@ -1510,7 +1642,7 @@ $(function () {
           setTimeout(function () {
 
             for (i = 0; i < spaces.length; i++) {
-              let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")-10}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
+              let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "") - 10}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
               $('.preview_body .preview_question_img_div').append(marker)
 
               if (spaces[i]["position_x"] < 0.5) {
@@ -1538,7 +1670,7 @@ $(function () {
                 let choice = `<span class="student_choice bg-primary" draggable="true">${spaces[i]["answer_text"]}</span>`
                 $('.preview_body .choices_div').append(choice)
 
-                let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "")-10}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
+                let marker = `<span class = 'btn mark' id='${spaces[i]["answer_number"]}' style=' position:absolute; background-color: ${spaces[i]["answer_color"]} ; top: ${spaces[i]["position_y"] * $("#preview_img").css('height').replace("px", "") - 10}px; left: ${spaces[i]["position_x"] * $("#preview_img").css('width').replace("px", "")}px'>${spaces[i]["answer_number"]}</span>`
                 $('.preview_body .preview_question_img_div').append(marker)
 
                 if (spaces[i]["position_x"] < 0.5) {
@@ -1729,26 +1861,26 @@ $(function () {
         var dataJSON = JSON.stringify(data)
         console.log(dataJSON);
       })
-      
+
       // Set Preview Box
       $("#previewButton").on("click", function () {
-        
+
         $(".preview_body").children().remove()
         $(".preview_options").children().remove()
-        
+
         // Set Options
         // randomize Options
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Randomize Options</span><span class="col-lg-4" id="fillSpaceRandomizeOptions">${$("#fillSpaceRandomizeOptions").prop("checked") ? "Yes" : "No"}</span></div>`)
-  
+
         // Allow Attachments
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Attachments</span><span class="col-lg-4" id="fillSpaceAllowAttach">${$("#fillSpaceAllowAttach").prop("checked") ? "Yes" : "No"}</span></div>`)
-  
+
         // Allow Partial Credit
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Allow Partial Credit</span><span class="col-lg-4" id="fillSpaceAllowPartialCredit">${$("#fillSpaceAllowPartialCredit").prop("checked") ? "Yes" : "No"}</span></div>`)
-  
+
         // Maximum Marks
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Marks</span><span class="col-lg-4" id="fillSpaceMaximumMarks">${$("#fillSpaceMaximumMarks").val() != 0 ? $("#fillSpaceMaximumMarks").val() : "N/A"}</span></div>`)
-  
+
         // Maximum Time
         $(".preview_options").append(`<div class="row"><span class="col-lg-8">Maximum Time</span><span class="col-lg-4" id="fillSpaceMaximumTime">${$("#fillSpaceMaximumTime").val() != 0 ? $("#fillSpaceMaximumTime").val() + " Minutes" : "N/A"}</span></div>`)
 
@@ -1757,17 +1889,17 @@ $(function () {
         $("#fillSpaceAttachFilesWithQuestion").find(".dz-preview.dz-success").each(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = allImages[$(this).find("span[data-dz-name]").text()]
         })
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName, fileBase64) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
           })
         }
         // ----------------------------------------------------------
-       
+
         // Set Question Text
         var questionHTML = $("#questionTextInput input").val() + "<br>" + $('#QuestionEditor').siblings(".note-editor").find(".note-editable.card-block").html();
         var questionParagraph = "<div class='question_text'>" + questionHTML + "</div>"
@@ -1775,8 +1907,8 @@ $(function () {
         // ----------------------------------------------------------
 
         // Set Elements             
-        $(".preview_body .question_text span").each(function(i) {
-          $(this).replaceWith(`<input type='text' class='form-control placeholder' id='placeholder${i+1}' data-num='${i+1}' style="display:inline-block; width:auto; margin: 1px auto; height: 35px;">`)
+        $(".preview_body .question_text span").each(function (i) {
+          $(this).replaceWith(`<input type='text' class='form-control placeholder' id='placeholder${i + 1}' data-num='${i + 1}' style="display:inline-block; width:auto; margin: 1px auto; height: 35px;">`)
         })
 
       })
@@ -1826,7 +1958,7 @@ $(function () {
           "topic_name": topicName,
           "filter_tags": filterTags,
           "question_html": questionHTML,
-          "question_details" : questionDetails,
+          "question_details": questionDetails,
           "allow_attachment": allowAttachment,
           "maximum_marks": maximumMarks,
           "maximum_time": maximumTime,
@@ -1865,10 +1997,10 @@ $(function () {
           questionUploads[$(this).find("span[data-dz-name]").text()] = audioVideoAllUploads[$(this).find("span[data-dz-name]").text()]
         })
 
-        if(Object.keys(questionUploads).length){
+        if (Object.keys(questionUploads).length) {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
-  
+
           $.each(questionUploads, function (fileName, fileBase64) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
