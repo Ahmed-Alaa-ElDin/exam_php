@@ -20,6 +20,7 @@
                 display: flex;
             }
         </style>
+        
         <link rel="stylesheet" href="ahmed_student/style/style.css">
     </head>
     <!--end::Head-->

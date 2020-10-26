@@ -125,7 +125,12 @@
 
                                         <div class="card-body">
                                             <!--begin: Datatable-->
-
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+                                                You Have <strong>Less Than 60 seconds</strong>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <span class="text-danger">Q - 1/10: </span>
@@ -298,7 +303,7 @@
         <!--end::Global Config-->
 
         <?php require_once './scripts.php'; ?>
-
+        <script src="ahmed_student/script/html2canvas.min.js" type="text/javascript"></script>
         <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
         <script src="ahmed_student/script/assortment.js" type="text/javascript"></script>
         <!-- begin:: jkanban -->

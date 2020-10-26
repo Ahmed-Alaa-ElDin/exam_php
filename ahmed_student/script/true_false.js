@@ -51,12 +51,12 @@ $(function () {
     // Image & Text
     if (choices[i]["image"] != undefined && choices[i]["text"] != "") {
       $(".totalChoices").append(choiceBox)
-      let choiceImg = "<div class='col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+      let choiceImg = "<div class='col-4 choiceImg'><img class='img-fluid' src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
       let choiceText = "<div class='col-8 choiceText'>" + choices[i]["text"] + "</div>"
       $(".totalChoices .choiceBox").last().append(choiceImg).append(choiceText)
     } else if (choices[i]["image"] != undefined) {
       $(".totalChoices").append(choiceBox)
-      let choiceImg = "<div class=' col-4 choiceImg'><img src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
+      let choiceImg = "<div class=' col-4 choiceImg'><img class='img-fluid' src='" + choices[i]["image"] + "' alt='" + choices[i]["image_name"] + "'></div>"
       $(".totalChoices .choiceBox").last().append(choiceImg)
     } else if (choices[i]["text"] != "") {
       $(".totalChoices").append(choiceBox)

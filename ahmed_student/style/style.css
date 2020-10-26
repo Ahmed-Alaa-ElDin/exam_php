@@ -37,6 +37,8 @@ body * {
 
 .multiple_choice .totalChoices .checkbox .choiceBox .choiceText,
 .true_false .totalChoices .radio .choiceBox .choiceText {
+  /* font-family: 'El Messiri', sans-serif; */
+  font-size: 1.5em;
   margin: auto;
 }
 
