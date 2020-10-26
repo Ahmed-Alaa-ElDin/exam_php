@@ -152,7 +152,8 @@
                                                     <div class="form-group">
 
                                                         <div class="summernote" id= "answerSummernote"></div>
-                                                        <textarea class="form-control" placeholder="Type Your Answer here" cols="8" rows="10"></textarea>
+                                                        <textarea class="form-control" placeholder="Type Your Answer here" cols="8" rows="10" id="answerTextarea"></textarea>
+                                                        
                                                         <br>
                                                         <span class="wordsCount text-danger font-weight-bold"></span> 
                                                     </div>
@@ -304,7 +305,8 @@
         <!--end::Global Config-->
 
         <?php require_once './scripts.php'; ?>
-
+        
+        <script src="ahmed_student/script/arabictextbox.js" type="text/javascript"></script>
         <script src="ahmed_student/script/html2canvas.min.js" type="text/javascript"></script>
         <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
         <script src="ahmed_student/script/short_answer.js" type="text/javascript"></script>

@@ -3,7 +3,12 @@ $(function () {
   $(document).on('contextmenu', e => e.preventDefault());
 
   // JSON input
-  var json_input = {"academic_id":"1","academic_year":"2020 - 2021","grade_id":"","grade_name":"","subject_id":"","subject_name":"","topic_name":"","filter_tags":[],"question_html":"What's the color of banana ??","question_details":"<p>Explain it</p>","allow_rich_text":false,"allow_attachment":true,"maximum_marks":"15","words_count_limit":"10","maximum_time":"10","question_images":{}}
+  var json_input = {"academic_id":"1","academic_year":"2020 - 2021","grade_id":"","grade_name":"","subject_id":"0","subject_name":"Urdu","topic_name":"","filter_tags":[],"question_html":"What's the color of banana ??","question_details":"<p>Explain it</p>","allow_rich_text":false,"allow_attachment":true,"maximum_marks":"15","words_count_limit":"10","maximum_time":"10","question_images":{}}
+
+  // Check Language
+  if (json_input.subject_id == 0) {
+    MakeTextBoxUrduEnabled(answerTextarea)
+  }
 
   // starter worder count
   $(".wordsCount").text(`${json_input.words_count_limit} Words Left`);
