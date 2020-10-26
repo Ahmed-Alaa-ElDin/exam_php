@@ -633,4 +633,18 @@ function com_ajsoftpk_insertAtCaret(textbox,text){
 		txtarea.scrollTop=scrollTop;
 	}
 }
-	
+
+// function MakeTextBoxUrduDisabled(txtObj){
+//     if (window.attachEvent) {
+//         txtObj.attachEvent("onkeypress", com_ajsoftpk_urdubar_eventCaptured);
+//     } else {
+//         txtObj.removeEventListener("keypress", com_ajsoftpk_urdubar_eventCaptured, false);
+//     }
+// }
+// function englishlan(event){return event;}
+
+
+// function English(evt) {
+// MakeTextBoxUrduDisabled(txtBox);
+// MakeTextBoxUrduDisabled(txtBox2);
+// }

@@ -1,23 +1,23 @@
-// UrduTextBox.js is javascript used to enable HTML textbox and textarea to allow editing of Urdu text in it.
-// Similar source code was used in "UrduBar" addon in past which was developed for FireFox Web Browsers
+// arabicTextBox.js is javascript used to enable HTML textbox and textarea to allow editing of arabic text in it.
+// Similar source code was used in "arabicBar" addon in past which was developed for FireFox Web Browsers
 // Developed by "Naseem Amjad" WebAddress=http://naseem.amjad.googlepages.com/ , Email=naseem@technologist.com
 // If you find this component useful and able to earn money by using it, it is required to submit 7% of profit to developer of this component. For details email to naseem.amjad[at]gmail.com
 
 //Known Limitation: TextArea in Internet Explorer<11 does not move cursor to next line on pressing Enter Key if the line contains non visible characters like space or no charachter at all.
 //09-09-2014: Added support for IE11
 
-function MakeTextBoxUrduEnabled(txtObj){
+function MakeTextBoxArabicEnabled(txtObj){
 //set page event handlers
     if (window.attachEvent) { //Support is expected to discontinue in IE11
         //IE and Opera
-        txtObj.attachEvent("onkeypress", com_ajsoftpk_urdubar_eventCaptured);
+        txtObj.attachEvent("onkeypress", com_ajsoftpk_arabicbar_eventCaptured);
 	} else {
 	    //FireFox and Other
-        txtObj.addEventListener("keypress", com_ajsoftpk_urdubar_eventCaptured, false);
+        txtObj.addEventListener("keypress", com_ajsoftpk_arabicbar_eventCaptured, false);
 	}
 }
 
-function com_ajsoftpk_urdubar_eventCaptured(evt) {
+function com_ajsoftpk_arabicbar_eventCaptured(evt) {
 
 	var target;
 	if (evt.target)
@@ -112,7 +112,7 @@ var RDQOTMRK  = 0x201D;
 var LDQOTMRK  = 0x201C;
 var DECSEP	= 0x0201A;
 var FULSTOP   = 0x0632;
-var AQMARK    = 0x061F;
+var AQMARK    = 0x0637;
 var ASEMICOL  = 0x0643;
 var ACOMA     = 0x0648;
 var NOT       = 0x0021;
@@ -293,7 +293,7 @@ var aENTER ='\r';
 var aNLINE ='\n';
 var aTAB ='\t';
 
-function com_ajsoftpk_setUrduPhoneticUnicodes(temp){
+function com_ajsoftpk_setArabicPhoneticUnicodes(temp){
 
     var var_char = "";
 
@@ -523,8 +523,8 @@ default :
 return var_char;
 
 }//function
-function com_ajsoftpk_getNextStateUrduPhoneticLayout(lastInput,currentInput){
-	return String.fromCharCode(com_ajsoftpk_setUrduPhoneticUnicodes(currentInput));
+function com_ajsoftpk_getNextStateArabicPhoneticLayout(lastInput,currentInput){
+	return String.fromCharCode(com_ajsoftpk_setArabicPhoneticUnicodes(currentInput));
 	}
 
 function com_ajsoftpk_KeyPress(textbox,evt){
@@ -567,7 +567,7 @@ function com_ajsoftpk_KeyPress(textbox,evt){
 
 	if(com_ajsoftpk_isValidAlphabet(keyChar))
 		{
-			var apnaChar=com_ajsoftpk_getNextStateUrduPhoneticLayout(com_ajsoftpk_findLastChar(textbox),keyChar);
+			var apnaChar=com_ajsoftpk_getNextStateArabicPhoneticLayout(com_ajsoftpk_findLastChar(textbox),keyChar);
 			if(apnaChar==keyChar)
 			{
 				com_ajsoftpk_replaceEndOfWord(textbox,com_ajsoftpk_findLastChar(textbox));
@@ -582,7 +582,7 @@ function com_ajsoftpk_KeyPress(textbox,evt){
 		}
 }
 
-function com_ajsoftpk_isValidAlphabet(character){if(com_ajsoftpk_getNextStateUrduPhoneticLayout("",character)=="")return false;return true;}
+function com_ajsoftpk_isValidAlphabet(character){if(com_ajsoftpk_getNextStateArabicPhoneticLayout("",character)=="")return false;return true;}
 function com_ajsoftpk_moveCursor(){var range=textbox.createTextRange();range.moveStart("character",caret);range.collapse(),range.select();}
 
 function com_ajsoftpk_replaceEndOfWord(textbox, character)
@@ -652,4 +652,21 @@ function com_ajsoftpk_insertAtCaret(textbox,text){
 		txtarea.scrollTop=scrollTop;
 	}
 }
+
+// function MakeTextBoxArabicDisabled(txtObj)
+// {
+//     if (window.attachEvent) {
+//         txtObj.attachEvent("onkeypress", com_ajsoftpk_arabicbar_eventCaptured);
+//     } else {
+//         txtObj.removeEventListener("keypress", com_ajsoftpk_arabicbar_eventCaptured, false);
+//     }
+// }
+
+// function englishlan(event){return event;}
+
+
+// function English(evt) {
+//     MakeTextBoxArabicDisabled(txtBox);
+//     MakeTextBoxArabicDisabled(txtBox2);
+// }
 	
