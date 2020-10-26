@@ -3,7 +3,7 @@ $(function () {
   $(document).on('contextmenu', e => e.preventDefault());
 
   // JSON input
-  var json_input = {"academic_id":"1","academic_year":"2020 - 2021","grade_id":"","grade_name":"","subject_id":"","subject_name":"","topic_name":"","filter_tags":[],"question_html":"What's the color of banana ??","question_details":"<p>Explain it</p>","allow_rich_text":true,"allow_attachment":true,"maximum_marks":"15","words_count_limit":"10","maximum_time":"10","question_images":{}}
+  var json_input = {"academic_id":"1","academic_year":"2020 - 2021","grade_id":"","grade_name":"","subject_id":"","subject_name":"","topic_name":"","filter_tags":[],"question_html":"What's the color of banana ??","question_details":"<p>Explain it</p>","allow_rich_text":false,"allow_attachment":true,"maximum_marks":"15","words_count_limit":"10","maximum_time":"10","question_images":{}}
 
   // starter worder count
   $(".wordsCount").text(`${json_input.words_count_limit} Words Left`);
@@ -21,15 +21,22 @@ $(function () {
   // set answer text area
   if (json_input.allow_rich_text) {
     $("#answerSummernote").siblings("textarea").css("display","none")
-    $('.note-editor .note-editable').on("keyup", function() {
+    $('.note-editor .note-editable').on("keydown", function(e) {
       var words = $(this).html().split('</p><p>').join(' ').split(" ");
       $(".wordsCount").text(`${json_input.words_count_limit - words.length} Words Left`);
+      // console.log(e.keyCode);
+      if ((json_input.words_count_limit - words.length) == 0 && e.keyCode == 32) {
+        return false
+      }
     });
   } else {
     $("#answerSummernote").siblings(".note-editor.note-frame.card").css("display","none")
-    $("#answerSummernote").siblings("textarea").on("keyup", function() {
+    $("#answerSummernote").siblings("textarea").on("keydown", function(e) {
       var words = $(this).val().split(' ');
       $(".wordsCount").text(`${json_input.words_count_limit - words.length} Words Left`);
+      if ((json_input.words_count_limit - words.length) == 0 && e.keyCode == 32) {
+        return false
+      }
     });
   }
 
