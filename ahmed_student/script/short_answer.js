@@ -21,7 +21,7 @@ $(function () {
       $("#answerTextarea").attr("dir", "rtl")
     }
 
-  // starter worder count
+  // starter words count
   $(".wordsCount").text(`${json_input.words_count_limit} Words Left`);
 
   // add time alert

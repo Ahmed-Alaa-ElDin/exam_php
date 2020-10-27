@@ -1292,7 +1292,7 @@ $(function () {
           var questionUploadsDiv = `<div class='question_uploads'><h4 class="text-center">Question Uploads</h4></div>`
           $(".preview_body").append(questionUploadsDiv)
 
-          $.each(questionUploads, function (fileName, fileBase64) {
+          $.each(questionUploads, function (fileName) {
             let file = `<a class= "fileName" href="#">${fileName}</a>`
             $(".preview_body .question_uploads").append(file)
           })
