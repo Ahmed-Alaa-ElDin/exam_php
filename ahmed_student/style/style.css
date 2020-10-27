@@ -35,6 +35,9 @@ body * {
   max-height: 100%;
 }
 
+.assortment .totalElements .elementText {
+  font-size: 1.25em;
+}
 .multiple_choice .totalChoices .checkbox .choiceBox .choiceText,
 .true_false .totalChoices .radio .choiceBox .choiceText {
   /* font-family: 'El Messiri', sans-serif; */

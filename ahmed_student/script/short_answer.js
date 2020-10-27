@@ -61,8 +61,6 @@ $(function () {
     $("#answerAttachments").css("display","none")
   }
 
-  
-  
   // make json 
   $("#submitAnswer").on("click",function () {
 
