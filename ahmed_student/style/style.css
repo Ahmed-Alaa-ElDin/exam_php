@@ -102,13 +102,13 @@ body * {
 .drag_drop .totalPairs .all_questions,
 .drag_drop .totalPairs .all_answers {
   margin: 10px auto;
+  padding: 20px 15px 0 15px;
 }
 
 .drag_drop .totalPairs .all_questions {
   background-color: #fff;
   border: 2px solid #e5e5e5;
   border-radius: 10px;
-  padding: 20px 15px;
   max-width: 90%;
 }
 
@@ -120,11 +120,6 @@ body * {
   margin-bottom: 10px;
 }
 
-
-.drag_drop .totalPairs .all_answers .answer .delete_answ {
-  right: 40px;
-  top: 5px;
-}
 
 .drag_drop .totalPairs .all_questions .question:not(:last-of-type) {
   margin-right: 25px;
@@ -148,7 +143,7 @@ body * {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  font-size: 18px;
+  font-size: 1.25em;
   font-weight: bold;
   text-align: center;
   margin: 10px auto;
@@ -169,11 +164,11 @@ body * {
   border: 2px solid #e5e5e5;
   max-width: 90%;
   margin: auto;
-  padding: 15px;
   border-radius: 10px;
 }
 
-.drag_drop .totalPairs .answer {
+.drag_drop .totalPairs .all_questions .answer,
+.drag_drop .totalPairs .all_answers .answer {
   background: #e5e5e5;
   font-weight: bold;
   padding: 10px;
@@ -182,19 +177,23 @@ body * {
   opacity: 0.999;
   cursor: grab;
   margin-bottom: 10px;
+  width: 125px;
+  max-width: 100%
 }
 
-.drag_drop .totalPairs .answer .answer_img {
+.drag_drop .totalPairs .all_questions .answer .answer_img,
+.drag_drop .totalPairs .all_answers .answer .answer_img {
   display: block;
   max-height: 75px;
   pointer-events: none;
-  /* user-select: none;
+  user-select: none;
   -moz-user-select: none;
-  -webkit-user-select: none; */
+  -webkit-user-select: none;
   margin: 10px auto;
 }
 
-.drag_drop .totalPairs .answer .answer_text {
+.drag_drop .totalPairs .all_questions .answer .answer_text,
+.drag_drop .totalPairs .all_answers .answer .answer_text {
   display: block;
   width: 80%;
   max-height: 150px;
@@ -202,7 +201,7 @@ body * {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  font-size: 18px;
+  font-size: 1.25em;
   font-weight: bold;
   text-align: center;
   margin: 10px auto;
@@ -225,11 +224,12 @@ body * {
   text-align: center;
   z-index: 5;
   position: relative;
+  background-color: #fff;
+
 }
 
 .drag_drop .questions .question .question_img {
-  width: 100%;
-  max-height: 75px;
+  max-height: 100px;
   display: block;
   -ms-user-select: none;
       user-select: none;
@@ -261,11 +261,11 @@ body * {
   z-index: 5;
   overflow: hidden;
   position: relative;
+  background-color: #fff;
 }
 
 .drag_drop .answers .answer .answer_img {
-  width: 100%;
-  max-height: 75px;
+  max-height: 100px;
   display: block;
   -ms-user-select: none;
       user-select: none;
@@ -285,5 +285,166 @@ body * {
   display: block;
   overflow: hidden;
 }
+.moving_line {
+  position: relative;
+}
+
+.right_arrow {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  top: -5px;
+  left: 2px;
+  height: 15px;
+  width: 15px;
+  border: solid black;
+  border-width:  0 0 5px 5px;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
 
 /* end:: DragDrop */
+
+/* begin:: Image Labeling */
+
+/* Answer Text Boxes */
+.imageLabelingQuestion .student_answer {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  margin: 5px auto;
+  width: 100%;
+  font-size: 15px;
+  min-height: 27px;
+  display: inline-block;
+}
+.imageLabelingQuestion .left_group .student_answer {
+  padding: 1px 27px 1px 10px;
+}
+
+.imageLabelingQuestion .right_group .student_answer {
+  padding: 1px 10px 1px 27px;
+}
+
+.imageLabelingQuestion .student_answer:focus {
+  outline: none;
+}
+
+.imageLabelingQuestion .right_group {
+  text-align: right;
+}
+
+/* Question Image */
+
+.imageLabelingQuestion .question_img_div {
+  cursor: pointer;
+  position: relative;
+  cursor: auto;
+}
+
+.imageLabelingQuestion .question_img_div img {
+  max-width: 100%;
+  display: inline-block;
+  margin: auto;
+}
+
+.imageLabelingQuestion .question_img_div .student_mark ,
+.imageLabelingQuestion .question_img_div .mark {
+  position: absolute;
+  display:block; 
+  z-index:80;
+  color: #fff;
+  font-size: 10px;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.imageLabelingQuestion .left_group .student_image_tag ,
+.imageLabelingQuestion .left_group .image_tag {
+  color: #fff;
+  border-radius: 0 40% 40% 0;
+  padding: 5px;
+  width: 25px;
+  height: 26px;
+  display: inline-block;
+  font-size: 10px;
+  text-align: center;
+  right: 0;
+  position: absolute;
+  top: 5px;
+  cursor: pointer;
+} 
+
+.imageLabelingQuestion .left_group .delete_input {
+  color: #fff;
+  border-radius: 40% 0 0 40%;
+  padding: 5px;
+  width: 25px;
+  height: 28px;
+  display: inline-block;
+  font-size: 10px;
+  text-align: center;
+  left: 0px;
+  position: absolute;
+  top: 5px;
+  cursor: pointer;
+}
+
+.imageLabelingQuestion .right_group .delete_input{
+  color: #fff;
+  background-color: #1abc9c;
+  border-radius: 0 40% 40% 0;
+  padding: 5px;
+  width: 25px;
+  height: 28px;
+  display: inline-block;
+  font-size: 10px;
+  text-align: center;
+  right: 0px;
+  position: absolute;
+  top: 5px;
+  cursor: pointer;
+}
+
+
+.imageLabelingQuestion .right_group .student_image_tag,
+.imageLabelingQuestion .right_group .image_tag {
+  color: #fff;
+  border-radius: 40% 0 0 40%;
+  padding: 5px;
+  width: 25px;
+  height: 26px;
+  display: inline-block;
+  font-size: 10px;
+  text-align: center;
+  left: 0px;
+  position: absolute;
+  top: 5px;
+  cursor: pointer;
+} 
+
+.imageLabelingQuestion .choices_div {
+  text-align: center;
+  border: 3px solid #3699FF;
+  background-color: #fff;
+  border-radius: 10px;
+  max-width: 100%;
+  min-width: 100px;
+  min-height: 50px;
+  width: fit-content;
+  margin: 10px auto 20px;
+  padding: 5px 10px;
+}
+
+.imageLabelingQuestion .choices_div .student_choice {
+  display: inline-block;
+  background-color: #3699ff;
+  margin: 5px;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: grab;
+  opacity: 0.9999;
+}
+/* end:: Image Labeling */

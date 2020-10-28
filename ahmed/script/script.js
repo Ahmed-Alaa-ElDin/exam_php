@@ -112,17 +112,17 @@ $(function () {
 
   $("#StudentSection").on("change", function () {
     if ($(this).val() == 0) {
-      $(".keyboard").each(function() {
+      $(".keyboard").each(function () {
         $(this).getkeyboard().options.layout = "ms-Urdu"
         keyboardOptions.layout = "ms-Urdu"
       })
     } else if ($(this).val() == 2) {
-      $(".keyboard").each(function() {
+      $(".keyboard").each(function () {
         $(this).getkeyboard().options.layout = "ms-Arabic (101)"
         keyboardOptions.layout = "ms-Arabic (101)"
       })
     } else {
-      $(".keyboard").each(function() {
+      $(".keyboard").each(function () {
         $(this).getkeyboard().options.layout = "ms-US English"
         keyboardOptions.layout = "ms-US English"
       })

@@ -30,7 +30,7 @@
 
 <!--begin::Body-->
 
-<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading drag_drop">
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
     <!--begin::Main-->
     <!--begin::Header Mobile-->
@@ -49,7 +49,7 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!--begin::Header-->
-                <div id="kt_header" class="header  header-fixed " data-html2canvas-ignore="true">
+                <div id="kt_header" class="header  header-fixed ">
                     <?php require_once 'topheader.php'; ?>
                 </div>
                 <!--end::Header-->
@@ -57,7 +57,7 @@
                 <!--begin::Content-->
                 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
                     <!--begin::Subheader-->
-                    <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader" data-html2canvas-ignore="true">
+                    <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader">
                         <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                             <!--begin::Info-->
                             <div class="d-flex align-items-center flex-wrap mr-1">
@@ -122,14 +122,12 @@
 
 
                                     <div class="card-body">
-                                        
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
                                             You Have <strong>Less Than 60 seconds</strong>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-
                                         <!--begin: Datatable-->
 
                                         <div class="row">
@@ -147,13 +145,19 @@
                                                 <hr>
                                             </div>
 
-                                            <div class="col-lg-12" id="questionNote">
-                                                <h4>Drag and Drop the Equivalent Elements Together</h4>
+                                            <div class="col-lg-12">
+                                                <h4>Type Your Answer here</h4>
                                             </div>
                                             <div class="col-lg-9">
-                                                <div class="form-group">
-                                                    <div class='totalPairs'>
-                                                        
+                                                <div class="form-group imageLabelingQuestion">
+                                                    <!-- <div class="choices_div"></div> -->
+                                                    <div class="row">
+                                                        <div class="col-4 left_group">
+                                                        </div>
+                                                        <div class="col-4 question_img_div" style="position:relative">
+                                                        </div>
+                                                        <div class="col-4 right_group">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" id="answerAttachments">
@@ -280,7 +284,7 @@
                 <!--end::Content-->
 
                 <!--begin::Footer-->
-                <div class="footer bg-white py-4 d-flex flex-lg-column " data-html2canvas-ignore="true" id="kt_footer">
+                <div class="footer bg-white py-4 d-flex flex-lg-column " id="kt_footer">
                     <!--begin::Container-->
                     <?php require_once 'footer.php'; ?>
                     <!--end::Container-->
@@ -305,11 +309,12 @@
 
     <?php require_once './scripts.php'; ?>
 
-    <!-- <script src="ahmed_student/script/arabictextbox.js" type="text/javascript"></script> -->
+    <!-- <script src="ahmed_student/script/arabictextbox.js" type="text/javascript"></script>
+        <script src="ahmed_student/script/urdutextbox.js" type="text/javascript"></script> -->
     <script src="ahmed_student/script/DragDropTouch.js" type="text/javascript"></script>
     <script src="ahmed_student/script/html2canvas.min.js" type="text/javascript"></script>
     <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
-    <script src="ahmed_student/script/darg_drop.js" type="text/javascript"></script>
+    <script src="ahmed_student/script/image_labeling.js" type="text/javascript"></script>
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
