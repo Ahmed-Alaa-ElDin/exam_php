@@ -310,8 +310,8 @@
 
     <?php require_once './scripts.php'; ?>
 
-    <!-- <script src="ahmed_student/script/arabictextbox.js" type="text/javascript"></script>
-        <script src="ahmed_student/script/urdutextbox.js" type="text/javascript"></script> -->
+    <!-- <script src="ahmed_student/script/arabictextbox.js" type="text/javascript"></script> -->
+    <script src="ahmed_student/script/DragDropTouch.js" type="text/javascript"></script>
     <script src="ahmed_student/script/html2canvas.min.js" type="text/javascript"></script>
     <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
     <script src="ahmed_student/script/darg_drop.js" type="text/javascript"></script>
