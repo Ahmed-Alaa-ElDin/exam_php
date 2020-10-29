@@ -49,7 +49,7 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!--begin::Header-->
-                <div id="kt_header" class="header  header-fixed ">
+                <div id="kt_header" data-html2canvas-ignore="true" class="header  header-fixed " data-html2canvas-ignore="true">
                     <?php require_once 'topheader.php'; ?>
                 </div>
                 <!--end::Header-->
@@ -57,7 +57,7 @@
                 <!--begin::Content-->
                 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
                     <!--begin::Subheader-->
-                    <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader">
+                    <div class="subheader py-2 py-lg-6  subheader-solid " data-html2canvas-ignore="true" id="kt_subheader">
                         <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                             <!--begin::Info-->
                             <div class="d-flex align-items-center flex-wrap mr-1">
