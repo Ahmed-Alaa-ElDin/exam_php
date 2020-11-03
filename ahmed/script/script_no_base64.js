@@ -108,12 +108,17 @@ $(function () {
             this.on("addedfile", function (file) {
                 var reader = new FileReader();
                 reader.onload = function (event) {
-                    var base64String = event.target.result;
-                    var fileName = file.name
-                    imageLabelingAllImages[fileName] = base64String
+                    // var base64String = event.target.result;
+                    // var fileName = file.name
+                    // imageLabelingAllImages[fileName] = base64String
                 };
                 reader.readAsDataURL(file);
             });
+        },
+
+        success: function (res,file) {
+            imageLabelingAllImages[file[1]] = file[0];
+            console.log(imageLabelingAllImages);
         },
 
         complete: function () {

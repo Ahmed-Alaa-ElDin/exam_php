@@ -1,0 +1,40 @@
+#RandomizeOptions + span select {
+    width: 60px;
+    height: 30px;
+    margin-left: -25px;
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-right: 2px;
+}
+#MaximumWords + span input,
+#MaximumMarks + span input {
+    width: 70px;
+    height: 30px;
+    margin-left: -35px;
+    padding-left: 8px;
+}
+#RandomizeOptions + span button,
+#MaximumWords + span button,
+#MaximumMarks + span button {
+    width: 20px;
+    height: 20px;
+    padding: 1px 4px;
+    margin: 5px 2px;
+}
+#RandomizeOptions + span button i,
+#MaximumWords + span button i,
+#MaximumMarks + span button i {
+    font-size: 10px;
+}
+
+.searchBox {
+    /* border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0; */
+}
