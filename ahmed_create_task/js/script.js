@@ -1,6 +1,7 @@
-$(function () {
+$(function() {
     var tags = ["English", "Arabic", "Urdu", "Science", "Math", "Geography", "History", "Biology", "pharmacology"]
-    var substringMatcher = function (strs) {
+
+    var substringMatcher = function(strs) {
         return function findMatches(q, cb) {
             var matches, substringRegex;
 
@@ -12,7 +13,7 @@ $(function () {
 
             // iterate through the pool of strings and for any string that
             // contains the substring `q`, add it to the `matches` array
-            $.each(strs, function (i, str) {
+            $.each(strs, function(i, str) {
                 if (substringRegex.test(str)) {
                     matches.push(str);
                 }
@@ -21,18 +22,20 @@ $(function () {
             cb(matches);
         };
     };
+
     $('#searchBox').typeahead({
-        classNames: {
-            input: 'searchBox',
-            hint: '',
-            selectable: ''
-          },
         hint: true,
         highlight: true,
-        minLength: 1
+        minLength: 0
     }, {
         name: 'tags',
         source: substringMatcher(tags)
     });
 
+    $("#tagBox").select2({
+        data: tags,
+        placeholder: "Enter Tag",
+        selectionCssClass: "tagSelectBox",
+        // dropdownCssClass: "tagSelectBox"
+    })
 })

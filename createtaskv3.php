@@ -138,8 +138,8 @@
 
                                                 <!--end::Heading-->
                                                 <!--begin::Form-->
-                                                <form class="d-flex position-relative w-75 px-lg-20 m-auto">
-                                                    <div class="input-group">
+                                                <form class="d-flex position-relative w-100 px-lg-20 m-auto row">
+                                                    <div class="input-group col-sm-6">
                                                         <!--begin::Icon-->
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text bg-white border-0 py-7 px-8">
@@ -159,6 +159,11 @@
                                                         <!--end::Icon-->
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control h-auto border-0 py-7 px-1 font-size-h6" placeholder="Search Your Topic" id="searchBox">
+                                                        <!--end::Input-->
+                                                    </div>
+                                                    <div class="input-group col-sm-6">
+                                                        <!--begin::Input-->
+                                                        <input type="text" class="form-control h-auto border-0 py-7 px-1 font-size-h6" multiple="multiple" placeholder="Enter Tags" id="tagBox">
                                                         <!--end::Input-->
                                                     </div>
                                                 </form>
