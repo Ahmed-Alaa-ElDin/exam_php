@@ -1,508 +1,544 @@
 body * {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #loading {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
-  display: block;
-  opacity: 0.8;
-  background-color: #fff;
-  z-index: 99;
-  text-align: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.8;
+    background-color: #fff;
+    z-index: 99;
+    text-align: center;
 }
 
 #loading-image {
-  position: absolute;
-  top: 25vh;
-  left: 35vw;
-  z-index: 100;
-  width: 30vw
+    position: absolute;
+    top: 25vh;
+    left: 35vw;
+    z-index: 100;
+    width: 30vw
 }
 
+
 /* begin:: multiple choice & True/False*/
+
 .multiple_choice .totalChoices .checkbox,
 .true_false .totalChoices .radio {
-  width: 80%;
-  margin: 5px auto;
-  border: 2px solid #ebedf3;
-  border-radius: 10px;
-  padding: 10px;
-  min-height: 70px;
-  transition: all 0.3s ease;
+    width: 80%;
+    margin: 5px auto;
+    border: 2px solid #ebedf3;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 70px;
+    transition: all 0.3s ease;
 }
 
 .multiple_choice .totalChoices .checkbox .choiceBox,
 .true_false .totalChoices .radio .choiceBox {
-  width: 100%;
+    width: 100%;
 }
 
 .multiple_choice .totalChoices .checkbox .choiceBox .choiceImg,
 .true_false .totalChoices .radio .choiceBox .choiceImg {
-  max-height: 100px;
-  text-align: center;
+    max-height: 100px;
+    text-align: center;
 }
 
 .multiple_choice .totalChoices .checkbox .choiceBox .choiceImg img,
 .true_false .totalChoices .radio .choiceBox .choiceImg img {
-  max-height: 100%;
+    max-height: 100%;
 }
 
 .assortment .totalElements .elementText {
-  font-size: 1.25em;
+    font-size: 1.25em;
 }
+
 .multiple_choice .totalChoices .checkbox .choiceBox .choiceText,
 .true_false .totalChoices .radio .choiceBox .choiceText {
-  /* font-family: 'El Messiri', sans-serif; */
-  font-size: 1.5em;
-  margin: auto;
+    /* font-family: 'El Messiri', sans-serif; */
+    font-size: 1.5em;
+    margin: auto;
 }
 
 .assortment h4,
 .multiple_choice h4,
 .true_false h4 {
-  margin: 20px 0;
+    margin: 20px 0;
 }
+
+
 /* end:: multiple choice & True/False*/
 
 
 /* begin:: Assortment*/
 
-.assortment #random .kanban-board-header ,
+.assortment #random .kanban-board-header,
 .assortment #sorted .kanban-board-header {
-  text-align: center;
+    text-align: center;
 }
 
 .gu-mirror .elementImg,
 .assortment #random .elementImg,
 .assortment #sorted .elementImg {
-  background: #fff;
-  padding: 5px;
-  border-radius: 5px;
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .gu-mirror .elementImg img,
 .assortment #random .elementImg img,
 .assortment #sorted .elementImg img {
-  max-height: 100px;
-  max-width: 100%;
-  display: block;
-  margin: auto;
+    max-height: 100px;
+    max-width: 100%;
+    display: block;
+    margin: auto;
 }
 
 .gu-mirror .elementText span,
 .assortment #random .elementText span,
 .assortment #sorted .elementText span {
-  margin: auto auto auto 20px;
+    margin: auto auto auto 20px;
 }
 
 .gu-mirror .elementText,
-.assortment #random .elementText ,
-.assortment #sorted .elementText  {
-  display: flex;
-  min-height: 100%;
+.assortment #random .elementText,
+.assortment #sorted .elementText {
+    display: flex;
+    min-height: 100%;
 }
 
 .assortment #random .kanban-board,
 .assortment #sorted .kanban-board {
-  width: 90% !important;
+    width: 90% !important;
 }
+
 
 /* end:: Assortment*/
 
+
 /* begin:: DragDrop */
+
+
 /* Image Matching */
+
 .drag_drop .totalPairs .all_questions,
 .drag_drop .totalPairs .all_answers {
-  margin: 10px auto;
-  padding: 20px 15px 0 15px;
+    margin: 10px auto;
+    padding: 20px 15px 0 15px;
 }
 
 .drag_drop .totalPairs .all_questions {
-  background-color: #fff;
-  border: 2px solid #e5e5e5;
-  border-radius: 10px;
-  max-width: 90%;
+    background-color: #fff;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    max-width: 90%;
 }
 
 .drag_drop .totalPairs .all_questions .question {
-  position: relative;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
-
 .drag_drop .totalPairs .all_questions .question:not(:last-of-type) {
-  margin-right: 25px;
+    margin-right: 25px;
 }
 
 .drag_drop .totalPairs .all_questions .question_img {
-  display: block;
-  max-height: 85px;
-  pointer-events: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  margin: auto;
+    display: block;
+    max-height: 85px;
+    pointer-events: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin: auto;
 }
 
 .drag_drop .totalPairs .all_questions .question_text {
-  display: block;
-  width: 80%;
-  max-height: 150px;
-  pointer-events: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  font-size: 1.25em;
-  font-weight: bold;
-  text-align: center;
-  margin: 10px auto;
+    display: block;
+    width: 80%;
+    max-height: 150px;
+    pointer-events: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px auto;
 }
-
 
 .drag_drop .totalPairs .all_questions .question_answer {
-  min-height: 30px;
-  background-color: #e5e5e5;
-  margin: 5px auto;
-  border-radius: 10px;
+    min-height: 30px;
+    background-color: #e5e5e5;
+    margin: 5px auto;
+    border-radius: 10px;
 }
 
-
 .drag_drop .totalPairs .all_answers {
-  margin-top: 50px;
-  background-color: #fff;
-  border: 2px solid #e5e5e5;
-  max-width: 90%;
-  margin: auto;
-  border-radius: 10px;
+    margin-top: 50px;
+    background-color: #fff;
+    border: 2px solid #e5e5e5;
+    max-width: 90%;
+    margin: auto;
+    border-radius: 10px;
 }
 
 .drag_drop .totalPairs .all_questions .answer,
 .drag_drop .totalPairs .all_answers .answer {
-  background: #e5e5e5;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 10px;
-  margin: auto;
-  opacity: 0.999;
-  cursor: grab;
-  margin-bottom: 10px;
-  width: 125px;
-  max-width: 100%
+    background: #e5e5e5;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    opacity: 0.999;
+    cursor: grab;
+    margin-bottom: 10px;
+    width: 125px;
+    max-width: 100%
 }
 
 .drag_drop .totalPairs .all_questions .answer .answer_img,
 .drag_drop .totalPairs .all_answers .answer .answer_img {
-  display: block;
-  max-height: 75px;
-  pointer-events: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  margin: 10px auto;
+    display: block;
+    max-height: 75px;
+    pointer-events: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin: 10px auto;
 }
 
 .drag_drop .totalPairs .all_questions .answer .answer_text,
 .drag_drop .totalPairs .all_answers .answer .answer_text {
-  display: block;
-  width: 80%;
-  max-height: 150px;
-  pointer-events: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  font-size: 1.25em;
-  font-weight: bold;
-  text-align: center;
-  margin: 10px auto;
+    display: block;
+    width: 80%;
+    max-height: 150px;
+    pointer-events: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px auto;
 }
-
-
 
 
 /* Line Matching */
+
 .drag_drop .lineMatchingDiv {
-  padding: 0 20px;
+    padding: 0 20px;
 }
 
-/* Question */
-.drag_drop .questions .question {
-  margin-top: 10px;
-  border: 5px solid #ddd;
-  border-radius: 30px;
-  padding: 5px;
-  text-align: center;
-  z-index: 5;
-  position: relative;
-  background-color: #fff;
 
+/* Question */
+
+.drag_drop .questions .question {
+    margin-top: 10px;
+    border: 5px solid #ddd;
+    border-radius: 30px;
+    padding: 5px;
+    text-align: center;
+    z-index: 5;
+    position: relative;
+    background-color: #fff;
 }
 
 .drag_drop .questions .question .question_img {
-  max-height: 100px;
-  display: block;
-  -ms-user-select: none;
-      user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  margin: auto;
+    max-height: 100px;
+    display: block;
+    -ms-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin: auto;
 }
 
 .drag_drop .questions .question .question_text {
-  font-size: 16px;
-  font-weight: bold;
-  -ms-user-select: none;
-      user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  margin: auto;
-  display: block;
-  overflow: hidden;
+    font-size: 16px;
+    font-weight: bold;
+    -ms-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin: auto;
+    display: block;
+    overflow: hidden;
 }
+
 
 /* Answer */
 
 .drag_drop .answers .answer {
-  margin-top: 10px;
-  border: 5px solid #ddd;
-  border-radius: 30px;
-  padding: 5px;
-  text-align: center;
-  z-index: 5;
-  overflow: hidden;
-  position: relative;
-  background-color: #fff;
+    margin-top: 10px;
+    border: 5px solid #ddd;
+    border-radius: 30px;
+    padding: 5px;
+    text-align: center;
+    z-index: 5;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
 }
 
 .drag_drop .answers .answer .answer_img {
-  max-height: 100px;
-  display: block;
-  -ms-user-select: none;
-      user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  margin: auto;
+    max-height: 100px;
+    display: block;
+    -ms-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin: auto;
 }
 
 .drag_drop .answers .answer .answer_text {
-  font-size: 16px;
-  font-weight: bold;
-  -ms-user-select: none;
-      user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  margin: auto;
-  display: block;
-  overflow: hidden;
+    font-size: 16px;
+    font-weight: bold;
+    -ms-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    margin: auto;
+    display: block;
+    overflow: hidden;
 }
+
 .moving_line {
-  position: relative;
+    position: relative;
 }
 
 .arrow {
-  position: absolute;
-  display: inline-block;
-  content: "";
-  top: -5px;
-  left: 0px;
-  height: 15px;
-  width: 15px;
-  border: solid black;
-  border-width:  0 0 5px 5px;
-  -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
+    position: absolute;
+    display: inline-block;
+    content: "";
+    top: -5px;
+    left: 0px;
+    height: 15px;
+    width: 15px;
+    border: solid black;
+    border-width: 0 0 5px 5px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .right_arrow {
-  position: absolute;
-  display: inline-block;
-  content: "";
-  top: -3px;
-  left: 0px;
-  height: 8px;
-  width: 8px;
-  border: solid black;
-  border-width:  0 0 2px 2px;
-  -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
+    position: absolute;
+    display: inline-block;
+    content: "";
+    top: -3px;
+    left: 0px;
+    height: 8px;
+    width: 8px;
+    border: solid black;
+    border-width: 0 0 2px 2px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .left_arrow {
-  position: absolute;
-  display: inline-block;
-  content: "";
-  bottom: -3px;
-  right: 0px;
-  height: 8px;
-  width: 8px;
-  border: solid black;
-  border-width:  0 0 2px 2px;
-  -webkit-transform: rotate(-135deg);
-      -ms-transform: rotate(-135deg);
-          transform: rotate(-135deg);
+    position: absolute;
+    display: inline-block;
+    content: "";
+    bottom: -3px;
+    right: 0px;
+    height: 8px;
+    width: 8px;
+    border: solid black;
+    border-width: 0 0 2px 2px;
+    -webkit-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    transform: rotate(-135deg);
 }
+
 
 /* end:: DragDrop */
 
+
 /* begin:: Image Labeling */
 
+
 /* Answer Text Boxes */
+
 .imageLabelingQuestion .student_answer {
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  text-align: center;
-  margin: 5px auto;
-  width: 100%;
-  font-size: 15px;
-  min-height: 27px;
-  display: inline-block;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    margin: 5px auto;
+    width: 100%;
+    font-size: 15px;
+    min-height: 27px;
+    display: inline-block;
 }
+
 .imageLabelingQuestion .left_group .student_answer {
-  padding: 1px 27px 1px 10px;
+    padding: 1px 27px 1px 10px;
 }
 
 .imageLabelingQuestion .right_group .student_answer {
-  padding: 1px 10px 1px 27px;
+    padding: 1px 10px 1px 27px;
 }
 
 .imageLabelingQuestion .student_answer:focus {
-  outline: none;
+    outline: none;
 }
 
 .imageLabelingQuestion .right_group {
-  text-align: right;
+    text-align: right;
 }
+
 
 /* Question Image */
 
 .imageLabelingQuestion .question_img_div {
-  cursor: pointer;
-  position: relative;
-  cursor: auto;
+    cursor: pointer;
+    position: relative;
+    cursor: auto;
 }
 
 .imageLabelingQuestion .question_img_div img {
-  max-width: 100%;
-  display: inline-block;
-  margin: auto;
+    max-width: 100%;
+    display: inline-block;
+    margin: auto;
 }
 
-.imageLabelingQuestion .question_img_div .student_mark ,
+.imageLabelingQuestion .question_img_div .student_mark,
 .imageLabelingQuestion .question_img_div .mark {
-  position: absolute;
-  display:block; 
-  z-index:80;
-  color: #fff;
-  line-height: 0;
-  cursor: pointer;
+    position: absolute;
+    display: block;
+    z-index: 80;
+    color: #fff;
+    line-height: 0;
+    cursor: pointer;
 }
 
-.imageLabelingQuestion .left_group .student_image_tag ,
+.imageLabelingQuestion .left_group .student_image_tag,
 .imageLabelingQuestion .left_group .image_tag {
-  color: #fff;
-  border-radius: 0 40% 40% 0;
-  padding: 5px;
-  width: 25px;
-  height: 26px;
-  display: inline-block;
-  font-size: 10px;
-  text-align: center;
-  right: 0;
-  position: absolute;
-  top: 5px;
-  cursor: pointer;
-} 
+    color: #fff;
+    border-radius: 0 40% 40% 0;
+    padding: 5px;
+    width: 25px;
+    height: 26px;
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    right: 0;
+    position: absolute;
+    top: 5px;
+    cursor: pointer;
+}
 
 .imageLabelingQuestion .left_group .delete_input {
-  color: #fff;
-  border-radius: 40% 0 0 40%;
-  padding: 5px;
-  width: 25px;
-  height: 28px;
-  display: inline-block;
-  font-size: 10px;
-  text-align: center;
-  left: 0px;
-  position: absolute;
-  top: 5px;
-  cursor: pointer;
+    color: #fff;
+    border-radius: 40% 0 0 40%;
+    padding: 5px;
+    width: 25px;
+    height: 28px;
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    left: 0px;
+    position: absolute;
+    top: 5px;
+    cursor: pointer;
 }
 
-.imageLabelingQuestion .right_group .delete_input{
-  color: #fff;
-  background-color: #1abc9c;
-  border-radius: 0 40% 40% 0;
-  padding: 5px;
-  width: 25px;
-  height: 28px;
-  display: inline-block;
-  font-size: 10px;
-  text-align: center;
-  right: 0px;
-  position: absolute;
-  top: 5px;
-  cursor: pointer;
+.imageLabelingQuestion .right_group .delete_input {
+    color: #fff;
+    background-color: #1abc9c;
+    border-radius: 0 40% 40% 0;
+    padding: 5px;
+    width: 25px;
+    height: 28px;
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    right: 0px;
+    position: absolute;
+    top: 5px;
+    cursor: pointer;
 }
-
 
 .imageLabelingQuestion .right_group .student_image_tag,
 .imageLabelingQuestion .right_group .image_tag {
-  color: #fff;
-  border-radius: 40% 0 0 40%;
-  padding: 5px;
-  width: 25px;
-  height: 26px;
-  display: inline-block;
-  font-size: 10px;
-  text-align: center;
-  left: 0px;
-  position: absolute;
-  top: 5px;
-  cursor: pointer;
-} 
+    color: #fff;
+    border-radius: 40% 0 0 40%;
+    padding: 5px;
+    width: 25px;
+    height: 26px;
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    left: 0px;
+    position: absolute;
+    top: 5px;
+    cursor: pointer;
+}
 
 .imageLabelingQuestion .choices_div {
-  text-align: center;
-  border: 3px solid #3699FF;
-  background-color: #fff;
-  border-radius: 10px;
-  max-width: 100%;
-  min-width: 100px;
-  min-height: 50px;
-  width: fit-content;
-  margin: 10px auto 20px;
-  padding: 5px 10px;
+    text-align: center;
+    border: 3px solid #3699FF;
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 100%;
+    min-width: 100px;
+    min-height: 50px;
+    width: fit-content;
+    margin: 10px auto 20px;
+    padding: 5px 10px;
 }
 
 .imageLabelingQuestion .choices_div .student_choice {
-  display: inline-block;
-  background-color: #3699ff;
-  margin: 5px;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: grab;
-  opacity: 0.9999;
+    display: inline-block;
+    background-color: #3699ff;
+    margin: 5px;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: grab;
+    opacity: 0.9999;
 }
+
+
 /* end:: Image Labeling */
 
+
 /* Begin:: teacher review teaxtarea */
-.form-label {
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  margin: 10px;
+
+.form-label-teacher {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    margin: 10px;
 }
+
+.guide {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.guide .badge-success {
+    background-color: #2ecc71;
+    margin: 10px;
+}
+
+.guide .badge-danger {
+    background-color: #e74c3c;
+    margin: 10px;
+}
+
+
 /* end:: teacher review teaxtarea */

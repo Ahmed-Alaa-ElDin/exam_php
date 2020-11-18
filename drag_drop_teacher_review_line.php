@@ -161,8 +161,12 @@
 
                                                     </div>
                                                 </div>
+                                                <div class="guide form-group">
+                                                    <span class="badge badge-success">Right Answer</span>
+                                                    <span class="badge badge-danger">Wrong Answer</span>
+                                                </div>
                                                 <div class="teacherReview form-group">
-                                                    <label for="teacherReview" class="form-label"> Teacher Review </label>
+                                                    <label for="teacherReview" class="form-label-teacher"> Teacher Review </label>
                                                     <textarea name="teacherReview" class="form-control" id="teacherReview" cols="100" rows="10"></textarea>
                                                 </div>
                                             </div>
@@ -232,7 +236,7 @@
                                             </div>
                                             <div class="col text-right">
 
-                                                <button type="reset" class="btn btn-danger" id="submitAnswer">Submit & Next</button>
+                                                <button type="reset" class="btn btn-danger" id="submitReview">Submit & Next</button>
                                             </div>
                                         </div>
                                     </div>
@@ -275,11 +279,10 @@
 
     <?php require_once './scripts.php'; ?>
 
-    <!-- <script src="ahmed_teacher_review/script/arabictextbox.js" type="text/javascript"></script> -->
     <script src="ahmed_teacher_review/script/DragDropTouch.js" type="text/javascript"></script>
     <script src="ahmed_teacher_review/script/html2canvas.min.js" type="text/javascript"></script>
     <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
-    <script src="ahmed_teacher_review/script/darg_drop.js" type="text/javascript"></script>
+    <script src="ahmed_teacher_review/script/darg_drop_line.js" type="text/javascript"></script>
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
