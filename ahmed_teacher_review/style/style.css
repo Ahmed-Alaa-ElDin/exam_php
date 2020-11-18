@@ -498,3 +498,11 @@ body * {
   opacity: 0.9999;
 }
 /* end:: Image Labeling */
+
+/* Begin:: teacher review teaxtarea */
+.form-label {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  margin: 10px;
+}
+/* end:: teacher review teaxtarea */
