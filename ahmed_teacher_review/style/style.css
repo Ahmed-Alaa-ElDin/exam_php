@@ -531,12 +531,12 @@ body * {
 }
 
 .guide .badge-success {
-    background-color: #2ecc71;
+    background-color: #1BC5BD;
     margin: 10px;
 }
 
 .guide .badge-danger {
-    background-color: #e74c3c;
+    background-color: #F64E60;
     margin: 10px;
 }
 

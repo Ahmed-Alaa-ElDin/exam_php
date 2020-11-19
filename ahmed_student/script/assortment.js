@@ -162,7 +162,7 @@ $(function () {
 
       output["screenshot"] = canvas.toDataURL()
       outputJSON = JSON.stringify(output)
-      console.log(output);
+      console.log(outputJSON);
 
     });
   })

@@ -121,9 +121,9 @@ $(function() {
                 var answerCheck = $(".answer_img[alt=" + element["answer_image_name"] + "]")
             }
             if (questionCheck.find(answerCheck).length) {
-                questionCheck.parents(".question").css("background-color", "#2ecc71")
+                questionCheck.parents(".question").css("background-color", "#1BC5BD")
             } else {
-                questionCheck.parents(".question").css("background-color", "#e74c3c")
+                questionCheck.parents(".question").css("background-color", "#F64E60")
             }
         });
     }, 500);

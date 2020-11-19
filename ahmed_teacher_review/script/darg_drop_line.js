@@ -57,9 +57,6 @@ $(function() {
         return array;
     }
 
-    // add line functionality
-    var colors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#bdc3c7", "#95a5a6", "#7f8c8d"]
-
     function connect(question, answer, color) {
         var x1 = getOffsetQuestion(question).x;
         var y1 = getOffsetQuestion(question).y;
@@ -168,12 +165,12 @@ $(function() {
                     continue
                 }
                 if (questionCheck.attr('id') == question.attr('id') && answerCheck.attr('id') == answer.attr('id')) {
-                    questionCheck.css("border-color", "#2ecc71")
-                    answerCheck.css("border-color", "#2ecc71")
+                    questionCheck.css("border-color", "#1BC5BD")
+                    answerCheck.css("border-color", "#1BC5BD")
                     break
                 }
-                questionCheck.css("border-color", "#e74c3c")
-                answerCheck.css("border-color", "#e74c3c")
+                questionCheck.css("border-color", "#F64E60")
+                answerCheck.css("border-color", "#F64E60")
             }
         }
     }, 500);
