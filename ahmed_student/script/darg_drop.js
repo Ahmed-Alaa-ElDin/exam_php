@@ -286,54 +286,57 @@ $(function() {
     var data = {}
 
     $("#submitAnswer").on("click", function() {
-            if (json_input.display_type == "image") {
-                var pairs = []
+        if (json_input.display_type == "image") {
+            var pairs = []
 
-                for (let i = 0; i < $(".question").length; i++) {
-                    let pair = {}
-                    pair = {
-                        "question_image_name": $(".question").eq(i).find(".question_img").attr("alt"),
-                        "question_image": `$(".question").eq(i).find(".question_img").attr("src")`,
-                        "question_text": $(".question").eq(i).find(".question_text").text(),
-                        "answer_image_name": $(".question").eq(i).find(".answer_img").attr("alt"),
-                        "answer_image": `$(".question").eq(i).find(".answer_img").attr("src")`,
-                        "answer_text": $(".question").eq(i).find(".answer_text").text()
-                    }
-                    pairs.push(pair)
+            for (let i = 0; i < $(".question").length; i++) {
+                let pair = {}
+                pair = {
+                    "question_image_name": $(".question").eq(i).find(".question_img").attr("alt"),
+                    "question_image": `$(".question").eq(i).find(".question_img").attr("src")`,
+                    "question_text": $(".question").eq(i).find(".question_text").text(),
+                    "answer_image_name": $(".question").eq(i).find(".answer_img").attr("alt"),
+                    "answer_image": `$(".question").eq(i).find(".answer_img").attr("src")`,
+                    "answer_text": $(".question").eq(i).find(".answer_text").text()
                 }
-                data["pairs"] = pairs
-            } else if (json_input.display_type == "line") {
-                var pairs = []
-
-                for (let i = 0; i < $(".question").length; i++) {
-                    let pair = {}
-                    let answer_id = $(".moving_line[data-ques_id=" + $(".question").eq(i).attr("id") + "]").data("answ_id")
-                    pair = {
-                        "question_image_name": $(".question").eq(i).find(".question_img").attr("alt"),
-                        "question_image": `$(".question").eq(i).find(".question_img").attr("src")`,
-                        "question_text": $(".question").eq(i).find(".question_text").text(),
-                        "answer_image_name": $(".answer[id=" + answer_id + "]").find(".answer_img").attr("alt"),
-                        "answer_image": `$(".answer[id=" + answer_id + "]").find(".answer_img").attr("src")`,
-                        "answer_text": $(".answer[id=" + answer_id + "]").find(".answer_text").text()
-                    }
-                    pairs.push(pair)
-                }
-                data["pairs"] = pairs
+                pairs.push(pair)
             }
+            data["pairs"] = pairs
+        } else if (json_input.display_type == "line") {
+            var pairs = []
 
-
-            // Make Screenshot
-            html2canvas(document.getElementById("kt_body"), { "imageTimeout": 0 }).then(function(canvas) {
-
-                output = {
-                    "pairs": data,
-                    "screenshot": "canvas.toDataURL()"
+            for (let i = 0; i < $(".question").length; i++) {
+                let pair = {}
+                let answer_id = $(".moving_line[data-ques_id=" + $(".question").eq(i).attr("id") + "]").data("answ_id")
+                pair = {
+                    "question_image_name": $(".question").eq(i).find(".question_img").attr("alt"),
+                    "question_image": `$(".question").eq(i).find(".question_img").attr("src")`,
+                    "question_text": $(".question").eq(i).find(".question_text").text(),
+                    "answer_image_name": $(".answer[id=" + answer_id + "]").find(".answer_img").attr("alt"),
+                    "answer_image": `$(".answer[id=" + answer_id + "]").find(".answer_img").attr("src")`,
+                    "answer_text": $(".answer[id=" + answer_id + "]").find(".answer_text").text()
                 }
-                outputJSON = JSON.stringify(output)
-                console.log(outputJSON);
+                pairs.push(pair)
+            }
+            data["pairs"] = pairs
+        }
 
-            });
-        })
-        // })
+
+        // Make Screenshot
+        html2canvas(document.getElementById("kt_body"), { "imageTimeout": 0 }).then(function(canvas) {
+
+            output = {
+                "pairs": data,
+                "screenshot": "canvas.toDataURL()"
+            }
+            outputJSON = JSON.stringify(output)
+            console.log(outputJSON);
+
+        });
+
+        // TODO
+        // excute this line after confitmation of submission
+        $(".moving_line").remove()
+    })
 
 })
