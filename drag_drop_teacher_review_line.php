@@ -181,6 +181,20 @@
                                                     <div class="card-body Stats">
 
                                                         <div class="row">
+                                                            <span class="col-lg-8">Computed Marks</span>
+                                                            <span class="col-lg-4 text-right studentMarks">5 of 5</span>
+
+                                                        </div>
+                                                        <hr>
+
+                                                        <div class="row">
+                                                            <span class="col-lg-8">Teacher Marks</span>
+                                                            <input type="number" class="col-lg-4 text-right form-control teacherMarks">
+
+                                                        </div>
+                                                        <hr>
+
+                                                        <div class="row">
                                                             <span class="col-lg-8">Maximum Marks</span>
                                                             <span class="col-lg-4 text-right">5</span>
 
@@ -193,6 +207,29 @@
                                                         <hr>
 
                                                         <p class="text-dark text-uppercase text-muted">Question Attachment(s)</p>
+                                                        <div class="d-flex mt-5">
+
+                                                            <img alt="" class="max-h-40px" src="assets/media/svg/files/jpg.svg">
+
+                                                            <a href="#" class="text-dark mt-5 font-weight-bold text-hover-primary ">Technical Requirements.jpg</a>
+                                                            <!--end: Tite-->
+
+                                                        </div>
+                                                        <hr>
+                                                        <div class="d-flex mt-5">
+                                                            <img alt="" class="max-h-40px" src="assets/media/svg/files/pdf.svg">
+                                                            <a href="#" class="text-dark mt-5 font-weight-bold text-hover-primary ">Technical.pdf</a>
+                                                            <!--end: Tite-->
+                                                        </div>
+                                                        <hr>
+                                                        <div class="d-flex mt-5">
+                                                            <img alt="" class="max-h-40px" src="assets/media/svg/files/zip.svg">
+                                                            <a href="#" class="text-dark mt-5 font-weight-bold text-hover-primary ">Requirements.zip</a>
+                                                            <!--end: Tite-->
+                                                        </div>
+                                                        <hr>
+
+                                                        <p class="text-dark text-uppercase text-muted">Student Attachment(s)</p>
                                                         <div class="d-flex mt-5">
 
                                                             <img alt="" class="max-h-40px" src="assets/media/svg/files/jpg.svg">

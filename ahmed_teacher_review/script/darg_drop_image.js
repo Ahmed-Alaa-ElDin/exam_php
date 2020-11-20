@@ -109,6 +109,9 @@ $(function() {
     })
 
     setTimeout(() => {
+        var totalMarks = json_input_question["pairs"].length;
+        var studentMarks = 0;
+
         json_input_question["pairs"].forEach(element => {
             if (element["question_text"]) {
                 var questionCheck = $(".question_text:contains(" + element["question_text"] + ")").siblings(".question_answer")
@@ -122,15 +125,21 @@ $(function() {
             }
             if (questionCheck.find(answerCheck).length) {
                 questionCheck.parents(".question").css("background-color", "#1BC5BD")
+                studentMarks += 1
             } else {
                 questionCheck.parents(".question").css("background-color", "#F64E60")
             }
+
+            $(".studentMarks").text(`${studentMarks} of ${totalMarks}`)
         });
     }, 500);
 
 
     $("#submitReview").on("click", function() {
-        outputJSON = JSON.stringify({ "teacher_review": $("#teacherReview").val() })
+        outputJSON = JSON.stringify({
+            "teacher_review": $("#teacherReview").val(),
+            "teacher_marks": $(".teacherMarks").val()
+        })
         console.log(outputJSON);
     })
 

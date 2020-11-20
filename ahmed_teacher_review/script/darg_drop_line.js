@@ -139,6 +139,8 @@ $(function() {
         }, 500)
     })
     setTimeout(() => {
+        var totalMarks = json_input_question["pairs"].length
+        var studentMarks = 0
         var questionCheck, answerCheck, question, answer
         for (let i = 0; i < json_input_question["pairs"].length; i++) {
             if (json_input_question["pairs"][i]["question_text"]) {
@@ -167,16 +169,22 @@ $(function() {
                 if (questionCheck.attr('id') == question.attr('id') && answerCheck.attr('id') == answer.attr('id')) {
                     questionCheck.css("border-color", "#1BC5BD")
                     answerCheck.css("border-color", "#1BC5BD")
+                    studentMarks += 1
                     break
                 }
                 questionCheck.css("border-color", "#F64E60")
                 answerCheck.css("border-color", "#F64E60")
             }
         }
+        $(".studentMarks").text(`${studentMarks} of ${totalMarks}`)
+
     }, 500);
 
     $("#submitReview").on("click", function() {
-        outputJSON = JSON.stringify({ "teacher_review": $("#teacherReview").val() })
+        outputJSON = JSON.stringify({
+            "teacher_review": $("#teacherReview").val(),
+            "teacher_marks": $(".teacherMarks").val()
+        })
         console.log(outputJSON);
     })
 

@@ -30,7 +30,7 @@
 
 <!--begin::Body-->
 
-<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading drag_drop">
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
     <!-- loading image  -->
     <div id="loading">
@@ -54,7 +54,7 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!--begin::Header-->
-                <div id="kt_header" class="header  header-fixed " data-html2canvas-ignore="true">
+                <div id="kt_header" data-html2canvas-ignore="true" class="header  header-fixed ">
                     <?php require_once 'topheader.php'; ?>
                 </div>
                 <!--end::Header-->
@@ -62,7 +62,7 @@
                 <!--begin::Content-->
                 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
                     <!--begin::Subheader-->
-                    <div class="subheader py-2 py-lg-6  subheader-solid " id="kt_subheader" data-html2canvas-ignore="true">
+                    <div class="subheader py-2 py-lg-6  subheader-solid " data-html2canvas-ignore="true" id="kt_subheader" data-html2canvas-ignore="true">
                         <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                             <!--begin::Info-->
                             <div class="d-flex align-items-center flex-wrap mr-1">
@@ -112,7 +112,8 @@
                                             </h3>
 
                                         </div>
-                                        <!-- <div class="card-toolbar">
+                                        <!--
+                                        <div class="card-toolbar">
                                             begin::Timmer
 
                                             <h2 class="text-danger text-right font-size-h1">
@@ -121,20 +122,18 @@
                                             </h2>
 
                                             end::Time
-                                        </div> -->
-
+                                        </div>
+                                        -->
                                     </div>
 
 
                                     <div class="card-body">
-
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
                                             You Have <strong>Less Than 60 seconds</strong>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-
                                         <!--begin: Datatable-->
 
                                         <div class="row">
@@ -143,23 +142,15 @@
                                                 <span class="questionText">
 
                                                 </span>
-                                                <br>
-                                                <br>
-                                                <p style="font-weight:bold;">Further Details</p>
-                                                <p class="questionDetails">
-
-                                                </p>
                                                 <hr>
                                             </div>
 
-                                            <div class="col-lg-12" id="questionNote">
-                                                <h4>Drag and Drop the Equivalent Elements Together</h4>
+                                            <div class="col-lg-12">
+                                                <h4>Fill the blanks below</h4>
                                             </div>
                                             <div class="col-lg-9">
-                                                <div class="form-group">
-                                                    <div class='totalPairs'>
-
-                                                    </div>
+                                                <div class="form-group studentFilling">
+                                                    
                                                 </div>
                                                 <div class="guide form-group">
                                                     <span class="badge badge-success">Right Answer</span>
@@ -169,6 +160,47 @@
                                                     <label for="teacherReview" class="form-label-teacher"> Teacher Review </label>
                                                     <textarea name="teacherReview" class="form-control" id="teacherReview" cols="100" rows="10"></textarea>
                                                 </div>
+                                                <!--
+                                                <div class="form-group" id="answerAttachments">
+                                                    <label>Upload Files:</label>
+                                                    <div class="dropzone dropzone-multi" id="StudentAnswerAttachment">
+                                                        <div class="dropzone-panel mb-lg-0 mb-2">
+                                                            <a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm">Attach files</a>
+                                                            <a class="dropzone-upload btn btn-light-primary font-weight-bold btn-sm">Upload All</a>
+                                                            <a class="dropzone-remove-all btn btn-light-primary font-weight-bold btn-sm">Remove All</a>
+                                                        </div>
+                                                        <div class="dropzone-items">
+                                                            <div class="dropzone-item" style="display:none">
+                                                                <div class="dropzone-file">
+                                                                    <div class="dropzone-filename" title="some_image_file_name.jpg">
+                                                                        <span data-dz-name="">some_image_file_name.jpg</span>
+                                                                        <strong>(
+                                                                            <span data-dz-size="">340kb</span>)</strong>
+                                                                    </div>
+                                                                    <div class="dropzone-error" data-dz-errormessage=""></div>
+                                                                </div>
+                                                                <div class="dropzone-progress">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress=""></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dropzone-toolbar">
+                                                                    <span class="dropzone-start">
+                                                                        <i class="flaticon2-arrow"></i>
+                                                                    </span>
+                                                                    <span class="dropzone-cancel" data-dz-remove="" style="display: none;">
+                                                                        <i class="flaticon2-cross"></i>
+                                                                    </span>
+                                                                    <span class="dropzone-delete" data-dz-remove="">
+                                                                        <i class="flaticon2-cross"></i>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
+                                                </div>
+                                                -->
                                             </div>
 
 
@@ -180,7 +212,7 @@
 
                                                     <div class="card-body Stats">
 
-                                                        <div class="row">
+                                                    <div class="row">
                                                             <span class="col-lg-8">Computed Marks</span>
                                                             <span class="col-lg-4 text-right studentMarks">5 of 5</span>
 
@@ -250,8 +282,6 @@
                                                             <a href="#" class="text-dark mt-5 font-weight-bold text-hover-primary ">Requirements.zip</a>
                                                             <!--end: Tite-->
                                                         </div>
-
-
                                                     </div>
 
 
@@ -273,7 +303,7 @@
                                             </div>
                                             <div class="col text-right">
 
-                                                <button type="reset" class="btn btn-danger" id="submitReview">Submit & Next</button>
+                                                <button type="reset" class="btn btn-danger" id="submitAnswer">Submit & Next</button>
                                             </div>
                                         </div>
                                     </div>
@@ -291,7 +321,7 @@
                 <!--end::Content-->
 
                 <!--begin::Footer-->
-                <div class="footer bg-white py-4 d-flex flex-lg-column " data-html2canvas-ignore="true" id="kt_footer">
+                <div class="footer bg-white py-4 d-flex flex-lg-column " id="kt_footer">
                     <!--begin::Container-->
                     <?php require_once 'footer.php'; ?>
                     <!--end::Container-->
@@ -316,10 +346,11 @@
 
     <?php require_once './scripts.php'; ?>
 
-    <script src="ahmed_teacher_review/script/DragDropTouch.js" type="text/javascript"></script>
+    <!-- <script src="ahmed_teacher_review/script/arabictextbox.js" type="text/javascript"></script>
+        <script src="ahmed_teacher_review/script/urdutextbox.js" type="text/javascript"></script> -->
     <script src="ahmed_teacher_review/script/html2canvas.min.js" type="text/javascript"></script>
     <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
-    <script src="ahmed_teacher_review/script/darg_drop_image.js" type="text/javascript"></script>
+    <script src="ahmed_teacher_review/script/fill_blank.js" type="text/javascript"></script>
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
