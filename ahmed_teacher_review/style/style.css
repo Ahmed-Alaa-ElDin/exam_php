@@ -373,13 +373,18 @@ body * {
 
 /* Answer Text Boxes */
 
+.imageLabelingQuestion .student_input_div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .imageLabelingQuestion .student_answer {
     border: 2px solid #ddd;
     border-radius: 10px;
     text-align: center;
     margin: 5px auto;
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     min-height: 27px;
     display: inline-block;
 }

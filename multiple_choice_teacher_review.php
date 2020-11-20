@@ -217,7 +217,7 @@
 
                                                     <div class="card-body Stats">
 
-                                                    <div class="row">
+                                                        <div class="row">
                                                             <span class="col-lg-8">Computed Marks</span>
                                                             <span class="col-lg-4 text-right studentMarks">5 of 5</span>
 
@@ -288,11 +288,7 @@
                                                             <!--end: Tite-->
                                                         </div>
 
-
                                                     </div>
-
-
-
 
                                                 </div>
                                                 <!--end:: Card-->

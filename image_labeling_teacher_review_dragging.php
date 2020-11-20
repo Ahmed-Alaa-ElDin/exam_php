@@ -54,7 +54,7 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!--begin::Header-->
-                <div id="kt_header" data-html2canvas-ignore="true" class="header  header-fixed ">
+                <div id="kt_header" data-html2canvas-ignore="true" class="header  header-fixed " data-html2canvas-ignore="true">
                     <?php require_once 'topheader.php'; ?>
                 </div>
                 <!--end::Header-->
@@ -62,7 +62,7 @@
                 <!--begin::Content-->
                 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
                     <!--begin::Subheader-->
-                    <div class="subheader py-2 py-lg-6  subheader-solid " data-html2canvas-ignore="true" id="kt_subheader" data-html2canvas-ignore="true">
+                    <div class="subheader py-2 py-lg-6  subheader-solid " data-html2canvas-ignore="true" id="kt_subheader">
                         <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                             <!--begin::Info-->
                             <div class="d-flex align-items-center flex-wrap mr-1">
@@ -142,14 +142,29 @@
                                                 <span class="questionText">
 
                                                 </span>
+                                                <br>
+                                                <br>
+                                                <p style="font-weight:bold;">Further Details</p>
+                                                <p class="questionDetails">
+
+                                                </p>
                                                 <hr>
                                             </div>
 
                                             <div class="col-lg-12">
-                                                <h4>Fill the blanks below</h4>
+                                                <h4>Type Your Answer here</h4>
                                             </div>
                                             <div class="col-lg-9">
-                                                <div class="form-group studentFilling">
+                                                <div class="form-group imageLabelingQuestion">
+                                                    <!-- <div class="choices_div"></div> -->
+                                                    <div class="row">
+                                                        <div class="col-4 left_group">
+                                                        </div>
+                                                        <div class="col-4 question_img_div" style="position:relative">
+                                                        </div>
+                                                        <div class="col-4 right_group">
+                                                        </div>
+                                                    </div>
                                                     
                                                 </div>
                                                 <div class="guide form-group">
@@ -161,7 +176,8 @@
                                                     <label for="teacherReview" class="form-label-teacher"> Teacher Review </label>
                                                     <textarea name="teacherReview" class="form-control" id="teacherReview" cols="100" rows="10"></textarea>
                                                 </div>
-                                                <!--
+
+                                                <!-- 
                                                 <div class="form-group" id="answerAttachments">
                                                     <label>Upload Files:</label>
                                                     <div class="dropzone dropzone-multi" id="StudentAnswerAttachment">
@@ -201,7 +217,7 @@
                                                     </div>
                                                     <span class="form-text text-muted">Max file size is 1MB and max number of files is 5.</span>
                                                 </div>
-                                                -->
+                                                 -->
                                             </div>
 
 
@@ -283,6 +299,7 @@
                                                             <a href="#" class="text-dark mt-5 font-weight-bold text-hover-primary ">Requirements.zip</a>
                                                             <!--end: Tite-->
                                                         </div>
+
                                                     </div>
 
 
@@ -348,10 +365,11 @@
     <?php require_once './scripts.php'; ?>
 
     <!-- <script src="ahmed_teacher_review/script/arabictextbox.js" type="text/javascript"></script>
-        <script src="ahmed_teacher_review/script/urdutextbox.js" type="text/javascript"></script> -->
+    <script src="ahmed_teacher_review/script/urdutextbox.js" type="text/javascript"></script> -->
+    <script src="ahmed_teacher_review/script/DragDropTouch.js" type="text/javascript"></script>
     <script src="ahmed_teacher_review/script/html2canvas.min.js" type="text/javascript"></script>
     <script src="assets/custom/js/question_student.js" type="text/javascript"></script>
-    <script src="ahmed_teacher_review/script/fill_blank.js" type="text/javascript"></script>
+    <script src="ahmed_teacher_review/script/image_labeling_dragging.js" type="text/javascript"></script>
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
